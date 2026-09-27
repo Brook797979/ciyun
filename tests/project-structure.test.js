@@ -90,3 +90,12 @@ test('developer tools must not filter component files by dependency analysis', (
   const projectConfig = JSON.parse(fs.readFileSync(path.join(root, 'project.config.json'), 'utf8'))
   assert.equal(projectConfig.setting.ignoreDevUnusedFiles, false)
 })
+
+test('home components are included in the global dependency graph', () => {
+  const appConfig = JSON.parse(fs.readFileSync(path.join(root, 'app.json'), 'utf8'))
+  assert.deepEqual(appConfig.usingComponents, {
+    'home-section-title': '/components/home-section-title/index',
+    'home-video-card': '/components/home-video-card/index',
+    'home-news-card': '/components/home-news-card/index'
+  })
+})

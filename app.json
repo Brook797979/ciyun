@@ -24,6 +24,11 @@
     "backgroundColor": "#F4EFE5",
     "backgroundTextStyle": "dark"
   },
+  "usingComponents": {
+    "home-section-title": "/components/home-section-title/index",
+    "home-video-card": "/components/home-video-card/index",
+    "home-news-card": "/components/home-news-card/index"
+  },
   "tabBar": {
     "color": "#77736B",
     "selectedColor": "#315C72",
