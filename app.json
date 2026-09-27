@@ -30,11 +30,11 @@
     "backgroundColor": "#FFFCF7",
     "borderStyle": "black",
     "list": [
-      { "pagePath": "pages/home/index", "text": "首页" },
-      { "pagePath": "pages/museum/index", "text": "瓷馆" },
-      { "pagePath": "pages/workshop/index", "text": "工坊" },
-      { "pagePath": "pages/challenge/index", "text": "挑战" },
-      { "pagePath": "pages/profile/index", "text": "我的" }
+      { "pagePath": "pages/home/index", "text": "首页", "iconPath": "assets/icons/tab-home.png", "selectedIconPath": "assets/icons/tab-home-active.png" },
+      { "pagePath": "pages/museum/index", "text": "瓷馆", "iconPath": "assets/icons/tab-museum.png", "selectedIconPath": "assets/icons/tab-museum-active.png" },
+      { "pagePath": "pages/workshop/index", "text": "工坊", "iconPath": "assets/icons/tab-workshop.png", "selectedIconPath": "assets/icons/tab-workshop-active.png" },
+      { "pagePath": "pages/challenge/index", "text": "挑战", "iconPath": "assets/icons/tab-challenge.png", "selectedIconPath": "assets/icons/tab-challenge-active.png" },
+      { "pagePath": "pages/profile/index", "text": "我的", "iconPath": "assets/icons/tab-profile.png", "selectedIconPath": "assets/icons/tab-profile-active.png" }
     ]
   },
   "style": "v2",

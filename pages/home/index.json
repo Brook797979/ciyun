@@ -1,1 +1,10 @@
-{ "navigationBarTitleText": "瓷韵", "usingComponents": { "section-title": "/components/section-title/index", "feature-entry": "/components/feature-entry/index" } }
+{
+  "navigationBarTitleText": "瓷韵",
+  "navigationBarBackgroundColor": "#F8F1E6",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "home-section-title": "/components/home-section-title/index",
+    "home-video-card": "/components/home-video-card/index",
+    "home-news-card": "/components/home-news-card/index"
+  }
+}

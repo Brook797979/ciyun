@@ -1,0 +1,1 @@
+<view class="video-card" bindtap="onTap"><view class="video-cover"><image src="{{item.image}}" mode="aspectFill"/><view class="play"><view class="triangle"></view></view><view class="duration">{{item.duration}}</view></view><view class="video-title">{{item.title}}</view><view class="video-description">{{item.description}}</view></view>

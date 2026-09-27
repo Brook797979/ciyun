@@ -1,1 +1,27 @@
-<view class="page-shell stack"><view class="hero surface"><view class="eyebrow">中国陶瓷数字文化体验平台</view><view class="hero-title">看瓷 · 学瓷 · 创瓷</view><view class="muted">第一阶段页面骨架</view></view><section-title title="核心体验" description="功能入口将在后续设计稿阶段逐页完善"/><view class="stack"><view wx:for="{{entries}}" wx:key="title" data-url="{{item.url}}" bindtap="openEntry"><feature-entry title="{{item.title}}" description="{{item.description}}"/></view></view><section-title title="精选陶瓷文化"/><view class="placeholder">精选内容展示区域</view></view>
+<view class="home-page">
+  <view class="hero">
+    <image class="hero-image" src="/assets/banners/home-hero.jpg" mode="aspectFill"/>
+    <view class="hero-wash"></view>
+    <view class="hero-copy">
+      <view class="brand-row"><text class="brand-name">瓷韵</text><text class="brand-seal">瓷</text></view>
+      <view class="brand-subtitle">中国陶瓷数字文化体验平台</view>
+      <view class="brand-line"></view>
+      <view class="brand-slogan">一瓷一世界 · 以数之美 · 传东方瓷韵</view>
+    </view>
+  </view>
+  <view class="home-content">
+    <view class="feature-grid">
+      <view wx:for="{{features}}" wx:key="id" class="feature-card feature-{{item.id}} tone-{{item.tone}}" data-url="{{item.url}}" bindtap="openUrl">
+        <image class="feature-image" src="{{item.image}}" mode="aspectFill"/>
+        <view class="feature-cover"></view>
+        <view class="feature-copy"><view class="feature-title">{{item.title}}</view><view class="feature-description">{{item.description}}</view><view class="feature-action"><text>→</text><text class="sr-only">{{item.action}}</text></view></view>
+      </view>
+    </view>
+    <view class="ai-card" data-url="{{aiAssistant.url}}" bindtap="openUrl">
+      <image class="ai-background" src="{{aiAssistant.image}}" mode="aspectFill"/><view class="ai-overlay"></view>
+      <view class="ai-content"><view class="ai-heading"><view class="ai-icon"><view class="ai-dot"></view><view class="ai-dot"></view><view class="ai-dot"></view></view><text>{{aiAssistant.title}}</text></view><view class="ai-prompt"><view class="ai-question">{{aiAssistant.description}}</view><view class="ai-button">{{aiAssistant.action}}</view></view></view>
+    </view>
+    <view class="home-section"><home-section-title title="陶瓷课堂" mark="课" bind:action="openVideos"/><scroll-view class="horizontal-scroll" scroll-x enhanced show-scrollbar="{{false}}"><view class="scroll-row"><home-video-card wx:for="{{videos}}" wx:key="id" item="{{item}}" bind:select="openUrl"/></view></scroll-view></view>
+    <view class="home-section news-section"><home-section-title title="瓷韵新知" mark="知" bind:action="openNews"/><scroll-view class="horizontal-scroll" scroll-x enhanced show-scrollbar="{{false}}"><view class="scroll-row"><home-news-card wx:for="{{news}}" wx:key="id" item="{{item}}" bind:select="openUrl"/></view></scroll-view></view>
+  </view>
+</view>

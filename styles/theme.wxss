@@ -1,12 +1,18 @@
 page {
-  --color-page: #F4EFE5;
+  --color-page: #F8F1E6;
   --color-surface: #FFFCF7;
-  --color-primary: #315C72;
-  --color-primary-soft: #DDE8EA;
-  --color-accent: #9A4E3F;
-  --color-text-primary: #252B2D;
-  --color-text-secondary: #6F716E;
-  --color-border: #D8D0C3;
+  --color-porcelain: #FFFCF7;
+  --color-silk: #EFE4D2;
+  --color-primary: #0B4162;
+  --color-ink-blue: #073958;
+  --color-primary-soft: #DCE8EA;
+  --color-accent: #A94B3E;
+  --color-cinnabar: #A94B3E;
+  --color-warm-gold: #B78955;
+  --color-text-primary: #252621;
+  --color-text-secondary: #777268;
+  --color-text-tertiary: #A19A8E;
+  --color-border: #D9CDBB;
   --color-disabled: #AAA69E;
   --font-family-title: "Songti SC", "STSong", serif;
   --font-family-body: "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -22,7 +28,9 @@ page {
   --radius-sm: 12rpx;
   --radius-md: 20rpx;
   --radius-lg: 32rpx;
-  --shadow-card: 0 12rpx 32rpx rgba(55, 48, 40, 0.08);
-  --page-gutter: 32rpx;
+  --radius-card: 22rpx;
+  --radius-card-lg: 28rpx;
+  --shadow-card: 0 12rpx 30rpx rgba(55, 48, 40, 0.11);
+  --page-gutter: 28rpx;
   --content-max-width: 1200rpx;
 }

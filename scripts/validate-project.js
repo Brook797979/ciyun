@@ -28,6 +28,8 @@ if (app) {
   if (tabs.length !== 5) errors.push(`Tab 数量应为 5，当前为 ${tabs.length}`)
   tabs.forEach((tab) => {
     if (!app.pages.includes(tab.pagePath)) errors.push(`Tab 页面未注册：${tab.pagePath}`)
+    if (tab.iconPath) requirePath(tab.iconPath)
+    if (tab.selectedIconPath) requirePath(tab.selectedIconPath)
   })
 }
 
@@ -44,6 +46,15 @@ const patternIds = new Set(patterns.map((item) => item.id))
 challenges.forEach((level) => {
   if (level.rewardPatternId && !patternIds.has(level.rewardPatternId)) errors.push(`关卡 ${level.id} 引用了不存在的纹样`)
 })
+
+const home = require(path.join(root, 'data/home'))
+const homeImages = [
+  ...home.features.map((item) => item.image),
+  home.aiAssistant.image,
+  ...home.videos.map((item) => item.image),
+  ...home.news.map((item) => item.image)
+]
+homeImages.forEach((image) => requirePath(image.replace(/^\//, '')))
 
 if (errors.length) {
   console.error(`项目校验失败（${errors.length} 项）：`)

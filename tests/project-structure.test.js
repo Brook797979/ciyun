@@ -69,3 +69,19 @@ test('profile only routes to the shared works page', () => {
     assert.equal(exists(`pages/${page}`), false, `unneeded page ${page} should not exist`)
   })
 })
+
+test('home data provides all required interactive content', () => {
+  const home = require(path.join(root, 'data/home'))
+  assert.deepEqual(home.features.map((item) => item.title), ['AI识瓷', '数字制瓷', '瓷境闯关', '视频课堂'])
+  assert.deepEqual(home.features.map((item) => item.url), [
+    '/pages/ai-identify/index',
+    '/pages/craft/index',
+    '/pages/challenge/index',
+    '/pages/video-learning/index'
+  ])
+  assert.equal(home.aiAssistant.url, '/pages/ai-chat/index')
+  assert.equal(home.videos.length, 3)
+  assert.ok(home.videos.every((item) => item.url === '/pages/video-learning/index'))
+  assert.equal(home.news.length, 3)
+  assert.ok(home.news.every((item) => item.url.startsWith('/pages/news-detail/index?id=')))
+})
