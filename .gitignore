@@ -1,0 +1,6 @@
+.worktrees/
+node_modules/
+miniprogram_npm/
+.DS_Store
+Thumbs.db
+
