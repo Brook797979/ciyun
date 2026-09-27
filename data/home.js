@@ -3,7 +3,7 @@ module.exports = {
     { id: 'identify', title: 'AI识瓷', description: '拍照识别\n探索陶瓷之美', action: '识瓷', url: '/pages/ai-identify/index', image: '/assets/ceramics/home-feature-identify.jpg', tone: 'blue', size: 'medium' },
     { id: 'craft', title: '数字制瓷', description: '从泥土到瓷器\n体验传统制瓷工艺', action: '创作', url: '/pages/craft/index', image: '/assets/ceramics/home-feature-craft.jpg', tone: 'ivory', size: 'large' },
     { id: 'challenge', title: '瓷境闯关', description: '趣味挑战\n解锁纹样与知识', action: '挑战', url: '/pages/challenge/index', image: '/assets/ceramics/home-feature-challenge.jpg', tone: 'red', size: 'large' },
-    { id: 'video', title: '视频课堂', description: '跟随匠人\n学习陶瓷工艺', action: '学习', url: '/pages/video-learning/index', image: '/assets/ceramics/home-feature-video.jpg', tone: 'blue', size: 'medium' }
+    { id: 'video', title: '视频课堂', description: '跟随匠人\n学习陶瓷工艺', action: '播放', url: '/pages/video-learning/index', image: '/assets/ceramics/home-feature-video.jpg', videoSrc: '', tone: 'blue', size: 'medium' }
   ],
   aiAssistant: { title: 'AI陶瓷助手', description: '关于陶瓷，你想了解什么？', action: '问问AI', url: '/pages/ai-chat/index', image: '/assets/banners/home-ai-assistant.jpg' },
   videos: [

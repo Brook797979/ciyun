@@ -112,14 +112,6 @@ test('home section headings use reference artwork icons', () => {
   assert.ok(exists('assets/icons/home-section-news.png'))
 })
 
-test('home classroom reserves inline video playback with posters', () => {
-  const videoTemplate = fs.readFileSync(path.join(root, 'components/home-video-card/index.wxml'), 'utf8')
-  const homeTemplate = fs.readFileSync(path.join(root, 'pages/home/index.wxml'), 'utf8')
-  assert.match(videoTemplate, /<video[^>]+wx:if="\{\{item\.src\}\}"/)
-  assert.match(videoTemplate, /poster="\{\{item\.image\}\}"/)
-  assert.match(homeTemplate, /home-section-title title="陶瓷课堂"[^>]+bind:action="openVideos"/)
-})
-
 test('home news links to a swiper-based news page with replaceable covers', () => {
   const home = require(path.join(root, 'data/home'))
   const newsTemplate = fs.readFileSync(path.join(root, 'pages/news/index.wxml'), 'utf8')
@@ -136,11 +128,11 @@ test('home news section is an autoplay carousel', () => {
   assert.match(homeTemplate, /<swiper-item[^>]+wx:for="\{\{news\}\}"/)
 })
 
-test('home classroom is an autoplay carousel that can pause for playback', () => {
+test('featured video plays inside the core card without a duplicate classroom section', () => {
+  const home = require(path.join(root, 'data/home'))
   const homeTemplate = fs.readFileSync(path.join(root, 'pages/home/index.wxml'), 'utf8')
-  const videoTemplate = fs.readFileSync(path.join(root, 'components/home-video-card/index.wxml'), 'utf8')
-  assert.match(homeTemplate, /<swiper[^>]+class="home-video-swiper"/)
-  assert.match(homeTemplate, /autoplay="\{\{videoCarouselAutoplay\}\}"/)
-  assert.match(homeTemplate, /bind:playstate="onVideoPlayState"/)
-  assert.match(videoTemplate, /bindplay="onPlay"/)
+  const featuredVideo = home.features.find((item) => item.id === 'video')
+  assert.equal(featuredVideo.videoSrc, '')
+  assert.match(homeTemplate, /<video[^>]+class="feature-video-player"/)
+  assert.doesNotMatch(homeTemplate, /home-section-title title="陶瓷课堂"/)
 })
