@@ -83,7 +83,7 @@ test('home data provides all required interactive content', () => {
   assert.equal(home.videos.length, 3)
   assert.ok(home.videos.every((item) => item.url === '/pages/video-learning/index'))
   assert.equal(home.news.length, 3)
-  assert.ok(home.news.every((item) => item.url.startsWith('/pages/news-detail/index?id=')))
+  assert.ok(home.news.every((item) => item.url.startsWith('/pages/news/index?active=')))
 })
 
 test('developer tools must not filter component files by dependency analysis', () => {
@@ -118,4 +118,13 @@ test('home classroom reserves inline video playback with posters', () => {
   assert.match(videoTemplate, /<video[^>]+wx:if="\{\{item\.src\}\}"/)
   assert.match(videoTemplate, /poster="\{\{item\.image\}\}"/)
   assert.match(homeTemplate, /home-section-title title="陶瓷课堂"[^>]+bind:action="openVideos"/)
+})
+
+test('home news links to a swiper-based news page with replaceable covers', () => {
+  const home = require(path.join(root, 'data/home'))
+  const newsTemplate = fs.readFileSync(path.join(root, 'pages/news/index.wxml'), 'utf8')
+  assert.ok(home.news.every((item) => item.url.startsWith('/pages/news/index?active=')))
+  assert.match(newsTemplate, /<swiper[^>]+class="news-swiper"/)
+  assert.match(newsTemplate, /<swiper-item[^>]+wx:for="\{\{news\}\}"/)
+  assert.match(newsTemplate, /<image[^>]+src="\{\{item\.cover\}\}"/)
 })
