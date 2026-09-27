@@ -15,7 +15,7 @@
         <video wx:if="{{item.id === 'video' && item.videoSrc}}" class="feature-video-player" src="{{item.videoSrc}}" poster="{{item.image}}" controls show-center-play-btn object-fit="cover"/>
         <image wx:else class="feature-image" src="{{item.image}}" mode="aspectFill"/>
         <view class="feature-cover"></view>
-        <view class="feature-copy"><view class="feature-title">{{item.title}}</view><view class="feature-description">{{item.description}}</view><view class="feature-action {{item.id === 'video' ? 'feature-play' : ''}}"><text>{{item.id === 'video' ? '▶' : '→'}}</text><text class="sr-only">{{item.action}}</text></view></view>
+        <view class="feature-copy"><view class="feature-title">{{item.title}}</view><view class="feature-description">{{item.description}}</view><view class="feature-action"><text>→</text><text class="sr-only">{{item.action}}</text></view></view>
       </view>
     </view>
     <view class="ai-card" data-url="{{aiAssistant.url}}" bindtap="openUrl">

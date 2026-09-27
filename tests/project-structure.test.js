@@ -136,3 +136,9 @@ test('featured video plays inside the core card without a duplicate classroom se
   assert.match(homeTemplate, /<video[^>]+class="feature-video-player"/)
   assert.doesNotMatch(homeTemplate, /home-section-title title="陶瓷课堂"/)
 })
+
+test('featured video uses the same arrow action style as other feature cards', () => {
+  const homeTemplate = fs.readFileSync(path.join(root, 'pages/home/index.wxml'), 'utf8')
+  assert.doesNotMatch(homeTemplate, /feature-play/)
+  assert.doesNotMatch(homeTemplate, /'▶'/)
+})
