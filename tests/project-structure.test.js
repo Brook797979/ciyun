@@ -111,3 +111,11 @@ test('home section headings use reference artwork icons', () => {
   assert.ok(exists('assets/icons/home-section-classroom.png'))
   assert.ok(exists('assets/icons/home-section-news.png'))
 })
+
+test('home classroom reserves inline video playback with posters', () => {
+  const videoTemplate = fs.readFileSync(path.join(root, 'components/home-video-card/index.wxml'), 'utf8')
+  const homeTemplate = fs.readFileSync(path.join(root, 'pages/home/index.wxml'), 'utf8')
+  assert.match(videoTemplate, /<video[^>]+wx:if="\{\{item\.src\}\}"/)
+  assert.match(videoTemplate, /poster="\{\{item\.image\}\}"/)
+  assert.match(homeTemplate, /home-section-title title="陶瓷课堂"[^>]+bind:action="openVideos"/)
+})

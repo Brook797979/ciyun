@@ -7,9 +7,9 @@ module.exports = {
   ],
   aiAssistant: { title: 'AI陶瓷助手', description: '关于陶瓷，你想了解什么？', action: '问问AI', url: '/pages/ai-chat/index', image: '/assets/banners/home-ai-assistant.jpg' },
   videos: [
-    { id: 'throwing', title: '拉坯成型', description: '感受泥土的温度', duration: '06:28', image: '/assets/videos/home-video-throwing.jpg', url: '/pages/video-learning/index' },
-    { id: 'painting', title: '青花绘制', description: '一笔一画，绘就千年', duration: '08:15', image: '/assets/videos/home-video-painting.jpg', url: '/pages/video-learning/index' },
-    { id: 'firing', title: '传统烧瓷工艺', description: '窑火淬炼，成就瓷韵', duration: '07:42', image: '/assets/videos/home-video-firing.jpg', url: '/pages/video-learning/index' }
+    { id: 'throwing', title: '拉坯成型', description: '感受泥土的温度', duration: '06:28', image: '/assets/videos/home-video-throwing.jpg', src: '', url: '/pages/video-learning/index' },
+    { id: 'painting', title: '青花绘制', description: '一笔一画，绘就千年', duration: '08:15', image: '/assets/videos/home-video-painting.jpg', src: '', url: '/pages/video-learning/index' },
+    { id: 'firing', title: '传统烧瓷工艺', description: '窑火淬炼，成就瓷韵', duration: '07:42', image: '/assets/videos/home-video-firing.jpg', src: '', url: '/pages/video-learning/index' }
   ],
   news: [
     { id: 'news-001', category: '文化', title: '千年瓷韵：从海上丝绸之路看中国陶瓷', date: '2026.09.20', image: '/assets/banners/home-news-culture.jpg', url: '/pages/news-detail/index?id=news-001' },
