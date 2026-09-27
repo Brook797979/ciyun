@@ -142,3 +142,25 @@ test('featured video uses the same arrow action style as other feature cards', (
   assert.doesNotMatch(homeTemplate, /feature-play/)
   assert.doesNotMatch(homeTemplate, /'▶'/)
 })
+
+test('tab bar icons use transparent corners without captured backgrounds', () => {
+  const iconNames = [
+    'home', 'home-active', 'museum', 'museum-active', 'workshop',
+    'workshop-active', 'challenge', 'challenge-active', 'profile', 'profile-active'
+  ]
+  const script = [
+    'Add-Type -AssemblyName System.Drawing',
+    ...iconNames.map((name) => {
+      const iconPath = path.join(root, 'assets', 'icons', `tab-${name}.png`).replace(/'/g, "''")
+      return `$bitmap=[System.Drawing.Bitmap]::FromFile('${iconPath}'); try { if ($bitmap.GetPixel(0,0).A -ne 0) { exit 1 } } finally { $bitmap.Dispose() }`
+    })
+  ].join('; ')
+  const result = require('node:child_process').spawnSync('powershell', ['-NoProfile', '-Command', script])
+  assert.equal(result.status, 0, 'tab icons must have transparent pixels at their corners')
+})
+
+test('AI assistant uses artwork without baked interactive controls', () => {
+  const homeData = fs.readFileSync(path.join(root, 'data/home.js'), 'utf8')
+  assert.match(homeData, /home-ai-assistant-clean\.jpg/)
+  assert.ok(fs.existsSync(path.join(root, 'assets/banners/home-ai-assistant-clean.jpg')))
+})

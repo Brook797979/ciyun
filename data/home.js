@@ -5,7 +5,7 @@ module.exports = {
     { id: 'challenge', title: '瓷境闯关', description: '趣味挑战\n解锁纹样与知识', action: '挑战', url: '/pages/challenge/index', image: '/assets/ceramics/home-feature-challenge.jpg', tone: 'red', size: 'large' },
     { id: 'video', title: '视频课堂', description: '跟随匠人\n学习陶瓷工艺', action: '播放', url: '/pages/video-learning/index', image: '/assets/ceramics/home-feature-video.jpg', videoSrc: '', tone: 'blue', size: 'medium' }
   ],
-  aiAssistant: { title: 'AI陶瓷助手', description: '关于陶瓷，你想了解什么？', action: '问问AI', url: '/pages/ai-chat/index', image: '/assets/banners/home-ai-assistant.jpg' },
+  aiAssistant: { title: 'AI陶瓷助手', description: '关于陶瓷，你想了解什么？', action: '问问AI', url: '/pages/ai-chat/index', image: '/assets/banners/home-ai-assistant-clean.jpg' },
   videos: [
     { id: 'throwing', title: '拉坯成型', description: '感受泥土的温度', duration: '06:28', image: '/assets/videos/home-video-throwing.jpg', src: '', url: '/pages/video-learning/index' },
     { id: 'painting', title: '青花绘制', description: '一笔一画，绘就千年', duration: '08:15', image: '/assets/videos/home-video-painting.jpg', src: '', url: '/pages/video-learning/index' },
