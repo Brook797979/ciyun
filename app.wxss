@@ -1,0 +1,12 @@
+@import "./styles/theme.wxss";
+@import "./styles/utilities.wxss";
+
+page {
+  min-height: 100%;
+  color: var(--color-text-primary);
+  background: var(--color-page);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body);
+}
+
+button::after { border: 0; }

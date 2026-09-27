@@ -1,0 +1,1 @@
+.hero{padding:48rpx 32rpx}.eyebrow{color:var(--color-primary);font-size:var(--font-size-caption)}.hero-title{margin:16rpx 0;font-family:var(--font-family-title);font-size:var(--font-size-title)}

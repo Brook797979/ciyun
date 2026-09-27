@@ -1,0 +1,1 @@
+<view class="page-shell stack"><view class="steps row"><view wx:for="{{steps}}" wx:key="*this" class="step {{index<=current?'active':''}}">{{index+1}}. {{item}}</view></view><view class="workspace placeholder">{{steps[current]}}操作区域</view><button class="link-button" bindtap="next">下一步</button></view>

@@ -1,0 +1,13 @@
+{
+  "description": "瓷韵——中国陶瓷数字文化体验平台",
+  "miniprogramRoot": "./",
+  "projectname": "瓷韵",
+  "appid": "touristappid",
+  "setting": {
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "urlCheck": false
+  },
+  "compileType": "miniprogram"
+}

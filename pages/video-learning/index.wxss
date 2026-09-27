@@ -1,0 +1,1 @@
+.video{display:flex;gap:20rpx;padding:20rpx}.cover{display:grid;place-items:center;width:220rpx;height:130rpx;background:var(--color-primary-soft);border-radius:var(--radius-sm);color:var(--color-text-secondary)}

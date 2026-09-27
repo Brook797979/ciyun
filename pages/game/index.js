@@ -1,0 +1,1 @@
+const levels=require('../../data/challenges'); const {go}=require('../../utils/navigation'); Page({data:{level:levels[0]},onLoad(options){this.setData({level:levels.find((item)=>item.id===options.id)||levels[0]})},complete(){go(`/pages/challenge-result/index?id=${this.data.level.id}`)}})

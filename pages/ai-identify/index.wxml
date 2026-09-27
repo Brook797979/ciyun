@@ -1,0 +1,1 @@
+<view class="page-shell stack"><empty-state wx:if="{{!hasResult}}" title="选择一张陶瓷图片" description="当前阶段使用模拟识别结果"/><button class="link-button" bindtap="choose">选择图片（模拟）</button><view wx:if="{{hasResult}}" class="surface result"><view>识别结果：青花梅瓶</view><view class="muted">器型、类别、纹样、工艺与文化介绍将在此展示</view></view></view>

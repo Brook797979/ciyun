@@ -1,0 +1,1 @@
+.result{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32rpx;text-align:center}.title{font-family:var(--font-family-title);font-size:var(--font-size-title)}.stars{color:var(--color-accent);font-size:64rpx}

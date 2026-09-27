@@ -1,0 +1,1 @@
+<view class="page-shell chat"><view class="messages"><view wx:for="{{messages}}" wx:key="index" class="bubble {{item.role}}">{{item.text}}</view></view><view class="composer row"><input value="{{input}}" bindinput="input" placeholder="输入陶瓷文化问题"/><button class="link-button" bindtap="send">发送</button></view></view>

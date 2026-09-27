@@ -1,0 +1,1 @@
+const ceramics=require('../../data/ceramics'); const {go}=require('../../utils/navigation'); Page({data:{item:ceramics[0]},onLoad(options){this.setData({item:ceramics.find((item)=>item.id===options.id)||ceramics[0]})},ask(){go(`/pages/ai-chat/index?ceramicId=${this.data.item.id}`)},watch(){go('/pages/video-learning/index')}})

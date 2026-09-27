@@ -1,0 +1,7 @@
+.page-shell { box-sizing: border-box; min-height: 100vh; padding: var(--space-lg) var(--page-gutter) var(--space-xl); }
+.surface { background: var(--color-surface); border: 1rpx solid var(--color-border); border-radius: var(--radius-md); }
+.stack { display: flex; flex-direction: column; gap: var(--space-md); }
+.row { display: flex; align-items: center; gap: var(--space-sm); }
+.muted { color: var(--color-text-secondary); }
+.placeholder { padding: var(--space-lg); border: 1rpx dashed var(--color-border); border-radius: var(--radius-md); color: var(--color-text-secondary); }
+.link-button { margin: 0; padding: 18rpx 24rpx; color: #fff; background: var(--color-primary); border-radius: var(--radius-sm); font-size: var(--font-size-body); }

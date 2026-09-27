@@ -1,0 +1,1 @@
+<view class="page-shell stack"><section-title title="陶瓷课堂" description="制作、绘瓷、烧制与非遗文化"/><view wx:for="{{videos}}" wx:key="id" class="surface video"><view class="cover">视频封面</view><view><view>{{item.title}}</view><view class="muted">{{item.category}} · {{item.duration}}</view></view></view></view>

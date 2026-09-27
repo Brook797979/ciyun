@@ -1,0 +1,1 @@
+.prompt{box-sizing:border-box;width:100%;min-height:220rpx;padding:24rpx}.result{display:grid;place-items:center;min-height:520rpx}

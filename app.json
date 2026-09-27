@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/museum/index",
+    "pages/workshop/index",
+    "pages/challenge/index",
+    "pages/profile/index",
+    "pages/ceramic-detail/index",
+    "pages/ai-identify/index",
+    "pages/ai-chat/index",
+    "pages/video-learning/index",
+    "pages/news/index",
+    "pages/news-detail/index",
+    "pages/craft/index",
+    "pages/ai-create/index",
+    "pages/works/index",
+    "pages/game/index",
+    "pages/challenge-result/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "瓷韵",
+    "navigationBarBackgroundColor": "#F4EFE5",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F4EFE5",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#77736B",
+    "selectedColor": "#315C72",
+    "backgroundColor": "#FFFCF7",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/home/index", "text": "首页" },
+      { "pagePath": "pages/museum/index", "text": "瓷馆" },
+      { "pagePath": "pages/workshop/index", "text": "工坊" },
+      { "pagePath": "pages/challenge/index", "text": "挑战" },
+      { "pagePath": "pages/profile/index", "text": "我的" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

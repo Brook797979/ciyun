@@ -1,0 +1,1 @@
+<view class="page-shell stack"><view class="title">{{item.title}}</view><view class="muted">{{item.category}} · {{item.publishedAt}}</view><view class="placeholder">资讯封面</view><view wx:for="{{item.paragraphs}}" wx:key="index" class="paragraph">{{item}}</view></view>

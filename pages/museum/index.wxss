@@ -1,0 +1,1 @@
+.filters{white-space:nowrap}.filter{padding:12rpx 24rpx;background:var(--color-surface);border:1rpx solid var(--color-border);border-radius:999rpx}.active{color:#fff;background:var(--color-primary)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20rpx}

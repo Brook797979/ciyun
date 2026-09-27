@@ -1,0 +1,1 @@
+<view class="card" bindtap="onTap"><view class="image-placeholder">陶瓷图片</view><view class="name">{{item.name}}</view><view class="meta">{{item.dynasty}} · {{item.shape}}</view></view>

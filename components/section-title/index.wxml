@@ -1,0 +1,1 @@
+<view class="section-title"><view><view class="title">{{title}}</view><view wx:if="{{description}}" class="description">{{description}}</view></view><view wx:if="{{actionText}}" class="action" bindtap="onAction">{{actionText}}</view></view>

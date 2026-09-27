@@ -1,0 +1,28 @@
+page {
+  --color-page: #F4EFE5;
+  --color-surface: #FFFCF7;
+  --color-primary: #315C72;
+  --color-primary-soft: #DDE8EA;
+  --color-accent: #9A4E3F;
+  --color-text-primary: #252B2D;
+  --color-text-secondary: #6F716E;
+  --color-border: #D8D0C3;
+  --color-disabled: #AAA69E;
+  --font-family-title: "Songti SC", "STSong", serif;
+  --font-family-body: "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-size-caption: 24rpx;
+  --font-size-body: 28rpx;
+  --font-size-subtitle: 32rpx;
+  --font-size-title: 44rpx;
+  --space-xs: 8rpx;
+  --space-sm: 16rpx;
+  --space-md: 24rpx;
+  --space-lg: 32rpx;
+  --space-xl: 48rpx;
+  --radius-sm: 12rpx;
+  --radius-md: 20rpx;
+  --radius-lg: 32rpx;
+  --shadow-card: 0 12rpx 32rpx rgba(55, 48, 40, 0.08);
+  --page-gutter: 32rpx;
+  --content-max-width: 1200rpx;
+}

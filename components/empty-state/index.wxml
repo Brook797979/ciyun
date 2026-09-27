@@ -1,0 +1,1 @@
+<view class="empty"><view class="symbol">纹</view><view class="title">{{title}}</view><view wx:if="{{description}}" class="description">{{description}}</view></view>

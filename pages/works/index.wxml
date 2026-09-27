@@ -1,0 +1,1 @@
+<view class="page-shell stack"><section-title title="我的作品" description="本地保存的数字陶瓷创作"/><view wx:for="{{works}}" wx:key="id" class="surface work"><view class="preview">作品图片</view><view><view>{{item.name}}</view><view class="muted">{{item.shape}} · {{item.pattern}} · {{item.glaze}}</view></view></view></view>

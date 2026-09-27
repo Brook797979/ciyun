@@ -1,0 +1,1 @@
+.section-title{display:flex;align-items:flex-end;justify-content:space-between}.title{font-family:var(--font-family-title);font-size:var(--font-size-subtitle);font-weight:600}.description{margin-top:8rpx;color:var(--color-text-secondary);font-size:var(--font-size-caption)}.action{color:var(--color-primary);font-size:var(--font-size-caption)}

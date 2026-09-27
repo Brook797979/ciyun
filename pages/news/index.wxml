@@ -1,0 +1,1 @@
+<view class="page-shell stack"><section-title title="陶瓷资讯" description="文化、非遗、展览与传统工艺"/><view wx:for="{{news}}" wx:key="id" class="surface article" data-id="{{item.id}}" bindtap="open"><view>{{item.title}}</view><view class="muted">{{item.category}} · {{item.publishedAt}}</view><view class="summary">{{item.summary}}</view></view></view>

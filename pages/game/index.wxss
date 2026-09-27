@@ -1,0 +1,1 @@
+.heading{padding:28rpx}.title{margin:10rpx 0;font-family:var(--font-family-title);font-size:var(--font-size-title)}.stage{display:grid;place-items:center;min-height:650rpx}

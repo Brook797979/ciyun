@@ -1,0 +1,1 @@
+.level{display:flex;align-items:center;gap:24rpx;padding:24rpx}.number{display:grid;place-items:center;width:72rpx;height:72rpx;color:#fff;background:var(--color-primary);border-radius:50%}.locked{opacity:.55}.level-body{flex:1}

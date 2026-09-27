@@ -1,0 +1,1 @@
+.steps{overflow-x:auto}.step{flex:none;padding:12rpx;color:var(--color-text-secondary)}.active{color:var(--color-primary)}.workspace{display:grid;place-items:center;min-height:680rpx}

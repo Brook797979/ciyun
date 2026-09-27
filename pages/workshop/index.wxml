@@ -1,0 +1,1 @@
+<view class="page-shell stack"><section-title title="数字工坊" description="用传统纹样创作你的陶瓷作品"/><view wx:for="{{entries}}" wx:key="title" data-url="{{item.url}}" bindtap="open"><feature-entry title="{{item.title}}" description="{{item.description}}"/></view></view>

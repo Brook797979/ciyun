@@ -1,0 +1,1 @@
+.work{display:flex;gap:20rpx;padding:20rpx}.preview{display:grid;place-items:center;width:180rpx;height:180rpx;background:var(--color-primary-soft);border-radius:var(--radius-sm);color:var(--color-text-secondary)}

@@ -1,0 +1,1 @@
+<view class="page-shell stack"><textarea class="surface prompt" value="{{prompt}}" bindinput="input" placeholder="例如：青花仙鹤祥云梅瓶"/><button class="link-button" bindtap="generate">生成设计（模拟）</button><view class="placeholder result">{{generated?'AI 陶瓷设计结果占位':'生成结果将在此展示'}}</view></view>
