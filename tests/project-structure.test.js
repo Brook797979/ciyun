@@ -135,3 +135,12 @@ test('home news section is an autoplay carousel', () => {
   assert.match(homeTemplate, /autoplay="\{\{true\}\}"/)
   assert.match(homeTemplate, /<swiper-item[^>]+wx:for="\{\{news\}\}"/)
 })
+
+test('home classroom is an autoplay carousel that can pause for playback', () => {
+  const homeTemplate = fs.readFileSync(path.join(root, 'pages/home/index.wxml'), 'utf8')
+  const videoTemplate = fs.readFileSync(path.join(root, 'components/home-video-card/index.wxml'), 'utf8')
+  assert.match(homeTemplate, /<swiper[^>]+class="home-video-swiper"/)
+  assert.match(homeTemplate, /autoplay="\{\{videoCarouselAutoplay\}\}"/)
+  assert.match(homeTemplate, /bind:playstate="onVideoPlayState"/)
+  assert.match(videoTemplate, /bindplay="onPlay"/)
+})
