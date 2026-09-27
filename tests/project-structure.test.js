@@ -85,3 +85,8 @@ test('home data provides all required interactive content', () => {
   assert.equal(home.news.length, 3)
   assert.ok(home.news.every((item) => item.url.startsWith('/pages/news-detail/index?id=')))
 })
+
+test('developer tools must not filter component files by dependency analysis', () => {
+  const projectConfig = JSON.parse(fs.readFileSync(path.join(root, 'project.config.json'), 'utf8'))
+  assert.equal(projectConfig.setting.ignoreDevUnusedFiles, false)
+})
