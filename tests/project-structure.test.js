@@ -104,3 +104,10 @@ test('AI assistant background artwork is masked behind the interactive button', 
   const homeStyles = fs.readFileSync(path.join(root, 'pages/home/index.wxss'), 'utf8')
   assert.match(homeStyles, /\.ai-overlay\{[^}]*#f8f2e6 82%[^}]*rgba\(248,242,230,0\) 96%/)
 })
+
+test('home section headings use reference artwork icons', () => {
+  const headingTemplate = fs.readFileSync(path.join(root, 'components/home-section-title/index.wxml'), 'utf8')
+  assert.match(headingTemplate, /<image[^>]+src="\{\{icon\}\}"/)
+  assert.ok(exists('assets/icons/home-section-classroom.png'))
+  assert.ok(exists('assets/icons/home-section-news.png'))
+})

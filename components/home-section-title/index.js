@@ -1,1 +1,1 @@
-Component({ properties: { title: String, actionText: { type: String, value: '更多' }, mark: String }, methods: { onAction() { this.triggerEvent('action') } } })
+Component({ properties: { title: String, actionText: { type: String, value: '更多' }, icon: String }, methods: { onAction() { this.triggerEvent('action') } } })
