@@ -128,3 +128,10 @@ test('home news links to a swiper-based news page with replaceable covers', () =
   assert.match(newsTemplate, /<swiper-item[^>]+wx:for="\{\{news\}\}"/)
   assert.match(newsTemplate, /<image[^>]+src="\{\{item\.cover\}\}"/)
 })
+
+test('home news section is an autoplay carousel', () => {
+  const homeTemplate = fs.readFileSync(path.join(root, 'pages/home/index.wxml'), 'utf8')
+  assert.match(homeTemplate, /<swiper[^>]+class="home-news-swiper"/)
+  assert.match(homeTemplate, /autoplay="\{\{true\}\}"/)
+  assert.match(homeTemplate, /<swiper-item[^>]+wx:for="\{\{news\}\}"/)
+})

@@ -22,6 +22,6 @@
       <view class="ai-content"><view class="ai-heading"><view class="ai-icon"><view class="ai-dot"></view><view class="ai-dot"></view><view class="ai-dot"></view></view><text>{{aiAssistant.title}}</text></view><view class="ai-prompt"><view class="ai-question">{{aiAssistant.description}}</view><view class="ai-button">{{aiAssistant.action}}</view></view></view>
     </view>
     <view class="home-section"><home-section-title title="陶瓷课堂" icon="/assets/icons/home-section-classroom.png" bind:action="openVideos"/><scroll-view class="horizontal-scroll" scroll-x enhanced show-scrollbar="{{false}}"><view class="scroll-row"><home-video-card wx:for="{{videos}}" wx:key="id" item="{{item}}"/></view></scroll-view></view>
-    <view class="home-section news-section"><home-section-title title="瓷韵新知" icon="/assets/icons/home-section-news.png" bind:action="openNews"/><scroll-view class="horizontal-scroll" scroll-x enhanced show-scrollbar="{{false}}"><view class="scroll-row"><home-news-card wx:for="{{news}}" wx:key="id" item="{{item}}" bind:select="openUrl"/></view></scroll-view></view>
+    <view class="home-section news-section"><home-section-title title="瓷韵新知" icon="/assets/icons/home-section-news.png" bind:action="openNews"/><swiper class="home-news-swiper" circular autoplay="{{true}}" interval="4200" duration="550" indicator-dots previous-margin="0rpx" next-margin="70rpx"><swiper-item wx:for="{{news}}" wx:key="id"><home-news-card item="{{item}}" carousel bind:select="openUrl"/></swiper-item></swiper></view>
   </view>
 </view>
