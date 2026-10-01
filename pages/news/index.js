@@ -1,12 +1,23 @@
 const news = require('../../data/news')
 const { go } = require('../../utils/navigation')
 
+const defaultFeatured = news.find((item) => item.id === 'news-002') || news[0]
+
 Page({
-  data: { news, current: 0 },
-  onLoad(options) {
-    const index = news.findIndex((item) => item.id === options.active)
-    if (index >= 0) this.setData({ current: index })
+  data: {
+    featured: defaultFeatured,
+    latestNews: news
   },
-  onChange(event) { this.setData({ current: event.detail.current }) },
+  onLoad(options) {
+    const featured = news.find((item) => item.id === (options && options.active))
+    if (featured) this.setData({ featured })
+  },
+  goBack() {
+    if (getCurrentPages().length > 1) {
+      wx.navigateBack()
+      return
+    }
+    wx.switchTab({ url: '/pages/home/index' })
+  },
   openDetail(event) { go(`/pages/news-detail/index?id=${event.currentTarget.dataset.id}`) }
 })

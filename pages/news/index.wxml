@@ -1,1 +1,62 @@
-<view class="page-shell news-page"><section-title title="陶瓷资讯" description="文化、非遗、展览与传统工艺"/><swiper class="news-swiper" current="{{current}}" circular indicator-dots autoplay="{{false}}" bindchange="onChange"><swiper-item wx:for="{{news}}" wx:key="id"><view class="news-slide" data-id="{{item.id}}" bindtap="openDetail"><image class="news-cover" src="{{item.cover}}" mode="aspectFill"/><view class="news-body"><view class="news-meta"><text class="news-tag">{{item.category}}</text><text class="news-date">{{item.publishedAt}}</text></view><view class="news-title">{{item.title}}</view><view class="news-summary">{{item.summary}}</view><view class="news-action">查看详情 <text>›</text></view></view></view></swiper-item></swiper><view class="swiper-hint">左右滑动，浏览更多瓷韵新知</view></view>
+<view class="news-page">
+  <view class="news-hero">
+    <image class="news-hero-image" src="/assets/banners/home-hero.jpg" mode="aspectFill"/>
+    <view class="news-hero-wash"></view>
+    <button class="back-button" bindtap="goBack" aria-label="返回">
+      <text class="back-icon">‹</text>
+    </button>
+    <view class="news-brand">
+      <view class="news-brand-title">瓷韵新知</view>
+      <view class="news-brand-subtitle">探索陶瓷文化、非遗与当代展览</view>
+    </view>
+  </view>
+
+  <view class="news-content">
+    <view class="news-section featured-section">
+      <view class="section-heading">
+        <image class="section-heading-icon" src="/assets/icons/home-section-news.png" mode="aspectFit"/>
+        <view class="section-heading-title">精选资讯</view>
+        <view class="section-heading-rule"><view class="rule-knot"></view></view>
+      </view>
+
+      <view class="featured-card" data-id="{{featured.id}}" bindtap="openDetail">
+        <image wx:if="{{featured.cover}}" class="featured-cover" src="{{featured.cover}}" mode="aspectFill"/>
+        <view wx:else class="news-cover-placeholder"></view>
+        <view class="featured-overlay"></view>
+        <view class="featured-copy">
+          <view class="news-tag featured-tag">{{featured.category}}</view>
+          <view class="featured-title">{{featured.title}}</view>
+          <view class="featured-summary">{{featured.summary}}</view>
+          <view class="featured-date">{{featured.publishedAt}}</view>
+        </view>
+        <view class="featured-arrow">›</view>
+      </view>
+    </view>
+
+    <view class="news-section latest-section">
+      <view class="section-heading">
+        <view class="section-seal section-seal-blue">新</view>
+        <view class="section-heading-title">最新资讯</view>
+        <view class="section-heading-rule"><view class="rule-knot"></view></view>
+      </view>
+
+      <view class="latest-list">
+        <view wx:for="{{latestNews}}" wx:key="id" class="latest-card" data-id="{{item.id}}" bindtap="openDetail">
+          <view class="latest-media">
+            <image wx:if="{{item.cover}}" class="latest-cover" src="{{item.cover}}" mode="aspectFill"/>
+            <view wx:else class="news-cover-placeholder">
+              <view class="placeholder-vase"></view>
+            </view>
+          </view>
+          <view class="latest-copy">
+            <view class="news-tag latest-tag">{{item.category}}</view>
+            <view class="latest-title">{{item.title}}</view>
+            <view class="latest-summary">{{item.summary}}</view>
+            <view class="latest-date">{{item.publishedAt}}</view>
+          </view>
+          <view class="latest-arrow">›</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

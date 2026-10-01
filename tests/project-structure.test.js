@@ -113,13 +113,29 @@ test('home section headings use reference artwork icons', () => {
   assert.ok(exists('assets/icons/home-section-news.png'))
 })
 
-test('home news links to a swiper-based news page with replaceable covers', () => {
+test('home news links to an editorial news landing page with replaceable covers', () => {
   const home = require(path.join(root, 'data/home'))
   const newsTemplate = fs.readFileSync(path.join(root, 'pages/news/index.wxml'), 'utf8')
   assert.ok(home.news.every((item) => item.url.startsWith('/pages/news/index?active=')))
-  assert.match(newsTemplate, /<swiper[^>]+class="news-swiper"/)
-  assert.match(newsTemplate, /<swiper-item[^>]+wx:for="\{\{news\}\}"/)
-  assert.match(newsTemplate, /<image[^>]+src="\{\{item\.cover\}\}"/)
+  assert.match(newsTemplate, /class="news-hero"/)
+  assert.match(newsTemplate, /class="featured-card"/)
+  assert.match(newsTemplate, /class="latest-list"/)
+  assert.match(newsTemplate, /wx:for="\{\{latestNews\}\}"/)
+  assert.doesNotMatch(newsTemplate, /class="news-swiper"/)
+})
+
+test('news landing page supports custom navigation and missing cover placeholders', () => {
+  const template = fs.readFileSync(path.join(root, 'pages/news/index.wxml'), 'utf8')
+  const script = fs.readFileSync(path.join(root, 'pages/news/index.js'), 'utf8')
+  const config = JSON.parse(fs.readFileSync(path.join(root, 'pages/news/index.json'), 'utf8'))
+
+  assert.equal(config.navigationStyle, 'custom')
+  assert.match(template, /bindtap="goBack"/)
+  assert.match(template, /wx:if="\{\{featured\.cover\}\}"/)
+  assert.match(template, /wx:if="\{\{item\.cover\}\}"/)
+  assert.match(template, /class="news-cover-placeholder"/)
+  assert.match(script, /featured:/)
+  assert.match(script, /latestNews:/)
 })
 
 test('home news section is an autoplay carousel', () => {
