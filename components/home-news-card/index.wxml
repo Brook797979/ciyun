@@ -1,1 +1,8 @@
-<view class="news-card {{carousel ? 'news-card-carousel' : ''}}" bindtap="onTap"><view class="news-image"><image src="{{item.image}}" mode="widthFix"/></view><view class="news-content"><view class="news-tag">{{item.category}}</view><view class="news-title">{{item.title}}</view><view class="news-date">{{item.date}}</view></view></view>
+<view class="news-card {{carousel ? 'news-card-carousel' : ''}}" bindtap="onTap">
+  <view class="news-image"><image src="{{item.image}}" mode="aspectFill"/></view>
+  <view class="news-content">
+    <view class="news-tag">{{item.category}}</view>
+    <view class="news-title">{{item.title}}</view>
+    <view class="news-date">{{item.date}}</view>
+  </view>
+</view>

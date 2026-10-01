@@ -1,1 +1,68 @@
-.news-card{overflow:hidden;width:324rpx;background:rgba(255,252,247,.94);border:1rpx solid rgba(166,142,111,.2);border-radius:var(--radius-card);box-shadow:var(--shadow-card)}.news-card-carousel{width:auto;margin:0 8rpx}.news-image{position:relative;overflow:hidden;height:166rpx;background:var(--color-primary-soft)}.news-card-carousel .news-image{height:210rpx}.news-image image{position:absolute;top:0;left:0;width:100%}.news-content{position:relative;padding:18rpx 20rpx 20rpx}.news-tag{display:inline-flex;padding:5rpx 18rpx;color:#81552f;background:#f7ead4;border-radius:999rpx;font-size:21rpx}.news-title{display:-webkit-box;min-height:76rpx;margin-top:10rpx;overflow:hidden;color:var(--color-text-primary);font-family:var(--font-family-title);font-size:27rpx;font-weight:600;line-height:1.4;-webkit-box-orient:vertical;-webkit-line-clamp:2}.news-date{margin-top:9rpx;color:var(--color-text-tertiary);font-size:21rpx}
+.news-card {
+  overflow: hidden;
+  width: 324rpx;
+  background: rgba(255, 252, 247, .96);
+  border: 1rpx solid rgba(166, 142, 111, .20);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.news-card-carousel {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.news-image {
+  position: relative;
+  overflow: hidden;
+  height: 166rpx;
+  background: var(--color-primary-soft);
+}
+
+.news-card-carousel .news-image { height: 188rpx; }
+
+.news-image image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.news-content {
+  position: relative;
+  padding: 15rpx 18rpx 17rpx;
+}
+
+.news-tag {
+  display: inline-flex;
+  padding: 4rpx 16rpx;
+  color: #81552f;
+  background: #f7ead4;
+  border-radius: 999rpx;
+  font-size: 20rpx;
+  line-height: 1.2;
+}
+
+.news-title {
+  display: -webkit-box;
+  min-height: 68rpx;
+  margin-top: 9rpx;
+  overflow: hidden;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-title);
+  font-size: 26rpx;
+  font-weight: 600;
+  line-height: 1.34;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.news-date {
+  margin-top: 7rpx;
+  color: var(--color-text-tertiary);
+  font-size: 20rpx;
+  line-height: 1.2;
+}
