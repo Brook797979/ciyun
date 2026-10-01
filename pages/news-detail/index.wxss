@@ -40,11 +40,6 @@
   font-size: 23rpx;
 }
 
-.article-meta-dot {
-  margin: 0 12rpx;
-  color: var(--color-warm-gold);
-}
-
 .article-hero {
   overflow: hidden;
   height: 420rpx;
@@ -121,20 +116,6 @@
 
 .article-paragraph:first-of-type {
   margin-top: 0;
-}
-
-.article-footer {
-  margin-top: 40rpx;
-  padding-top: 24rpx;
-  border-top: 1rpx solid rgba(217, 205, 187, 0.8);
-  color: var(--color-text-tertiary);
-  font-size: 22rpx;
-  line-height: 1.7;
-  text-align: right;
-}
-
-.article-note {
-  margin-top: 4rpx;
 }
 
 @media (max-width: 350px) {

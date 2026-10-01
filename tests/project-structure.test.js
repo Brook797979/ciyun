@@ -259,13 +259,14 @@ test('news detail data contains complete original reading content', () => {
   })
 })
 
-test('news detail page renders a complete article reading structure', () => {
+test('news detail page renders a clean article without editorial credits', () => {
   const template = fs.readFileSync(path.join(root, 'pages/news-detail/index.wxml'), 'utf8')
 
   assert.match(template, /<image[^>]+class="article-cover"[^>]+src="\{\{item\.cover\}\}"[^>]+mode="aspectFill"/)
   assert.match(template, /class="article-caption"[^>]*>\{\{item\.imageCaption\}\}/)
   assert.match(template, /class="article-lead"[^>]*>\{\{item\.lead\}\}/)
   assert.match(template, /wx:for="\{\{item\.paragraphs\}\}"/)
-  assert.match(template, /class="article-author"[^>]*>编辑：\{\{item\.author\}\}/)
+  assert.doesNotMatch(template, /\{\{item\.author\}\}|article-footer|article-author|article-note/)
+  assert.doesNotMatch(template, /编辑：|本文为瓷韵平台原创文化资讯/)
   assert.doesNotMatch(template, /资讯封面|class="placeholder"/)
 })

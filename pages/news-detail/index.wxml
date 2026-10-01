@@ -4,8 +4,6 @@
     <view class="article-title">{{item.title}}</view>
     <view class="article-meta">
       <text>{{item.publishedAt}}</text>
-      <text class="article-meta-dot">·</text>
-      <text>{{item.author}}</text>
     </view>
   </view>
 
@@ -22,10 +20,5 @@
       <view class="article-divider-line"></view>
     </view>
     <view wx:for="{{item.paragraphs}}" wx:key="index" class="article-paragraph">{{item}}</view>
-
-    <view class="article-footer">
-      <view class="article-author">编辑：{{item.author}}</view>
-      <view class="article-note">本文为瓷韵平台原创文化资讯</view>
-    </view>
   </view>
 </view>
