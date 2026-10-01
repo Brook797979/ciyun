@@ -229,6 +229,15 @@ test('featured video uses the same arrow action style as other feature cards', (
   assert.doesNotMatch(homeTemplate, /'▶'/)
 })
 
+test('video placeholders navigate without showing a resource toast', () => {
+  const homeScript = fs.readFileSync(path.join(root, 'pages/home/index.js'), 'utf8')
+  const videoCardScript = fs.readFileSync(path.join(root, 'components/home-video-card/index.js'), 'utf8')
+
+  assert.doesNotMatch(homeScript, /showToast|视频资源待补充/)
+  assert.doesNotMatch(videoCardScript, /showToast|视频资源待补充/)
+  assert.match(homeScript, /openFeature\([\s\S]*?go\(url\)/)
+})
+
 test('tab bar icons use transparent corners without captured backgrounds', () => {
   const iconNames = [
     'home', 'home-active', 'museum', 'museum-active', 'workshop',
