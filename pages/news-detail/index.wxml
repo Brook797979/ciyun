@@ -7,10 +7,10 @@
     </view>
   </view>
 
-  <view class="article-hero">
+  <view wx:if="{{item.cover}}" class="article-hero">
     <image class="article-cover" src="{{item.cover}}" mode="aspectFill"/>
   </view>
-  <view class="article-caption">{{item.imageCaption}}</view>
+  <view wx:if="{{item.cover}}" class="article-caption">{{item.imageCaption}}</view>
 
   <view class="article-content">
     <view class="article-lead">{{item.lead}}</view>

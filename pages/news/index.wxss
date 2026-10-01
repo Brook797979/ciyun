@@ -10,7 +10,7 @@
 
 .news-hero {
   position: relative;
-  height: 390rpx;
+  height: 260rpx;
   overflow: hidden;
 }
 
@@ -29,13 +29,13 @@
 .back-button {
   position: absolute;
   z-index: 3;
-  top: calc(env(safe-area-inset-top) + 16rpx);
+  top: calc(env(safe-area-inset-top) + 6rpx);
   left: 22rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 72rpx;
-  height: 72rpx;
+  width: 64rpx;
+  height: 64rpx;
   margin: 0;
   padding: 0;
   color: var(--color-ink-blue);
@@ -47,7 +47,7 @@
 .back-icon {
   margin-top: -5rpx;
   font-family: Arial, sans-serif;
-  font-size: 66rpx;
+  font-size: 58rpx;
   font-weight: 300;
   line-height: 1;
 }
@@ -55,26 +55,26 @@
 .news-brand {
   position: absolute;
   z-index: 2;
-  top: calc(env(safe-area-inset-top) + 86rpx);
-  left: 120rpx;
-  right: 120rpx;
+  top: calc(env(safe-area-inset-top) + 34rpx);
+  left: 104rpx;
+  right: 104rpx;
   text-align: center;
 }
 
 .news-brand-title {
   color: var(--color-ink-blue);
   font-family: var(--font-family-title);
-  font-size: 50rpx;
+  font-size: 46rpx;
   font-weight: 700;
   letter-spacing: 6rpx;
   text-shadow: 0 2rpx 2rpx rgba(255, 252, 247, 0.8);
 }
 
 .news-brand-subtitle {
-  margin-top: 20rpx;
+  margin-top: 10rpx;
   color: rgba(7, 57, 88, 0.82);
   font-family: var(--font-family-title);
-  font-size: 25rpx;
+  font-size: 23rpx;
   line-height: 1.55;
   letter-spacing: 3rpx;
   white-space: nowrap;
@@ -83,7 +83,7 @@
 .news-content {
   position: relative;
   z-index: 4;
-  margin-top: -28rpx;
+  margin-top: -8rpx;
   padding: 0 var(--page-gutter);
 }
 

@@ -138,6 +138,22 @@ test('news landing page supports custom navigation and missing cover placeholder
   assert.match(script, /latestNews:/)
 })
 
+test('news landing keeps a compact hero and excludes the featured exhibition from the latest list', () => {
+  const news = require(path.join(root, 'data/news'))
+  const script = fs.readFileSync(path.join(root, 'pages/news/index.js'), 'utf8')
+  const styles = fs.readFileSync(path.join(root, 'pages/news/index.wxss'), 'utf8')
+  const featured = news.find((item) => item.id === 'news-002')
+  const latest = news.filter((item) => item.id !== featured.id)
+
+  assert.equal(featured.category, '展览')
+  assert.equal(latest.length, 5)
+  assert.ok(latest.every((item) => item.id !== featured.id))
+  assert.ok(latest.filter((item) => !item.cover).length >= 3)
+  assert.match(script, /featuredNews/)
+  assert.match(script, /news\.filter\(\(item\) => item\.id !== featuredNews\.id\)/)
+  assert.match(styles, /\.news-hero\s*\{[^}]*height:\s*260rpx/)
+})
+
 test('home news section is an autoplay carousel', () => {
   const homeTemplate = fs.readFileSync(path.join(root, 'pages/home/index.wxml'), 'utf8')
   assert.match(homeTemplate, /<swiper[^>]+class="home-news-swiper"/)
@@ -257,8 +273,8 @@ test('home and detail news share the user-provided local cover images', () => {
   ]
 
   assert.deepEqual(home.news.map((item) => item.image), expectedCovers)
-  assert.deepEqual(news.map((item) => item.cover), expectedCovers)
-  assert.deepEqual(home.news.map((item) => item.title), news.map((item) => item.title))
+  assert.deepEqual(home.news.map((item) => news.find((entry) => entry.id === item.id).cover), expectedCovers)
+  assert.deepEqual(home.news.map((item) => item.title), home.news.map((item) => news.find((entry) => entry.id === item.id).title))
   expectedCovers.forEach((cover) => assert.ok(exists(cover.replace(/^\//, '')), `${cover} is missing`))
 })
 
@@ -278,6 +294,7 @@ test('news detail data contains complete original reading content', () => {
 test('news detail page renders a clean article without editorial credits', () => {
   const template = fs.readFileSync(path.join(root, 'pages/news-detail/index.wxml'), 'utf8')
 
+  assert.match(template, /wx:if="\{\{item\.cover\}\}"/)
   assert.match(template, /<image[^>]+class="article-cover"[^>]+src="\{\{item\.cover\}\}"[^>]+mode="aspectFill"/)
   assert.match(template, /class="article-caption"[^>]*>\{\{item\.imageCaption\}\}/)
   assert.match(template, /class="article-lead"[^>]*>\{\{item\.lead\}\}/)
