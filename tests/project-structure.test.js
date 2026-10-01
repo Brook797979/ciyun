@@ -213,3 +213,20 @@ test('native tab icons retain normalized transparent 81 pixel canvases', () => {
   const result = require('node:child_process').spawnSync('powershell', ['-NoProfile', '-Command', script])
   assert.equal(result.status, 0, 'tab icons must use transparent 81×81 canvases')
 })
+
+test('home paper background is a reusable texture instead of a captured UI strip', () => {
+  const texturePath = path.join(root, 'assets', 'backgrounds', 'home-paper.png').replace(/'/g, "''")
+  const script = [
+    'Add-Type -AssemblyName System.Drawing',
+    `$bitmap=[System.Drawing.Bitmap]::FromFile('${texturePath}')`,
+    'try { if ($bitmap.Width -lt 512 -or $bitmap.Height -lt 512) { exit 1 } } finally { $bitmap.Dispose() }'
+  ].join('; ')
+  const result = require('node:child_process').spawnSync('powershell', ['-NoProfile', '-Command', script])
+  assert.equal(result.status, 0, 'home paper texture must be at least 512×512 without baked UI text')
+})
+
+test('home news uses clean image-only covers instead of captured card artwork', () => {
+  const home = require(path.join(root, 'data/home'))
+  assert.ok(home.news.every((item) => /-clean\.jpg$/.test(item.image)))
+  home.news.forEach((item) => assert.ok(exists(item.image.replace(/^\//, '')), `${item.image} is missing`))
+})
