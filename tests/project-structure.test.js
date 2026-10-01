@@ -225,8 +225,47 @@ test('home paper background is a reusable texture instead of a captured UI strip
   assert.equal(result.status, 0, 'home paper texture must be at least 512×512 without baked UI text')
 })
 
-test('home news uses clean image-only covers instead of captured card artwork', () => {
+test('home news uses local image covers instead of captured card artwork', () => {
   const home = require(path.join(root, 'data/home'))
-  assert.ok(home.news.every((item) => /-clean\.jpg$/.test(item.image)))
+  assert.ok(home.news.every((item) => /\.(?:jpe?g|png)$/.test(item.image)))
   home.news.forEach((item) => assert.ok(exists(item.image.replace(/^\//, '')), `${item.image} is missing`))
+})
+
+test('home and detail news share the user-provided local cover images', () => {
+  const home = require(path.join(root, 'data/home'))
+  const news = require(path.join(root, 'data/news'))
+  const expectedCovers = [
+    '/assets/banners/news-silk-road.jpeg',
+    '/assets/banners/news-exhibition.jpeg',
+    '/assets/banners/news-craftsmanship.jpeg'
+  ]
+
+  assert.deepEqual(home.news.map((item) => item.image), expectedCovers)
+  assert.deepEqual(news.map((item) => item.cover), expectedCovers)
+  assert.deepEqual(home.news.map((item) => item.title), news.map((item) => item.title))
+  expectedCovers.forEach((cover) => assert.ok(exists(cover.replace(/^\//, '')), `${cover} is missing`))
+})
+
+test('news detail data contains complete original reading content', () => {
+  const news = require(path.join(root, 'data/news'))
+
+  news.forEach((item) => {
+    assert.equal(item.author, '瓷韵编辑部')
+    assert.ok(item.lead.length >= 35, `${item.id} lead is too short`)
+    assert.ok(item.imageCaption.length >= 12, `${item.id} image caption is too short`)
+    assert.ok(item.paragraphs.length >= 3, `${item.id} needs at least three paragraphs`)
+    assert.ok(item.paragraphs.join('').length >= 420, `${item.id} article is too short`)
+    assert.doesNotMatch(item.paragraphs.join(''), /占位|模拟正文/)
+  })
+})
+
+test('news detail page renders a complete article reading structure', () => {
+  const template = fs.readFileSync(path.join(root, 'pages/news-detail/index.wxml'), 'utf8')
+
+  assert.match(template, /<image[^>]+class="article-cover"[^>]+src="\{\{item\.cover\}\}"[^>]+mode="aspectFill"/)
+  assert.match(template, /class="article-caption"[^>]*>\{\{item\.imageCaption\}\}/)
+  assert.match(template, /class="article-lead"[^>]*>\{\{item\.lead\}\}/)
+  assert.match(template, /wx:for="\{\{item\.paragraphs\}\}"/)
+  assert.match(template, /class="article-author"[^>]*>编辑：\{\{item\.author\}\}/)
+  assert.doesNotMatch(template, /资讯封面|class="placeholder"/)
 })

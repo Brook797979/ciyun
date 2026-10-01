@@ -1,1 +1,31 @@
-<view class="page-shell stack"><view class="title">{{item.title}}</view><view class="muted">{{item.category}} · {{item.publishedAt}}</view><view class="placeholder">资讯封面</view><view wx:for="{{item.paragraphs}}" wx:key="index" class="paragraph">{{item}}</view></view>
+<view class="page-shell article-page">
+  <view class="article-header">
+    <view class="article-category">{{item.category}}</view>
+    <view class="article-title">{{item.title}}</view>
+    <view class="article-meta">
+      <text>{{item.publishedAt}}</text>
+      <text class="article-meta-dot">·</text>
+      <text>{{item.author}}</text>
+    </view>
+  </view>
+
+  <view class="article-hero">
+    <image class="article-cover" src="{{item.cover}}" mode="aspectFill"/>
+  </view>
+  <view class="article-caption">{{item.imageCaption}}</view>
+
+  <view class="article-content">
+    <view class="article-lead">{{item.lead}}</view>
+    <view class="article-divider">
+      <view class="article-divider-line"></view>
+      <view class="article-divider-mark">瓷</view>
+      <view class="article-divider-line"></view>
+    </view>
+    <view wx:for="{{item.paragraphs}}" wx:key="index" class="article-paragraph">{{item}}</view>
+
+    <view class="article-footer">
+      <view class="article-author">编辑：{{item.author}}</view>
+      <view class="article-note">本文为瓷韵平台原创文化资讯</view>
+    </view>
+  </view>
+</view>

@@ -12,8 +12,8 @@ module.exports = {
     { id: 'firing', title: '传统烧瓷工艺', description: '窑火淬炼，成就瓷韵', duration: '07:42', image: '/assets/videos/home-video-firing.jpg', src: '', url: '/pages/video-learning/index' }
   ],
   news: [
-    { id: 'news-001', category: '文化', title: '千年瓷韵：从海上丝绸之路看中国陶瓷', date: '2026.09.20', image: '/assets/banners/home-news-culture-clean.jpg', url: '/pages/news/index?active=news-001' },
-    { id: 'news-002', category: '展览', title: '“东方瓷韵”古代陶瓷特展启幕', date: '2026.09.15', image: '/assets/banners/home-news-exhibition-clean.jpg', url: '/pages/news/index?active=news-002' },
-    { id: 'news-003', category: '非遗', title: '传统制瓷工艺里的匠心传承', date: '2026.09.10', image: '/assets/banners/home-news-heritage-clean.jpg', url: '/pages/news/index?active=news-003' }
+    { id: 'news-001', category: '文化', title: '千年瓷韵：从海上丝绸之路看中国陶瓷', date: '2026.09.20', image: '/assets/banners/news-silk-road.jpeg', url: '/pages/news/index?active=news-001' },
+    { id: 'news-002', category: '展览', title: '“东方瓷韵”古代陶瓷特展启幕', date: '2026.09.15', image: '/assets/banners/news-exhibition.jpeg', url: '/pages/news/index?active=news-002' },
+    { id: 'news-003', category: '非遗', title: '传统制瓷工艺里的匠心传承', date: '2026.09.10', image: '/assets/banners/news-craftsmanship.jpeg', url: '/pages/news/index?active=news-003' }
   ]
 }
