@@ -16,10 +16,10 @@ page {
   --color-disabled: #AAA69E;
   --font-family-title: "Songti SC", "STSong", serif;
   --font-family-body: "PingFang SC", "Microsoft YaHei", sans-serif;
-  --font-size-caption: 24rpx;
-  --font-size-body: 28rpx;
+  --font-size-caption: 22rpx;
+  --font-size-body: 27rpx;
   --font-size-subtitle: 32rpx;
-  --font-size-title: 44rpx;
+  --font-size-title: 42rpx;
   --space-xs: 8rpx;
   --space-sm: 16rpx;
   --space-md: 24rpx;
@@ -29,8 +29,8 @@ page {
   --radius-md: 20rpx;
   --radius-lg: 32rpx;
   --radius-card: 22rpx;
-  --radius-card-lg: 28rpx;
-  --shadow-card: 0 12rpx 30rpx rgba(55, 48, 40, 0.11);
+  --radius-card-lg: 26rpx;
+  --shadow-card: 0 10rpx 26rpx rgba(42, 48, 47, 0.10);
   --page-gutter: 28rpx;
   --content-max-width: 1200rpx;
 }
