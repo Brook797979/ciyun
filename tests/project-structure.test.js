@@ -100,9 +100,10 @@ test('home components are included in the global dependency graph', () => {
   })
 })
 
-test('AI assistant background artwork is masked behind the interactive button', () => {
+test('AI assistant reserves the right side for artwork without crowding live controls', () => {
   const homeStyles = fs.readFileSync(path.join(root, 'pages/home/index.wxss'), 'utf8')
-  assert.match(homeStyles, /\.ai-overlay\{[^}]*#f8f2e6 82%[^}]*rgba\(248,242,230,0\) 96%/)
+  assert.match(homeStyles, /\.ai-overlay\s*\{[^}]*linear-gradient/)
+  assert.match(homeStyles, /\.ai-content\s*\{[^}]*width:\s*76%/)
 })
 
 test('home section headings use reference artwork icons', () => {
