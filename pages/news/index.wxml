@@ -2,9 +2,9 @@
   <view class="news-hero">
     <image class="news-hero-image" src="/assets/banners/home-hero.jpg" mode="aspectFill"/>
     <view class="news-hero-wash"></view>
-    <button class="back-button" style="top: {{navTop}}px" bindtap="goBack" aria-label="返回">
+    <view class="back-button" style="top: {{navTop}}px" bindtap="goBack" aria-label="返回">
       <text class="back-icon">‹</text>
-    </button>
+    </view>
     <view class="news-brand" style="top: {{navTop}}px">
       <view class="news-brand-title">瓷韵新知</view>
       <view class="news-brand-subtitle">探索陶瓷文化、非遗与当代展览</view>

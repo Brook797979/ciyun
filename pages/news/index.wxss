@@ -38,9 +38,8 @@
   margin: 0;
   padding: 0;
   color: var(--color-ink-blue);
-  background: rgba(255, 252, 247, 0.68);
+  background: transparent;
   border-radius: 50%;
-  box-shadow: 0 5rpx 16rpx rgba(7, 57, 88, 0.10);
 }
 
 .back-icon {

@@ -130,7 +130,8 @@ test('news landing page supports custom navigation and missing cover placeholder
   const config = JSON.parse(fs.readFileSync(path.join(root, 'pages/news/index.json'), 'utf8'))
 
   assert.equal(config.navigationStyle, 'custom')
-  assert.match(template, /bindtap="goBack"/)
+  assert.match(template, /<view[^>]+class="back-button"[^>]+bindtap="goBack"/)
+  assert.doesNotMatch(template, /<button[^>]+class="back-button"/)
   assert.match(template, /wx:if="\{\{featured\.cover\}\}"/)
   assert.match(template, /wx:if="\{\{item\.cover\}\}"/)
   assert.match(template, /class="news-cover-placeholder"/)
@@ -144,10 +145,13 @@ test('news landing matches the compact target proportions and fixed article orde
   const styles = fs.readFileSync(path.join(root, 'pages/news/index.wxss'), 'utf8')
   const featured = news.find((item) => item.id === 'news-002')
   const expectedLatestIds = ['news-005', 'news-004', 'news-007', 'news-006', 'news-008']
+  const latest = expectedLatestIds.map((id) => news.find((item) => item.id === id))
 
   assert.equal(featured.category, '展览')
   assert.equal(featured.summary, '穿越千年，感受中国陶瓷的东方美学与文明温度。')
-  assert.deepEqual(expectedLatestIds.map((id) => news.find((item) => item.id === id).id), expectedLatestIds)
+  assert.deepEqual(latest.map((item) => item.id), expectedLatestIds)
+  assert.ok(latest.every((item) => item.category !== '展览'))
+  assert.equal(news.find((item) => item.id === 'news-006').title, '窑火中的颜色密码')
   assert.match(script, /featuredNews/)
   expectedLatestIds.forEach((id) => assert.match(script, new RegExp(`'${id}'`)))
   assert.match(styles, /\.news-hero\s*\{[^}]*height:\s*230rpx/)
