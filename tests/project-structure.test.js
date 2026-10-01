@@ -164,3 +164,51 @@ test('AI assistant uses artwork without baked interactive controls', () => {
   assert.match(homeData, /home-ai-assistant-clean\.jpg/)
   assert.ok(fs.existsSync(path.join(root, 'assets/banners/home-ai-assistant-clean.jpg')))
 })
+
+test('home keeps the approved compact module order and brand copy', () => {
+  const template = fs.readFileSync(path.join(root, 'pages/home/index.wxml'), 'utf8')
+  const heroIndex = template.indexOf('class="hero"')
+  const featuresIndex = template.indexOf('class="feature-grid"')
+  const assistantIndex = template.indexOf('class="ai-card"')
+  const newsIndex = template.indexOf('class="home-section news-section"')
+
+  assert.ok(heroIndex < featuresIndex)
+  assert.ok(featuresIndex < assistantIndex)
+  assert.ok(assistantIndex < newsIndex)
+  assert.match(template, /瓷一世界 · 以数之美 · 传东方瓷韵/)
+})
+
+test('home uses the balanced compact visual measurements', () => {
+  const styles = fs.readFileSync(path.join(root, 'pages/home/index.wxss'), 'utf8')
+  assert.match(styles, /\.hero\s*\{[^}]*height:\s*340rpx/)
+  assert.match(styles, /\.feature-action\s*\{[^}]*width:\s*52rpx[^}]*height:\s*52rpx/)
+  assert.match(styles, /\.ai-card\s*\{[^}]*height:\s*190rpx/)
+  assert.match(styles, /@media\s*\(max-width:\s*350px\)/)
+})
+
+test('home news shows one full card and a 15 to 20 percent next-card peek', () => {
+  const template = fs.readFileSync(path.join(root, 'pages/home/index.wxml'), 'utf8')
+  const styles = fs.readFileSync(path.join(root, 'pages/home/index.wxss'), 'utf8')
+  const cardTemplate = fs.readFileSync(path.join(root, 'components/home-news-card/index.wxml'), 'utf8')
+
+  assert.match(template, /previous-margin="0rpx"/)
+  assert.match(template, /next-margin="116rpx"/)
+  assert.match(styles, /\.home-news-swiper\s*\{[^}]*height:\s*400rpx/)
+  assert.match(cardTemplate, /mode="aspectFill"/)
+})
+
+test('native tab icons retain normalized transparent 81 pixel canvases', () => {
+  const iconNames = [
+    'home', 'home-active', 'museum', 'museum-active', 'workshop',
+    'workshop-active', 'challenge', 'challenge-active', 'profile', 'profile-active'
+  ]
+  const script = [
+    'Add-Type -AssemblyName System.Drawing',
+    ...iconNames.map((name) => {
+      const iconPath = path.join(root, 'assets', 'icons', `tab-${name}.png`).replace(/'/g, "''")
+      return `$bitmap=[System.Drawing.Bitmap]::FromFile('${iconPath}'); try { if ($bitmap.Width -ne 81 -or $bitmap.Height -ne 81 -or $bitmap.GetPixel(0,0).A -ne 0) { exit 1 } } finally { $bitmap.Dispose() }`
+    })
+  ].join('; ')
+  const result = require('node:child_process').spawnSync('powershell', ['-NoProfile', '-Command', script])
+  assert.equal(result.status, 0, 'tab icons must use transparent 81×81 canvases')
+})
