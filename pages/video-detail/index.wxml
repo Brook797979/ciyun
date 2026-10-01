@@ -1,0 +1,17 @@
+<view class="page-shell video-detail-page">
+  <view class="detail-media">
+    <video wx:if="{{item.src}}" class="detail-video" src="{{item.src}}" poster="{{item.cover}}" controls></video>
+    <view wx:else class="detail-poster">
+      <image class="detail-cover" src="{{item.cover}}" mode="aspectFill"/>
+      <view class="detail-shade"></view>
+      <view class="detail-play"><view class="detail-triangle"></view></view>
+      <view class="detail-duration">{{item.duration}}</view>
+    </view>
+  </view>
+  <view class="detail-content">
+    <view class="detail-label">瓷艺课堂</view>
+    <view class="detail-title">{{item.title}}</view>
+    <view class="detail-description">{{item.description}}</view>
+    <view class="detail-pending">视频资源待补充，当前展示封面与课程信息。</view>
+  </view>
+</view>

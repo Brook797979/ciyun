@@ -9,6 +9,7 @@
     "pages/ai-identify/index",
     "pages/ai-chat/index",
     "pages/video-learning/index",
+    "pages/video-detail/index",
     "pages/news/index",
     "pages/news-detail/index",
     "pages/craft/index",

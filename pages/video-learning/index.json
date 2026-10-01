@@ -1,1 +1,4 @@
-{ "navigationBarTitleText": "视频学习", "usingComponents": { "section-title": "/components/section-title/index" } }
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "瓷艺课堂"
+}

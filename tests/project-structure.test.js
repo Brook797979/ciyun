@@ -18,6 +18,7 @@ const secondaryPages = [
   'pages/ai-identify/index',
   'pages/ai-chat/index',
   'pages/video-learning/index',
+  'pages/video-detail/index',
   'pages/news/index',
   'pages/news-detail/index',
   'pages/craft/index',
@@ -122,6 +123,53 @@ test('home news links to an editorial news landing page with replaceable covers'
   assert.match(newsTemplate, /class="latest-list"/)
   assert.match(newsTemplate, /wx:for="\{\{latestNews\}\}"/)
   assert.doesNotMatch(newsTemplate, /class="news-swiper"/)
+})
+
+test('video classroom provides one featured video and six target cards', () => {
+  const videoData = require(path.join(root, 'data/videos'))
+  const expectedTitles = ['拉坯成型', '青花绘制', '施釉工艺', '窑火烧制', '传统纹样绘制', '非遗匠人故事']
+  const expectedDurations = ['08:28', '08:15', '07:42', '10:20', '09:18', '11:05']
+
+  assert.equal(videoData.featured.id, 'featured')
+  assert.equal(videoData.featured.title, '从泥土到瓷器——传统制瓷工艺')
+  assert.equal(videoData.featured.duration, '12:36')
+  assert.deepEqual(videoData.videos.map((item) => item.title), expectedTitles)
+  assert.deepEqual(videoData.videos.map((item) => item.duration), expectedDurations)
+  assert.deepEqual(videoData.videos.map((item) => item.id), ['throwing', 'blue-white', 'glazing', 'firing', 'pattern', 'artisan'])
+  ;[videoData.featured, ...videoData.videos].forEach((item) => {
+    assert.ok(exists(item.cover.replace(/^\//, '')), `${item.cover} is missing`)
+    assert.equal(item.url, `/pages/video-detail/index?id=${item.id}`)
+  })
+})
+
+test('video classroom matches the target high-density structure', () => {
+  const template = fs.readFileSync(path.join(root, 'pages/video-learning/index.wxml'), 'utf8')
+  const styles = fs.readFileSync(path.join(root, 'pages/video-learning/index.wxss'), 'utf8')
+  const config = JSON.parse(fs.readFileSync(path.join(root, 'pages/video-learning/index.json'), 'utf8'))
+
+  assert.equal(config.navigationStyle, 'custom')
+  assert.match(template, /class="classroom-hero"/)
+  assert.match(template, /open-type="share"/)
+  assert.match(template, /class="featured-video"/)
+  assert.match(template, /wx:for="\{\{videos\}\}"/)
+  assert.match(template, /mode="aspectFill"/)
+  assert.doesNotMatch(template, /<br\s*\/?\s*>/)
+  assert.match(styles, /\.classroom-hero\s*\{[^}]*height:\s*300rpx/)
+  assert.match(styles, /\.featured-video\s*\{[^}]*height:\s*278rpx/)
+  assert.match(styles, /\.video-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/)
+  assert.match(styles, /\.video-card\s*\{[^}]*height:\s*214rpx/)
+  assert.match(styles, /\.video-thumb\s*\{[^}]*height:\s*140rpx/)
+})
+
+test('video detail page resolves content by video id', () => {
+  const script = fs.readFileSync(path.join(root, 'pages/video-detail/index.js'), 'utf8')
+  const template = fs.readFileSync(path.join(root, 'pages/video-detail/index.wxml'), 'utf8')
+
+  assert.match(script, /options\.id/)
+  assert.match(script, /allVideos\.find/)
+  assert.match(template, /item\.cover/)
+  assert.match(template, /item\.title/)
+  assert.match(template, /item\.description/)
 })
 
 test('news landing page supports custom navigation and missing cover placeholders', () => {
