@@ -2,10 +2,10 @@
   <view class="news-hero">
     <image class="news-hero-image" src="/assets/banners/home-hero.jpg" mode="aspectFill"/>
     <view class="news-hero-wash"></view>
-    <button class="back-button" bindtap="goBack" aria-label="返回">
+    <button class="back-button" style="top: {{navTop}}px" bindtap="goBack" aria-label="返回">
       <text class="back-icon">‹</text>
     </button>
-    <view class="news-brand">
+    <view class="news-brand" style="top: {{navTop}}px">
       <view class="news-brand-title">瓷韵新知</view>
       <view class="news-brand-subtitle">探索陶瓷文化、非遗与当代展览</view>
     </view>
@@ -25,8 +25,14 @@
         <view class="featured-overlay"></view>
         <view class="featured-copy">
           <view class="news-tag featured-tag">{{featured.category}}</view>
-          <view class="featured-title">{{featured.title}}</view>
-          <view class="featured-summary">{{featured.summary}}</view>
+          <view class="featured-title">
+            <view>“东方瓷韵”</view>
+            <view>古代陶瓷特展启幕</view>
+          </view>
+          <view class="featured-summary">
+            <view>穿越千年，感受中国陶瓷的</view>
+            <view>东方美学与文明温度。</view>
+          </view>
           <view class="featured-date">{{featured.publishedAt}}</view>
         </view>
         <view class="featured-arrow">›</view>
@@ -35,7 +41,7 @@
 
     <view class="news-section latest-section">
       <view class="section-heading">
-        <view class="section-seal section-seal-blue">新</view>
+        <image class="section-heading-icon" src="/assets/icons/home-section-classroom.png" mode="aspectFit"/>
         <view class="section-heading-title">最新资讯</view>
         <view class="section-heading-rule"><view class="rule-knot"></view></view>
       </view>

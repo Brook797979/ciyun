@@ -138,20 +138,21 @@ test('news landing page supports custom navigation and missing cover placeholder
   assert.match(script, /latestNews:/)
 })
 
-test('news landing keeps a compact hero and excludes the featured exhibition from the latest list', () => {
+test('news landing matches the compact target proportions and fixed article order', () => {
   const news = require(path.join(root, 'data/news'))
   const script = fs.readFileSync(path.join(root, 'pages/news/index.js'), 'utf8')
   const styles = fs.readFileSync(path.join(root, 'pages/news/index.wxss'), 'utf8')
   const featured = news.find((item) => item.id === 'news-002')
-  const latest = news.filter((item) => item.id !== featured.id)
+  const expectedLatestIds = ['news-005', 'news-004', 'news-007', 'news-006', 'news-008']
 
   assert.equal(featured.category, '展览')
-  assert.equal(latest.length, 5)
-  assert.ok(latest.every((item) => item.id !== featured.id))
-  assert.ok(latest.filter((item) => !item.cover).length >= 3)
+  assert.equal(featured.summary, '穿越千年，感受中国陶瓷的东方美学与文明温度。')
+  assert.deepEqual(expectedLatestIds.map((id) => news.find((item) => item.id === id).id), expectedLatestIds)
   assert.match(script, /featuredNews/)
-  assert.match(script, /news\.filter\(\(item\) => item\.id !== featuredNews\.id\)/)
-  assert.match(styles, /\.news-hero\s*\{[^}]*height:\s*260rpx/)
+  expectedLatestIds.forEach((id) => assert.match(script, new RegExp(`'${id}'`)))
+  assert.match(styles, /\.news-hero\s*\{[^}]*height:\s*230rpx/)
+  assert.match(styles, /\.featured-card\s*\{[^}]*height:\s*300rpx/)
+  assert.match(styles, /\.latest-card\s*\{[^}]*min-height:\s*144rpx/)
 })
 
 test('home news section is an autoplay carousel', () => {
