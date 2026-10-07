@@ -149,7 +149,7 @@ test('video classroom data maps four carousel videos and six selected videos', (
   assert.equal(videoData.allVideos.length, 10)
   videoData.allVideos.forEach((item) => {
     assert.ok(exists(item.cover.replace(/^\//, '')), `${item.cover} is missing`)
-    assert.match(item.src, /^https:\/\/.*\.tcb\.qcloud\.la\/videos\/.+\?sign=/)
+    assert.match(item.src, /^cloud:\/\/cloud1-d7gew23w04c3def7d\..+\/videos\/.+\.mp4$/)
     assert.match(item.cloudPath, /^videos\/(carousel|selected)\/.+\.mp4$/)
   })
 })
@@ -178,7 +178,7 @@ test('video classroom uses an inline carousel and two-column playback cards', ()
   assert.doesNotMatch(template, /<br\s*\/?\s*>/)
   assert.doesNotMatch(script, /pages\/video-detail/)
   assert.match(script, /wx\.createVideoContext/)
-  assert.match(script, /getTempFileURL/)
+  assert.match(script, /callFunction/)
   assert.match(script, /stopCurrentVideo/)
   assert.match(script, /requestFullScreen/)
   assert.match(styles, /\.classroom-hero\s*\{[^}]*height:\s*260rpx/)
@@ -189,7 +189,7 @@ test('video classroom uses an inline carousel and two-column playback cards', ()
   assert.match(styles, /\.video-thumb\s*\{[^}]*height:\s*190rpx/)
 })
 
-test('video classroom stops the active video before another one starts', () => {
+test('video classroom stops the active video before another one starts', async () => {
   const scriptPath = path.join(root, 'pages/video-learning/index.js')
   const originalPage = global.Page
   const originalWx = global.wx
@@ -198,6 +198,12 @@ test('video classroom stops the active video before another one starts', () => {
 
   global.Page = (definition) => { pageDefinition = definition }
   global.wx = {
+    cloud: { async callFunction() {
+      return { result: {
+        videos: require(path.join(root, 'data/videos')).allVideos.map((item) => ({ id: item.id, url: `https://example.com/${item.id}.mp4` })),
+        expiresAt: Date.now() + 2700000
+      } }
+    } },
     createVideoContext(id) {
       return {
         play() { calls.push(`play:${id}`) },
@@ -218,8 +224,8 @@ test('video classroom stops the active video before another one starts', () => {
     }
   }
 
-  page.playVideo({ currentTarget: { dataset: { id: 'carousel-ceramic-life' } } })
-  page.playVideo({ currentTarget: { dataset: { id: 'selected-ru-porcelain' } } })
+  await page.playVideo({ currentTarget: { dataset: { id: 'carousel-ceramic-life' } } })
+  await page.playVideo({ currentTarget: { dataset: { id: 'selected-ru-porcelain' } } })
   page.requestFullscreen({ currentTarget: { dataset: { id: 'selected-ru-porcelain' } } })
   page.onSwiperChange({ detail: { current: 2 } })
   page.onVideoEnded({ currentTarget: { dataset: { id: 'selected-ru-porcelain' } } })

@@ -1,0 +1,7 @@
+{
+  "envId": "cloud1-d7gew23w04c3def7d",
+  "functionRoot": "cloudfunctions",
+  "functions": [
+    { "name": "video-playback", "runtime": "Nodejs20.19", "handler": "index.main", "timeout": 15, "memorySize": 128, "installDependency": true }
+  ]
+}

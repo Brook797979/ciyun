@@ -1,5 +1,5 @@
 <view class="classroom-page">
-  <view class="classroom-hero">
+  <view class="classroom-hero" style="height: {{heroHeight}}px">
     <image class="hero-background" src="/assets/backgrounds/video-classroom-header.jpg" mode="aspectFill"/>
     <view class="hero-wash"></view>
 

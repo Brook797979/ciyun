@@ -1,7 +1,7 @@
 const { carouselVideos, videos } = require('../../data/videos')
 
 function withInitialPlayUrl(items) {
-  return items.map((item) => ({ ...item, playUrl: item.src }))
+  return items.map((item) => ({ ...item, playUrl: '' }))
 }
 
 Page({
@@ -11,37 +11,47 @@ Page({
     playingVideoId: '',
     currentSwiperIndex: 0,
     navTop: 24,
-    brandTop: 68
+    brandTop: 60,
+    heroHeight: 145
   },
   onLoad() {
+    const windowInfo = typeof wx.getWindowInfo === 'function' ? wx.getWindowInfo() : { windowWidth: 390 }
+    const scale = windowInfo.windowWidth / 750
+    let brandTop = this.data.brandTop
     if (typeof wx.getMenuButtonBoundingClientRect === 'function') {
       const menuButton = wx.getMenuButtonBoundingClientRect()
       if (menuButton && menuButton.top) {
-        this.setData({
-          navTop: menuButton.top,
-          brandTop: menuButton.bottom + 10
-        })
+        brandTop = menuButton.bottom + 2
+        this.setData({ navTop: menuButton.top })
       }
     }
-    this.resolveCloudVideoUrls()
+    this.setData({ brandTop, heroHeight: Math.max(260 * scale, brandTop + 112 * scale) })
+    this.resolveCloudVideoUrls().catch((error) => {
+      console.warn('[video-classroom] URL preparation failed:', error.errMsg || error.message)
+    })
   },
-  resolveCloudVideoUrls() {
-    if (!wx.cloud || typeof wx.cloud.getTempFileURL !== 'function') return
-    const allVideos = [...this.data.carouselVideos, ...this.data.videos]
-    const cloudFileIds = allVideos.map((item) => item.src).filter((src) => src.startsWith('cloud://'))
-    if (!cloudFileIds.length) return
-
-    wx.cloud.getTempFileURL({ fileList: cloudFileIds }).then(({ fileList = [] }) => {
-      const urlMap = fileList.reduce((result, item) => {
-        if (item.fileID && item.tempFileURL) result[item.fileID] = item.tempFileURL
+  resolveCloudVideoUrls(force = false) {
+    if (!wx.cloud || typeof wx.cloud.callFunction !== 'function') return Promise.resolve()
+    if (!force && this.videoUrlsExpireAt > Date.now()) return Promise.resolve()
+    if (this.videoUrlRequest) return this.videoUrlRequest
+    // Private storage requires server-side access; never persist temporary signatures in the bundle.
+    this.videoUrlRequest = wx.cloud.callFunction({ name: 'video-playback' }).then(({ result }) => {
+      if (!result || !Array.isArray(result.videos)) throw new Error('No video playback URLs returned')
+      const urlMap = result.videos.reduce((result, item) => {
+        if (item.id && item.url) result[item.id] = item.url
         return result
       }, {})
-      const attachUrl = (item) => ({ ...item, playUrl: urlMap[item.src] || item.src })
+      const attachUrl = (item) => ({ ...item, playUrl: urlMap[item.id] || '' })
+      this.videoUrlsExpireAt = result.expiresAt || Date.now() + 45 * 60 * 1000
       this.setData({
         carouselVideos: this.data.carouselVideos.map(attachUrl),
         videos: this.data.videos.map(attachUrl)
       })
-    }).catch(() => {})
+    }).then(() => { this.videoUrlRequest = null }, (error) => {
+      this.videoUrlRequest = null
+      throw error
+    })
+    return this.videoUrlRequest
   },
   goBack() {
     if (getCurrentPages().length > 1) {
@@ -50,10 +60,24 @@ Page({
     }
     wx.switchTab({ url: '/pages/home/index' })
   },
-  playVideo(event) {
+  async playVideo(event) {
     const id = event.currentTarget.dataset.id
     if (!id || id === this.data.playingVideoId) return
     this.stopCurrentVideo()
+    const request = (this.playRequest || 0) + 1
+    this.playRequest = request
+    this.setData({ playingVideoId: '' })
+    try {
+      await this.resolveCloudVideoUrls()
+      if (request !== this.playRequest) return
+      const video = [...this.data.carouselVideos, ...this.data.videos].find((item) => item.id === id)
+      if (!video || !video.playUrl) throw new Error('Video URL unavailable')
+    } catch (error) {
+      if (request !== this.playRequest) return
+      console.warn('[video-classroom] Playback preparation failed:', id, error.errMsg || error.message)
+      wx.showToast({ title: '视频暂时无法加载，请重试', icon: 'none' })
+      return
+    }
     this.setData({ playingVideoId: id }, () => {
       this.activeVideoContext = wx.createVideoContext(`video-${id}`, this)
       if (this.activeVideoContext && typeof this.activeVideoContext.play === 'function') {
@@ -98,6 +122,8 @@ Page({
     this.setData({ playingVideoId: '' })
   },
   onVideoError(event) {
+    console.warn('[video-classroom] Player error:', event.currentTarget.dataset.id, event.detail)
+    this.videoUrlsExpireAt = 0
     if (event.currentTarget.dataset.id === this.data.playingVideoId) {
       this.activeVideoContext = null
       this.setData({ playingVideoId: '' })
@@ -105,10 +131,12 @@ Page({
     wx.showToast({ title: '视频加载失败，请稍后重试', icon: 'none' })
   },
   onHide() {
+    this.playRequest = (this.playRequest || 0) + 1
     this.stopCurrentVideo()
     if (this.data.playingVideoId) this.setData({ playingVideoId: '' })
   },
   onUnload() {
+    this.playRequest = (this.playRequest || 0) + 1
     this.stopCurrentVideo()
   },
   onShareAppMessage() {

@@ -6,7 +6,7 @@ const carouselVideos = [
     duration: '09:22',
     cover: '/assets/videos/carousel-ceramic-life.jpg',
     cloudPath: 'videos/carousel/ceramic-life.mp4',
-    src: 'https://636c-cloud1-d7gew23w04c3def7d-1501415161.tcb.qcloud.la/videos/carousel/ceramic-life.mp4?sign=55bda2da5e70c8f9d56c786db9bdec0a&t=1791361965'
+    src: "cloud://cloud1-d7gew23w04c3def7d.636c-cloud1-d7gew23w04c3def7d-1501415161/videos/carousel/ceramic-life.mp4"
   },
   {
     id: 'carousel-longquan-celadon',
@@ -15,7 +15,7 @@ const carouselVideos = [
     duration: '09:24',
     cover: '/assets/videos/carousel-longquan-celadon.jpg',
     cloudPath: 'videos/carousel/longquan-celadon.mp4',
-    src: 'https://636c-cloud1-d7gew23w04c3def7d-1501415161.tcb.qcloud.la/videos/carousel/longquan-celadon.mp4?sign=62fd4b8b5cdd8d21dfbba06c10b33de6&t=1791361970'
+    src: "cloud://cloud1-d7gew23w04c3def7d.636c-cloud1-d7gew23w04c3def7d-1501415161/videos/carousel/longquan-celadon.mp4"
   },
   {
     id: 'carousel-kiln-millennium',
@@ -24,7 +24,7 @@ const carouselVideos = [
     duration: '05:34',
     cover: '/assets/videos/carousel-kiln-millennium.jpg',
     cloudPath: 'videos/carousel/kiln-millennium.mp4',
-    src: 'https://636c-cloud1-d7gew23w04c3def7d-1501415161.tcb.qcloud.la/videos/carousel/kiln-millennium.mp4?sign=2488c5bc3ceae4b5dc64a48638833994&t=1791361976'
+    src: "cloud://cloud1-d7gew23w04c3def7d.636c-cloud1-d7gew23w04c3def7d-1501415161/videos/carousel/kiln-millennium.mp4"
   },
   {
     id: 'carousel-ceramic-history',
@@ -33,7 +33,7 @@ const carouselVideos = [
     duration: '27:31',
     cover: '/assets/videos/carousel-ceramic-history.jpg',
     cloudPath: 'videos/carousel/ceramic-history.mp4',
-    src: 'https://636c-cloud1-d7gew23w04c3def7d-1501415161.tcb.qcloud.la/videos/carousel/ceramic-history.mp4?sign=ad39ffedbe617b24373d14d40cb816c1&t=1791361981'
+    src: "cloud://cloud1-d7gew23w04c3def7d.636c-cloud1-d7gew23w04c3def7d-1501415161/videos/carousel/ceramic-history.mp4"
   }
 ]
 
@@ -45,7 +45,7 @@ const videos = [
     duration: '04:03',
     cover: '/assets/videos/selected-ru-porcelain.jpg',
     cloudPath: 'videos/selected/ru-porcelain.mp4',
-    src: 'https://636c-cloud1-d7gew23w04c3def7d-1501415161.tcb.qcloud.la/videos/selected/ru-porcelain.mp4?sign=76310bf7fa6356c4c06b8ac2fa5b95a4&t=1791361987'
+    src: "cloud://cloud1-d7gew23w04c3def7d.636c-cloud1-d7gew23w04c3def7d-1501415161/videos/selected/ru-porcelain.mp4"
   },
   {
     id: 'selected-three-step-vase',
@@ -54,7 +54,7 @@ const videos = [
     duration: '02:26',
     cover: '/assets/videos/selected-three-step-vase.jpg',
     cloudPath: 'videos/selected/three-step-vase.mp4',
-    src: 'https://636c-cloud1-d7gew23w04c3def7d-1501415161.tcb.qcloud.la/videos/selected/three-step-vase.mp4?sign=b1e71b293bd72c26ba7a243180251ce2&t=1791361993'
+    src: "cloud://cloud1-d7gew23w04c3def7d.636c-cloud1-d7gew23w04c3def7d-1501415161/videos/selected/three-step-vase.mp4"
   },
   {
     id: 'selected-cactus-making',
@@ -63,7 +63,7 @@ const videos = [
     duration: '02:38',
     cover: '/assets/videos/selected-cactus-making.jpg',
     cloudPath: 'videos/selected/cactus-making.mp4',
-    src: 'https://636c-cloud1-d7gew23w04c3def7d-1501415161.tcb.qcloud.la/videos/selected/cactus-making.mp4?sign=5e9bc0d35d05b4243eb37de9ba9dc15f&t=1791361999'
+    src: "cloud://cloud1-d7gew23w04c3def7d.636c-cloud1-d7gew23w04c3def7d-1501415161/videos/selected/cactus-making.mp4"
   },
   {
     id: 'selected-bowl-making',
@@ -72,7 +72,7 @@ const videos = [
     duration: '05:08',
     cover: '/assets/videos/selected-bowl-making.jpg',
     cloudPath: 'videos/selected/bowl-making.mp4',
-    src: 'https://636c-cloud1-d7gew23w04c3def7d-1501415161.tcb.qcloud.la/videos/selected/bowl-making.mp4?sign=4e94b4b878ee216c6bc99d7f698ac5db&t=1791362005'
+    src: "cloud://cloud1-d7gew23w04c3def7d.636c-cloud1-d7gew23w04c3def7d-1501415161/videos/selected/bowl-making.mp4"
   },
   {
     id: 'selected-throwing-basics',
@@ -81,7 +81,7 @@ const videos = [
     duration: '03:29',
     cover: '/assets/videos/selected-throwing-basics.jpg',
     cloudPath: 'videos/selected/throwing-basics.mp4',
-    src: 'https://636c-cloud1-d7gew23w04c3def7d-1501415161.tcb.qcloud.la/videos/selected/throwing-basics.mp4?sign=a15a3341b2873e8991042a5f3cf2da21&t=1791362010'
+    src: "cloud://cloud1-d7gew23w04c3def7d.636c-cloud1-d7gew23w04c3def7d-1501415161/videos/selected/throwing-basics.mp4"
   },
   {
     id: 'selected-white-vase',
@@ -90,7 +90,7 @@ const videos = [
     duration: '13:58',
     cover: '/assets/videos/selected-white-vase.jpg',
     cloudPath: 'videos/selected/white-vase.mp4',
-    src: 'https://636c-cloud1-d7gew23w04c3def7d-1501415161.tcb.qcloud.la/videos/selected/white-vase.mp4?sign=f65a1d0ca2d0573d5b1881171b4e2b48&t=1791362016'
+    src: "cloud://cloud1-d7gew23w04c3def7d.636c-cloud1-d7gew23w04c3def7d-1501415161/videos/selected/white-vase.mp4"
   }
 ]
 

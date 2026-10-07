@@ -1,6 +1,7 @@
 {
   "description": "瓷韵——中国陶瓷数字文化体验平台",
   "miniprogramRoot": "./",
+  "cloudfunctionRoot": "cloudfunctions/",
   "projectname": "瓷韵",
   "appid": "wx95208e13ef365f14",
   "setting": {
@@ -32,7 +33,10 @@
   "compileType": "miniprogram",
   "simulatorPluginLibVersion": {},
   "packOptions": {
-    "ignore": [],
+    "ignore": [
+      { "type": "folder", "value": "cloudfunctions" },
+      { "type": "file", "value": "cloudbaserc.json" }
+    ],
     "include": []
   },
   "editorSetting": {}
