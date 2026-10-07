@@ -125,40 +125,111 @@ test('home news links to an editorial news landing page with replaceable covers'
   assert.doesNotMatch(newsTemplate, /class="news-swiper"/)
 })
 
-test('video classroom provides one featured video and six target cards', () => {
+test('video classroom data maps four carousel videos and six selected videos', () => {
   const videoData = require(path.join(root, 'data/videos'))
-  const expectedTitles = ['拉坯成型', '青花绘制', '施釉工艺', '窑火烧制', '传统纹样绘制', '非遗匠人故事']
-  const expectedDurations = ['08:28', '08:15', '07:42', '10:20', '09:18', '11:05']
+  const expectedCarouselTitles = [
+    '《只瓷一生》非遗纪录片｜景德镇手工制瓷技艺纪录片',
+    '龙泉青瓷｜内藏雕花·中式瓷韵的极致美学',
+    '微电影《窑火千年 瓷骋天下》',
+    '一次看完，中国陶瓷发展史！'
+  ]
+  const expectedVideoTitles = [
+    '【非遗汝瓷】全世界只有中国会做，裂纹声如风铃般清脆！',
+    '3步完成一个精美花瓶！',
+    '超简单，一学就会的仙人掌制作展示！',
+    '陶碗制作全过程',
+    '陶艺入门拉坯教程',
+    '治愈系手工陶艺，做一个纯白简约风高腰花瓶'
+  ]
 
-  assert.equal(videoData.featured.id, 'featured')
-  assert.equal(videoData.featured.title, '从泥土到瓷器——传统制瓷工艺')
-  assert.equal(videoData.featured.duration, '12:36')
-  assert.deepEqual(videoData.videos.map((item) => item.title), expectedTitles)
-  assert.deepEqual(videoData.videos.map((item) => item.duration), expectedDurations)
-  assert.deepEqual(videoData.videos.map((item) => item.id), ['throwing', 'blue-white', 'glazing', 'firing', 'pattern', 'artisan'])
-  ;[videoData.featured, ...videoData.videos].forEach((item) => {
+  assert.deepEqual(videoData.carouselVideos.map((item) => item.title), expectedCarouselTitles)
+  assert.deepEqual(videoData.carouselVideos.map((item) => item.duration), ['09:22', '09:24', '05:34', '27:31'])
+  assert.deepEqual(videoData.videos.map((item) => item.title), expectedVideoTitles)
+  assert.deepEqual(videoData.videos.map((item) => item.duration), ['04:03', '02:26', '02:38', '05:08', '03:29', '13:58'])
+  assert.equal(videoData.allVideos.length, 10)
+  videoData.allVideos.forEach((item) => {
     assert.ok(exists(item.cover.replace(/^\//, '')), `${item.cover} is missing`)
-    assert.equal(item.url, `/pages/video-detail/index?id=${item.id}`)
+    assert.match(item.src, /^https:\/\/.*\.tcb\.qcloud\.la\/videos\/.+\?sign=/)
+    assert.match(item.cloudPath, /^videos\/(carousel|selected)\/.+\.mp4$/)
   })
 })
 
-test('video classroom matches the target high-density structure', () => {
+test('video classroom uses an inline carousel and two-column playback cards', () => {
   const template = fs.readFileSync(path.join(root, 'pages/video-learning/index.wxml'), 'utf8')
   const styles = fs.readFileSync(path.join(root, 'pages/video-learning/index.wxss'), 'utf8')
+  const script = fs.readFileSync(path.join(root, 'pages/video-learning/index.js'), 'utf8')
   const config = JSON.parse(fs.readFileSync(path.join(root, 'pages/video-learning/index.json'), 'utf8'))
 
   assert.equal(config.navigationStyle, 'custom')
   assert.match(template, /class="classroom-hero"/)
   assert.match(template, /open-type="share"/)
-  assert.match(template, /class="featured-video"/)
+  assert.match(template, /<swiper[^>]+class="featured-swiper"/)
+  assert.match(template, /indicator-dots="\{\{true\}\}"/)
+  assert.match(template, /wx:for="\{\{carouselVideos\}\}"/)
   assert.match(template, /wx:for="\{\{videos\}\}"/)
+  assert.match(template, /<video[^>]+wx:if="\{\{playingVideoId === item\.id\}\}"/)
+  assert.match(template, /bindended="onVideoEnded"/)
+  assert.match(template, /bindtap="playVideo"/)
   assert.match(template, /mode="aspectFill"/)
   assert.doesNotMatch(template, /<br\s*\/?\s*>/)
-  assert.match(styles, /\.classroom-hero\s*\{[^}]*height:\s*300rpx/)
-  assert.match(styles, /\.featured-video\s*\{[^}]*height:\s*278rpx/)
+  assert.doesNotMatch(script, /pages\/video-detail/)
+  assert.match(script, /wx\.createVideoContext/)
+  assert.match(script, /getTempFileURL/)
+  assert.match(script, /stopCurrentVideo/)
+  assert.match(styles, /\.classroom-hero\s*\{[^}]*height:\s*260rpx/)
+  assert.match(styles, /\.featured-swiper\s*\{[^}]*height:\s*326rpx/)
   assert.match(styles, /\.video-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/)
-  assert.match(styles, /\.video-card\s*\{[^}]*height:\s*214rpx/)
-  assert.match(styles, /\.video-thumb\s*\{[^}]*height:\s*140rpx/)
+  assert.match(styles, /\.video-thumb\s*\{[^}]*height:\s*190rpx/)
+})
+
+test('video classroom stops the active video before another one starts', () => {
+  const scriptPath = path.join(root, 'pages/video-learning/index.js')
+  const originalPage = global.Page
+  const originalWx = global.wx
+  let pageDefinition
+  const calls = []
+
+  global.Page = (definition) => { pageDefinition = definition }
+  global.wx = {
+    createVideoContext(id) {
+      return {
+        play() { calls.push(`play:${id}`) },
+        stop() { calls.push(`stop:${id}`) }
+      }
+    }
+  }
+
+  delete require.cache[require.resolve(scriptPath)]
+  require(scriptPath)
+  const page = {
+    ...pageDefinition,
+    data: { ...pageDefinition.data },
+    setData(update, callback) {
+      Object.assign(this.data, update)
+      if (callback) callback()
+    }
+  }
+
+  page.playVideo({ currentTarget: { dataset: { id: 'carousel-ceramic-life' } } })
+  page.playVideo({ currentTarget: { dataset: { id: 'selected-ru-porcelain' } } })
+  page.onVideoEnded({ currentTarget: { dataset: { id: 'selected-ru-porcelain' } } })
+
+  assert.deepEqual(calls, [
+    'play:video-carousel-ceramic-life',
+    'stop:video-carousel-ceramic-life',
+    'play:video-selected-ru-porcelain'
+  ])
+  assert.equal(page.data.playingVideoId, '')
+
+  delete require.cache[require.resolve(scriptPath)]
+  global.Page = originalPage
+  global.wx = originalWx
+})
+
+test('app initializes the configured WeChat cloud environment', () => {
+  const appScript = fs.readFileSync(path.join(root, 'app.js'), 'utf8')
+  assert.match(appScript, /wx\.cloud\.init/)
+  assert.match(appScript, /cloud1-d7gew23w04c3def7d/)
 })
 
 test('video detail page resolves content by video id', () => {

@@ -20,19 +20,39 @@
   </view>
 
   <view class="classroom-content">
-    <view class="featured-video" data-id="{{featured.id}}" bindtap="openVideo">
-      <image class="featured-cover" src="{{featured.cover}}" mode="aspectFill"/>
-      <view class="featured-shade"></view>
-      <view class="featured-copy">
-        <view class="featured-title" wx:for="{{featured.titleLines}}" wx:key="*this">{{item}}</view>
-        <view class="featured-description">
-          <view>一捧泥土，历经千锤百炼，</view>
-          <view>成就东方之美。</view>
+    <swiper
+      class="featured-swiper"
+      indicator-dots="{{true}}"
+      indicator-color="rgba(11, 65, 98, 0.22)"
+      indicator-active-color="#0b4162"
+      circular="{{true}}"
+      bindchange="onSwiperChange"
+    >
+      <swiper-item wx:for="{{carouselVideos}}" wx:key="id">
+        <view class="featured-video">
+          <video
+            wx:if="{{playingVideoId === item.id}}"
+            id="video-{{item.id}}"
+            class="inline-video featured-player"
+            src="{{item.playUrl}}"
+            data-id="{{item.id}}"
+            autoplay="{{true}}"
+            controls="{{true}}"
+            object-fit="contain"
+            show-center-play-btn="{{false}}"
+            bindended="onVideoEnded"
+            binderror="onVideoError"
+          />
+          <view wx:else class="featured-poster" data-id="{{item.id}}" bindtap="playVideo">
+            <image class="featured-cover" src="{{item.cover}}" mode="aspectFill"/>
+            <view class="featured-shade"></view>
+            <view class="featured-title">{{item.title}}</view>
+            <view class="featured-play"><view class="play-triangle"></view></view>
+            <view class="video-duration featured-duration">{{item.duration}}</view>
+          </view>
         </view>
-      </view>
-      <view class="featured-play"><view class="play-triangle"></view></view>
-      <view class="video-duration featured-duration">{{featured.duration}}</view>
-    </view>
+      </swiper-item>
+    </swiper>
 
     <view class="section-heading">
       <image class="section-icon" src="/assets/icons/home-section-classroom.png" mode="aspectFit"/>
@@ -41,15 +61,30 @@
     </view>
 
     <view class="video-grid">
-      <view wx:for="{{videos}}" wx:key="id" class="video-card" data-id="{{item.id}}" bindtap="openVideo">
+      <view wx:for="{{videos}}" wx:key="id" class="video-card">
         <view class="video-thumb">
-          <image class="video-cover" src="{{item.cover}}" mode="aspectFill"/>
-          <view class="card-play"><view class="play-triangle"></view></view>
-          <view class="video-duration">{{item.duration}}</view>
+          <video
+            wx:if="{{playingVideoId === item.id}}"
+            id="video-{{item.id}}"
+            class="inline-video"
+            src="{{item.playUrl}}"
+            data-id="{{item.id}}"
+            autoplay="{{true}}"
+            controls="{{true}}"
+            object-fit="contain"
+            show-center-play-btn="{{false}}"
+            bindended="onVideoEnded"
+            binderror="onVideoError"
+          />
+          <view wx:else class="video-poster" data-id="{{item.id}}" bindtap="playVideo">
+            <image class="video-cover" src="{{item.cover}}" mode="aspectFill"/>
+            <view class="thumb-shade"></view>
+            <view class="card-play"><view class="play-triangle"></view></view>
+            <view class="video-duration">{{item.duration}}</view>
+          </view>
         </view>
         <view class="video-copy">
           <view class="video-title">{{item.title}}</view>
-          <view class="video-description">{{item.description}}</view>
         </view>
       </view>
     </view>
