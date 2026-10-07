@@ -66,3 +66,39 @@ test('fullscreen keeps the active video mounted until returning to the classroom
   assert.equal(page.data.playingVideoId, 'carousel-ceramic-life')
   assert.equal(page.data.isVideoFullscreen, false)
 })
+
+test('simulator fullscreen resizes the same player and restores its inline position', async () => {
+  const calls = []
+  const page = loadPage({
+    cloud: { async callFunction() {
+      return { result: { videos: [{ id: 'selected-ru-porcelain', url: 'https://example.com/video.mp4' }], expiresAt: Date.now() + 2700000 } }
+    } },
+    createSelectorQuery() {
+      return { select() { return this }, boundingClientRect(callback) {
+        this.callback = callback
+        return this
+      }, exec() { this.callback({ left: 12, top: 260, width: 174, height: 99 }) } }
+    },
+    createVideoContext(id) {
+      calls.push(`create:${id}`)
+      return { play() { calls.push('play') }, stop() { calls.push('stop') } }
+    }
+  })
+  page.data.isSimulator = true
+  await page.playVideo({ currentTarget: { dataset: { id: 'selected-ru-porcelain' } } })
+  const context = page.activeVideoContext
+  const source = page.data.simulatorVideo.playUrl
+  page.enterSimulatorFullscreen()
+  assert.equal(page.data.simulatorFullscreen, true)
+  assert.equal(page.data.isVideoFullscreen, true)
+  assert.equal(page.data.playingVideoId, 'selected-ru-porcelain')
+  assert.equal(page.activeVideoContext, context)
+  page.exitSimulatorFullscreen()
+  assert.equal(page.data.simulatorFullscreen, false)
+  assert.equal(page.data.simulatorVideo.playUrl, source)
+  assert.equal(page.activeVideoContext, context)
+  assert.match(page.data.simulatorPlayerStyle, /top: 260px/)
+  assert.deepEqual(calls, ['create:video-selected-ru-porcelain', 'play'])
+  page.onPageScroll({ scrollTop: 60 })
+  assert.match(page.data.simulatorPlayerStyle, /top: 200px/)
+})

@@ -30,9 +30,10 @@
       bindchange="onSwiperChange"
     >
       <swiper-item wx:for="{{carouselVideos}}" wx:key="id">
-        <view class="featured-video">
+        <view class="featured-video" id="media-{{item.id}}">
           <block wx:if="{{playingVideoId === item.id}}">
             <video
+              wx:if="{{!isSimulator}}"
               id="video-{{item.id}}"
               class="inline-video featured-player"
               src="{{item.playUrl}}"
@@ -69,6 +70,13 @@
       </swiper-item>
     </swiper>
 
+    <view wx:if="{{isSimulator && playingVideoId && simulatorVideo.isCarousel}}" class="featured-player-action">
+      <view class="player-action-title">{{simulatorVideo.title}}</view>
+      <view class="expand-video-button" bindtap="enterSimulatorFullscreen" aria-role="button" aria-label="全屏播放">
+        <view class="expand-video-symbol"></view>
+      </view>
+    </view>
+
     <view class="section-heading">
       <image class="section-icon" src="/assets/icons/home-section-classroom.png" mode="aspectFit"/>
       <view class="section-title">精选影像</view>
@@ -77,9 +85,10 @@
 
     <view class="video-grid">
       <view wx:for="{{videos}}" wx:key="id" class="video-card">
-        <view class="video-thumb">
+        <view class="video-thumb" id="media-{{item.id}}">
           <block wx:if="{{playingVideoId === item.id}}">
             <video
+              wx:if="{{!isSimulator}}"
               id="video-{{item.id}}"
               class="inline-video"
               src="{{item.playUrl}}"
@@ -105,8 +114,37 @@
         </view>
         <view class="video-copy">
           <view class="video-title">{{item.title}}</view>
+          <view wx:if="{{isSimulator && playingVideoId === item.id}}" class="expand-video-button" bindtap="enterSimulatorFullscreen" aria-role="button" aria-label="全屏播放">
+            <view class="expand-video-symbol"></view>
+          </view>
         </view>
       </view>
     </view>
   </view>
 </view>
+
+<root-portal wx:if="{{isSimulator && playingVideoId}}">
+  <view class="simulator-player {{simulatorVideo.isCarousel ? 'is-featured' : ''}} {{simulatorFullscreen ? 'is-fullscreen' : ''}}" style="{{simulatorFullscreen ? '' : simulatorPlayerStyle}}" catchtouchmove="preventPlayerScroll">
+    <view wx:if="{{simulatorFullscreen}}" class="simulator-player-toolbar" style="padding-top: {{navTop}}px">
+      <view class="simulator-player-back" bindtap="exitSimulatorFullscreen" aria-role="button" aria-label="退出全屏">‹ 返回</view>
+      <view class="simulator-player-title">{{simulatorVideo.title}}</view>
+    </view>
+    <view class="simulator-player-media">
+      <video
+        id="video-{{playingVideoId}}"
+        class="simulator-video"
+        src="{{simulatorVideo.playUrl}}"
+        data-id="{{playingVideoId}}"
+        autoplay="{{true}}"
+        controls="{{true}}"
+        object-fit="contain"
+        show-center-play-btn="{{false}}"
+        show-background-playback-button="{{false}}"
+        show-fullscreen-btn="{{false}}"
+        show-progress="{{simulatorFullscreen}}"
+        bindended="onVideoEnded"
+        binderror="onVideoError"
+      />
+    </view>
+  </view>
+</root-portal>

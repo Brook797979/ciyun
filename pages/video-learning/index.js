@@ -10,6 +10,10 @@ Page({
     videos: withInitialPlayUrl(videos),
     playingVideoId: '',
     isVideoFullscreen: false,
+    isSimulator: false,
+    simulatorFullscreen: false,
+    simulatorVideo: null,
+    simulatorPlayerStyle: '',
     currentSwiperIndex: 0,
     navTop: 24,
     brandTop: 60,
@@ -18,6 +22,8 @@ Page({
   onLoad() {
     const windowInfo = typeof wx.getWindowInfo === 'function' ? wx.getWindowInfo() : { windowWidth: 390 }
     const scale = windowInfo.windowWidth / 750
+    const deviceInfo = typeof wx.getDeviceInfo === 'function' ? wx.getDeviceInfo()
+      : typeof wx.getSystemInfoSync === 'function' ? wx.getSystemInfoSync() : {}
     let brandTop = this.data.brandTop
     if (typeof wx.getMenuButtonBoundingClientRect === 'function') {
       const menuButton = wx.getMenuButtonBoundingClientRect()
@@ -26,7 +32,7 @@ Page({
         this.setData({ navTop: menuButton.top })
       }
     }
-    this.setData({ brandTop, heroHeight: Math.max(260 * scale, brandTop + 112 * scale) })
+    this.setData({ brandTop, heroHeight: Math.max(260 * scale, brandTop + 112 * scale), isSimulator: deviceInfo.platform === 'devtools' })
     this.resolveCloudVideoUrls().catch((error) => {
       console.warn('[video-classroom] URL preparation failed:', error.errMsg || error.message)
     })
@@ -55,6 +61,10 @@ Page({
     return this.videoUrlRequest
   },
   goBack() {
+    if (this.data.simulatorFullscreen) {
+      this.exitSimulatorFullscreen()
+      return
+    }
     if (getCurrentPages().length > 1) {
       wx.navigateBack()
       return
@@ -68,24 +78,62 @@ Page({
     const request = (this.playRequest || 0) + 1
     this.playRequest = request
     this.setData({ playingVideoId: '' })
+    let video
     try {
       await this.resolveCloudVideoUrls()
       if (request !== this.playRequest) return
-      const video = [...this.data.carouselVideos, ...this.data.videos].find((item) => item.id === id)
+      video = [...this.data.carouselVideos, ...this.data.videos].find((item) => item.id === id)
       if (!video || !video.playUrl) throw new Error('Video URL unavailable')
+      if (this.data.isSimulator) {
+        const rect = await this.measureVideoBox(id)
+        if (request !== this.playRequest) return
+        this.simulatorAnchor = { ...rect, documentTop: rect.top + (this.pageScrollTop || 0) }
+      }
     } catch (error) {
       if (request !== this.playRequest) return
       console.warn('[video-classroom] Playback preparation failed:', id, error.errMsg || error.message)
       wx.showToast({ title: '视频暂时无法加载，请重试', icon: 'none' })
       return
     }
-    this.setData({ playingVideoId: id }, () => {
+    this.setData({
+      playingVideoId: id,
+      simulatorVideo: this.data.isSimulator ? { ...video, isCarousel: id.startsWith('carousel-') } : null,
+      simulatorPlayerStyle: this.data.isSimulator ? this.getSimulatorPlayerStyle() : ''
+    }, () => {
       this.activeVideoContext = wx.createVideoContext(`video-${id}`, this)
       if (this.activeVideoContext && typeof this.activeVideoContext.play === 'function') {
         this.activeVideoContext.play()
       }
     })
   },
+  measureVideoBox(id) {
+    return new Promise((resolve, reject) => {
+      wx.createSelectorQuery().select(`#media-${id}`).boundingClientRect((rect) => {
+        if (!rect || !rect.width || !rect.height) reject(new Error('Video container is not ready'))
+        else resolve(rect)
+      }).exec()
+    })
+  },
+  getSimulatorPlayerStyle() {
+    const box = this.simulatorAnchor
+    return box ? `left: ${box.left}px; top: ${box.documentTop - (this.pageScrollTop || 0)}px; width: ${box.width}px; height: ${box.height}px;` : ''
+  },
+  enterSimulatorFullscreen() {
+    if (!this.data.isSimulator || !this.data.playingVideoId) return
+    // Keep the same video node and source. DevTools' browser fullscreen is not used.
+    this.setData({ simulatorFullscreen: true, isVideoFullscreen: true })
+  },
+  exitSimulatorFullscreen() {
+    if (!this.data.simulatorFullscreen) return
+    this.setData({ simulatorFullscreen: false, isVideoFullscreen: false, simulatorPlayerStyle: this.getSimulatorPlayerStyle() })
+  },
+  onPageScroll(event) {
+    this.pageScrollTop = event.scrollTop || 0
+    if (this.data.isSimulator && this.data.playingVideoId && !this.data.simulatorFullscreen) {
+      this.setData({ simulatorPlayerStyle: this.getSimulatorPlayerStyle() })
+    }
+  },
+  preventPlayerScroll() {},
   stopCurrentVideo() {
     if (this.activeVideoContext && typeof this.activeVideoContext.stop === 'function') {
       this.activeVideoContext.stop()
@@ -94,7 +142,7 @@ Page({
       if (context && typeof context.stop === 'function') context.stop()
     }
     this.activeVideoContext = null
-    if (this.data.isVideoFullscreen) this.setData({ isVideoFullscreen: false })
+    if (this.data.isVideoFullscreen) this.setData({ isVideoFullscreen: false, simulatorFullscreen: false })
   },
   onSwiperChange(event) {
     if (this.data.isVideoFullscreen) return
@@ -116,14 +164,14 @@ Page({
   onVideoEnded(event) {
     if (event.currentTarget.dataset.id !== this.data.playingVideoId) return
     this.activeVideoContext = null
-    this.setData({ playingVideoId: '', isVideoFullscreen: false })
+    this.setData({ playingVideoId: '', isVideoFullscreen: false, simulatorFullscreen: false, simulatorVideo: null })
   },
   onVideoError(event) {
     console.warn('[video-classroom] Player error:', event.currentTarget.dataset.id, event.detail)
     this.videoUrlsExpireAt = 0
     if (event.currentTarget.dataset.id === this.data.playingVideoId) {
       this.activeVideoContext = null
-      this.setData({ playingVideoId: '', isVideoFullscreen: false })
+      this.setData({ playingVideoId: '', isVideoFullscreen: false, simulatorFullscreen: false, simulatorVideo: null })
     }
     wx.showToast({ title: '视频加载失败，请稍后重试', icon: 'none' })
   },
