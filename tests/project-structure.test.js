@@ -443,6 +443,7 @@ test('news detail data contains complete original reading content', () => {
     assert.equal(item.author, '瓷韵编辑部')
     assert.ok(item.lead.length >= 35, `${item.id} lead is too short`)
     assert.ok(item.imageCaption.length >= 12, `${item.id} image caption is too short`)
+    assert.doesNotMatch(item.imageCaption, /待补充|占位|正常阅读/, `${item.id} still uses a placeholder caption`)
     assert.ok(item.paragraphs.length >= 3, `${item.id} needs at least three paragraphs`)
     assert.ok(item.paragraphs.join('').length >= 420, `${item.id} article is too short`)
     assert.doesNotMatch(item.paragraphs.join(''), /占位|模拟正文/)
