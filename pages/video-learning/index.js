@@ -9,6 +9,7 @@ Page({
     carouselVideos: withInitialPlayUrl(carouselVideos),
     videos: withInitialPlayUrl(videos),
     playingVideoId: '',
+    currentSwiperIndex: 0,
     navTop: 24,
     brandTop: 68
   },
@@ -70,12 +71,26 @@ Page({
     this.activeVideoContext = null
   },
   onSwiperChange(event) {
+    const currentSwiperIndex = event.detail.current || 0
+    if (currentSwiperIndex !== this.data.currentSwiperIndex) {
+      this.setData({ currentSwiperIndex })
+    }
     const activeId = this.data.playingVideoId
     if (!activeId || !activeId.startsWith('carousel-')) return
-    const nextVideo = this.data.carouselVideos[event.detail.current]
+    const nextVideo = this.data.carouselVideos[currentSwiperIndex]
     if (nextVideo && nextVideo.id === activeId) return
     this.stopCurrentVideo()
     this.setData({ playingVideoId: '' })
+  },
+  requestFullscreen(event) {
+    const id = event.currentTarget.dataset.id
+    if (!id) return
+    const context = id === this.data.playingVideoId && this.activeVideoContext
+      ? this.activeVideoContext
+      : wx.createVideoContext(`video-${id}`, this)
+    if (context && typeof context.requestFullScreen === 'function') {
+      context.requestFullScreen({ direction: 90 })
+    }
   },
   onVideoEnded(event) {
     if (event.currentTarget.dataset.id !== this.data.playingVideoId) return

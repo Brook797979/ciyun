@@ -164,20 +164,27 @@ test('video classroom uses an inline carousel and two-column playback cards', ()
   assert.match(template, /class="classroom-hero"/)
   assert.match(template, /open-type="share"/)
   assert.match(template, /<swiper[^>]+class="featured-swiper"/)
-  assert.match(template, /indicator-dots="\{\{true\}\}"/)
+  assert.match(template, /indicator-dots="\{\{false\}\}"/)
+  assert.match(template, /autoplay="\{\{playingVideoId === ''\}\}"/)
+  assert.match(template, /interval="4500"/)
+  assert.match(template, /class="swiper-dots"/)
   assert.match(template, /wx:for="\{\{carouselVideos\}\}"/)
   assert.match(template, /wx:for="\{\{videos\}\}"/)
-  assert.match(template, /<video[^>]+wx:if="\{\{playingVideoId === item\.id\}\}"/)
+  assert.match(template, /<block[^>]+wx:if="\{\{playingVideoId === item\.id\}\}"/)
   assert.match(template, /bindended="onVideoEnded"/)
   assert.match(template, /bindtap="playVideo"/)
+  assert.match(template, /catchtap="requestFullscreen"/)
   assert.match(template, /mode="aspectFill"/)
   assert.doesNotMatch(template, /<br\s*\/?\s*>/)
   assert.doesNotMatch(script, /pages\/video-detail/)
   assert.match(script, /wx\.createVideoContext/)
   assert.match(script, /getTempFileURL/)
   assert.match(script, /stopCurrentVideo/)
+  assert.match(script, /requestFullScreen/)
   assert.match(styles, /\.classroom-hero\s*\{[^}]*height:\s*260rpx/)
-  assert.match(styles, /\.featured-swiper\s*\{[^}]*height:\s*326rpx/)
+  assert.match(styles, /\.classroom-content\s*\{[^}]*padding:\s*18rpx 22rpx 0/)
+  assert.match(styles, /\.featured-swiper\s*\{[^}]*height:\s*294rpx/)
+  assert.match(styles, /\.swiper-dots\s*\{[^}]*position:\s*absolute[^}]*bottom:\s*12rpx/)
   assert.match(styles, /\.video-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/)
   assert.match(styles, /\.video-thumb\s*\{[^}]*height:\s*190rpx/)
 })
@@ -194,7 +201,8 @@ test('video classroom stops the active video before another one starts', () => {
     createVideoContext(id) {
       return {
         play() { calls.push(`play:${id}`) },
-        stop() { calls.push(`stop:${id}`) }
+        stop() { calls.push(`stop:${id}`) },
+        requestFullScreen({ direction }) { calls.push(`fullscreen:${id}:${direction}`) }
       }
     }
   }
@@ -212,13 +220,17 @@ test('video classroom stops the active video before another one starts', () => {
 
   page.playVideo({ currentTarget: { dataset: { id: 'carousel-ceramic-life' } } })
   page.playVideo({ currentTarget: { dataset: { id: 'selected-ru-porcelain' } } })
+  page.requestFullscreen({ currentTarget: { dataset: { id: 'selected-ru-porcelain' } } })
+  page.onSwiperChange({ detail: { current: 2 } })
   page.onVideoEnded({ currentTarget: { dataset: { id: 'selected-ru-porcelain' } } })
 
   assert.deepEqual(calls, [
     'play:video-carousel-ceramic-life',
     'stop:video-carousel-ceramic-life',
-    'play:video-selected-ru-porcelain'
+    'play:video-selected-ru-porcelain',
+    'fullscreen:video-selected-ru-porcelain:90'
   ])
+  assert.equal(page.data.currentSwiperIndex, 2)
   assert.equal(page.data.playingVideoId, '')
 
   delete require.cache[require.resolve(scriptPath)]

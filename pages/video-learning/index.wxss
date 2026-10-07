@@ -148,11 +148,11 @@
 .classroom-content {
   position: relative;
   z-index: 3;
-  padding: 0 22rpx;
+  padding: 18rpx 22rpx 0;
 }
 
 .featured-swiper {
-  height: 326rpx;
+  height: 294rpx;
 }
 
 .featured-video {
@@ -251,9 +251,55 @@
   font-size: 19rpx;
 }
 
+.swiper-dots {
+  position: absolute;
+  bottom: 12rpx;
+  left: 50%;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  transform: translateX(-50%);
+}
+
+.swiper-dot {
+  width: 10rpx;
+  height: 10rpx;
+  background: rgba(255, 253, 247, 0.48);
+  border-radius: 999rpx;
+  box-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.18);
+  transition: width 180ms ease, background-color 180ms ease;
+}
+
+.swiper-dot.is-active {
+  width: 24rpx;
+  background: #fffdf7;
+}
+
 .inline-video {
   z-index: 5;
   background: #08151c;
+}
+
+.fullscreen-control {
+  position: absolute;
+  top: 12rpx;
+  right: 12rpx;
+  z-index: 8;
+  padding: 7rpx 13rpx;
+  color: #fff;
+  background: rgba(7, 22, 31, 0.68);
+  border: 1rpx solid rgba(255, 255, 255, 0.58);
+  border-radius: 999rpx;
+  font-size: 18rpx;
+  line-height: 1.2;
+}
+
+.card-fullscreen {
+  top: 8rpx;
+  right: 8rpx;
+  padding: 5rpx 10rpx;
+  font-size: 16rpx;
 }
 
 .section-heading {
