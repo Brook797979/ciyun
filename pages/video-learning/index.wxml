@@ -41,11 +41,12 @@
               controls="{{true}}"
               object-fit="contain"
               show-center-play-btn="{{false}}"
-              show-fullscreen-btn="{{false}}"
+              show-fullscreen-btn="{{true}}"
+              direction="90"
+              bindfullscreenchange="onVideoFullscreenChange"
               bindended="onVideoEnded"
               binderror="onVideoError"
             />
-            <cover-view class="fullscreen-control" data-id="{{item.id}}" catchtap="requestFullscreen">全屏</cover-view>
           </block>
           <view wx:else class="featured-poster" data-id="{{item.id}}" bindtap="playVideo">
             <image class="featured-cover" src="{{item.cover}}" mode="aspectFill"/>
@@ -86,11 +87,12 @@
               controls="{{true}}"
               object-fit="contain"
               show-center-play-btn="{{false}}"
-              show-fullscreen-btn="{{false}}"
+              show-fullscreen-btn="{{true}}"
+              direction="90"
+              bindfullscreenchange="onVideoFullscreenChange"
               bindended="onVideoEnded"
               binderror="onVideoError"
             />
-            <cover-view class="fullscreen-control card-fullscreen" data-id="{{item.id}}" catchtap="requestFullscreen">全屏</cover-view>
           </block>
           <view wx:else class="video-poster" data-id="{{item.id}}" bindtap="playVideo">
             <image class="video-cover" src="{{item.cover}}" mode="aspectFill"/>

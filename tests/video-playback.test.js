@@ -47,3 +47,22 @@ test('brand subtitle stays inside its header at 320–430px widths', () => {
       `subtitle must not be clipped at ${windowWidth}px`)
   }
 })
+
+test('fullscreen keeps the active video mounted until returning to the classroom', async () => {
+  const calls = []
+  const page = loadPage({
+    cloud: { async callFunction() {
+      return { result: { videos: [{ id: 'carousel-ceramic-life', url: 'https://example.com/video.mp4' }], expiresAt: Date.now() + 2700000 } }
+    } },
+    createVideoContext() { return { play() {}, stop() { calls.push('stop') } } }
+  })
+  await page.playVideo({ currentTarget: { dataset: { id: 'carousel-ceramic-life' } } })
+  page.onVideoFullscreenChange({ currentTarget: { dataset: { id: 'carousel-ceramic-life' } }, detail: { fullScreen: true } })
+  page.onSwiperChange({ detail: { current: 1 } })
+  assert.equal(page.data.playingVideoId, 'carousel-ceramic-life')
+  assert.equal(page.data.isVideoFullscreen, true)
+  assert.equal(calls.length, 0)
+  page.onVideoFullscreenChange({ currentTarget: { dataset: { id: 'carousel-ceramic-life' } }, detail: { fullScreen: false } })
+  assert.equal(page.data.playingVideoId, 'carousel-ceramic-life')
+  assert.equal(page.data.isVideoFullscreen, false)
+})

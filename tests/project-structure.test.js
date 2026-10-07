@@ -173,14 +173,16 @@ test('video classroom uses an inline carousel and two-column playback cards', ()
   assert.match(template, /<block[^>]+wx:if="\{\{playingVideoId === item\.id\}\}"/)
   assert.match(template, /bindended="onVideoEnded"/)
   assert.match(template, /bindtap="playVideo"/)
-  assert.match(template, /catchtap="requestFullscreen"/)
+  assert.equal((template.match(/show-fullscreen-btn="\{\{true\}\}"/g) || []).length, 2)
+  assert.equal((template.match(/bindfullscreenchange="onVideoFullscreenChange"/g) || []).length, 2)
+  assert.doesNotMatch(template, /fullscreen-control|catchtap="requestFullscreen"/)
   assert.match(template, /mode="aspectFill"/)
   assert.doesNotMatch(template, /<br\s*\/?\s*>/)
   assert.doesNotMatch(script, /pages\/video-detail/)
   assert.match(script, /wx\.createVideoContext/)
   assert.match(script, /callFunction/)
   assert.match(script, /stopCurrentVideo/)
-  assert.match(script, /requestFullScreen/)
+  assert.match(script, /onVideoFullscreenChange/)
   assert.match(styles, /\.classroom-hero\s*\{[^}]*height:\s*260rpx/)
   assert.match(styles, /\.classroom-content\s*\{[^}]*padding:\s*18rpx 22rpx 0/)
   assert.match(styles, /\.featured-swiper\s*\{[^}]*height:\s*294rpx/)
@@ -207,8 +209,7 @@ test('video classroom stops the active video before another one starts', async (
     createVideoContext(id) {
       return {
         play() { calls.push(`play:${id}`) },
-        stop() { calls.push(`stop:${id}`) },
-        requestFullScreen({ direction }) { calls.push(`fullscreen:${id}:${direction}`) }
+        stop() { calls.push(`stop:${id}`) }
       }
     }
   }
@@ -226,15 +227,13 @@ test('video classroom stops the active video before another one starts', async (
 
   await page.playVideo({ currentTarget: { dataset: { id: 'carousel-ceramic-life' } } })
   await page.playVideo({ currentTarget: { dataset: { id: 'selected-ru-porcelain' } } })
-  page.requestFullscreen({ currentTarget: { dataset: { id: 'selected-ru-porcelain' } } })
   page.onSwiperChange({ detail: { current: 2 } })
   page.onVideoEnded({ currentTarget: { dataset: { id: 'selected-ru-porcelain' } } })
 
   assert.deepEqual(calls, [
     'play:video-carousel-ceramic-life',
     'stop:video-carousel-ceramic-life',
-    'play:video-selected-ru-porcelain',
-    'fullscreen:video-selected-ru-porcelain:90'
+    'play:video-selected-ru-porcelain'
   ])
   assert.equal(page.data.currentSwiperIndex, 2)
   assert.equal(page.data.playingVideoId, '')

@@ -281,27 +281,6 @@
   background: #08151c;
 }
 
-.fullscreen-control {
-  position: absolute;
-  top: 12rpx;
-  right: 12rpx;
-  z-index: 8;
-  padding: 7rpx 13rpx;
-  color: #fff;
-  background: rgba(7, 22, 31, 0.68);
-  border: 1rpx solid rgba(255, 255, 255, 0.58);
-  border-radius: 999rpx;
-  font-size: 18rpx;
-  line-height: 1.2;
-}
-
-.card-fullscreen {
-  top: 8rpx;
-  right: 8rpx;
-  padding: 5rpx 10rpx;
-  font-size: 16rpx;
-}
-
 .section-heading {
   display: flex;
   align-items: center;

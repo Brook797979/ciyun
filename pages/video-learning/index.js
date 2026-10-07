@@ -9,6 +9,7 @@ Page({
     carouselVideos: withInitialPlayUrl(carouselVideos),
     videos: withInitialPlayUrl(videos),
     playingVideoId: '',
+    isVideoFullscreen: false,
     currentSwiperIndex: 0,
     navTop: 24,
     brandTop: 60,
@@ -93,8 +94,10 @@ Page({
       if (context && typeof context.stop === 'function') context.stop()
     }
     this.activeVideoContext = null
+    if (this.data.isVideoFullscreen) this.setData({ isVideoFullscreen: false })
   },
   onSwiperChange(event) {
+    if (this.data.isVideoFullscreen) return
     const currentSwiperIndex = event.detail.current || 0
     if (currentSwiperIndex !== this.data.currentSwiperIndex) {
       this.setData({ currentSwiperIndex })
@@ -106,27 +109,21 @@ Page({
     this.stopCurrentVideo()
     this.setData({ playingVideoId: '' })
   },
-  requestFullscreen(event) {
-    const id = event.currentTarget.dataset.id
-    if (!id) return
-    const context = id === this.data.playingVideoId && this.activeVideoContext
-      ? this.activeVideoContext
-      : wx.createVideoContext(`video-${id}`, this)
-    if (context && typeof context.requestFullScreen === 'function') {
-      context.requestFullScreen({ direction: 90 })
-    }
+  onVideoFullscreenChange(event) {
+    if (event.currentTarget.dataset.id !== this.data.playingVideoId) return
+    this.setData({ isVideoFullscreen: !!event.detail.fullScreen })
   },
   onVideoEnded(event) {
     if (event.currentTarget.dataset.id !== this.data.playingVideoId) return
     this.activeVideoContext = null
-    this.setData({ playingVideoId: '' })
+    this.setData({ playingVideoId: '', isVideoFullscreen: false })
   },
   onVideoError(event) {
     console.warn('[video-classroom] Player error:', event.currentTarget.dataset.id, event.detail)
     this.videoUrlsExpireAt = 0
     if (event.currentTarget.dataset.id === this.data.playingVideoId) {
       this.activeVideoContext = null
-      this.setData({ playingVideoId: '' })
+      this.setData({ playingVideoId: '', isVideoFullscreen: false })
     }
     wx.showToast({ title: '视频加载失败，请稍后重试', icon: 'none' })
   },
