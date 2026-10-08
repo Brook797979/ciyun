@@ -1,1 +1,73 @@
-<view class="page-shell stack"><view class="image-placeholder">瓷器大图</view><view class="surface detail"><view class="title">{{item.name}}</view><view class="muted">{{item.dynasty}} · {{item.shape}}</view><view>纹样：{{item.pattern}}</view><view>工艺：{{item.craft}}</view><view>{{item.intro}}</view></view><view class="row"><button class="link-button" bindtap="ask">AI问答</button><button class="link-button" bindtap="watch">相关视频</button></view></view>
+<view class="ceramic-detail-page">
+  <view class="detail-header" style="height: {{heroHeight}}px">
+    <image class="detail-header-image" src="/assets/banners/home-hero.jpg" mode="aspectFill"/>
+    <view class="detail-header-wash"></view>
+    <view class="detail-nav" style="top: {{navTop}}px; height: {{navHeight}}px">
+      <view class="back-button" bindtap="goBack" aria-role="button" aria-label="返回瓷馆">
+        <view class="back-icon"></view>
+      </view>
+      <view class="detail-nav-title">瓷器详情</view>
+    </view>
+  </view>
+
+  <view class="detail-content">
+    <view class="ceramic-hero">
+      <image class="ceramic-hero-image" src="{{item.image}}" mode="aspectFill"/>
+      <view class="hero-cloud-decoration" aria-hidden="true"></view>
+    </view>
+
+    <view class="collection-info">
+      <view class="collection-name-row">
+        <view class="collection-name">{{item.name}}</view>
+        <view class="collection-seal">瓷韵</view>
+      </view>
+      <view class="collection-meta">{{item.dynasty}} · {{item.type}} · {{item.category}}</view>
+      <view class="collection-tags">
+        <view wx:for="{{item.tags}}" wx:key="*this" class="collection-tag">{{item}}</view>
+      </view>
+    </view>
+
+    <view class="detail-section introduction-section">
+      <view class="section-heading">
+        <view class="section-emblem" aria-hidden="true"><view class="emblem-core"></view></view>
+        <view class="section-title">藏品简介</view>
+        <view class="section-knot"></view>
+        <view class="section-line"></view>
+      </view>
+      <view class="collection-description">{{item.description}}</view>
+    </view>
+
+    <view class="detail-section related-section">
+      <view class="section-heading">
+        <view class="section-emblem" aria-hidden="true"><view class="emblem-core"></view></view>
+        <view class="section-title">相关影像</view>
+        <view class="section-knot"></view>
+        <view class="section-line"></view>
+      </view>
+
+      <view class="related-video">
+        <view class="related-video-cover">
+          <image class="related-video-image" src="{{item.video.cover}}" mode="aspectFill"/>
+          <view class="related-video-shade"></view>
+          <view class="video-play" aria-hidden="true"><view class="video-play-triangle"></view></view>
+          <view class="video-duration">{{item.video.duration}}</view>
+        </view>
+        <view class="related-video-copy">
+          <view class="related-video-title">{{item.video.title}}</view>
+          <view class="related-video-description">{{item.video.description}}</view>
+        </view>
+        <view class="related-video-decoration" aria-hidden="true"></view>
+      </view>
+    </view>
+
+    <view class="ai-entry" bindtap="ask" aria-role="button" aria-label="问问AI，继续了解这件瓷器">
+      <view class="ai-icon"><view class="ai-bubble"><view class="ai-dots">•••</view></view></view>
+      <view class="ai-divider"></view>
+      <view class="ai-copy">
+        <view class="ai-title">问问AI</view>
+        <view class="ai-description">继续了解这件瓷器</view>
+      </view>
+      <view class="ai-arrow" aria-hidden="true">›</view>
+    </view>
+  </view>
+</view>

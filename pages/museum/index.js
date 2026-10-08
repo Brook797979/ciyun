@@ -1,5 +1,6 @@
 const ceramics = require('../../data/ceramics')
 const filterCeramics = require('../../utils/filter-ceramics')
+const { go } = require('../../utils/navigation')
 
 Page({
   data: {
@@ -51,7 +52,8 @@ Page({
     )
   },
   selectCeramic(event) {
-    // Keep the stable collection id ready for the future detail-page handoff.
-    this.setData({ selectedCeramicId: event.detail.id })
+    const id = event.detail.id
+    this.setData({ selectedCeramicId: id })
+    go(`/pages/ceramic-detail/index?id=${id}`)
   }
 })

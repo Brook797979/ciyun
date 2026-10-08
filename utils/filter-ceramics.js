@@ -9,8 +9,11 @@ function filterCeramics(items, keyword = '', dynasty = '全部') {
       item.name,
       item.dynasty,
       item.shape,
+      item.type,
+      item.category,
       item.pattern,
       item.craft,
+      ...(item.tags || []),
       ...(item.keywords || [])
     ].filter(Boolean).join(' ').toLowerCase()
 

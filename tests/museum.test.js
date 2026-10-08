@@ -64,6 +64,14 @@ test('museum search and dynasty filters work together', () => {
 })
 
 test('museum page combines live search with dynasty selection and preserves card ids', () => {
+  const originalWx = global.wx
+  const navigations = []
+  global.wx = {
+    navigateTo(options) {
+      navigations.push(options.url)
+      return Promise.resolve()
+    }
+  }
   const page = loadMuseumPage()
 
   assert.equal(typeof page.onSearchInput, 'function')
@@ -77,6 +85,8 @@ test('museum page combines live search with dynasty selection and preserves card
   assert.equal(page.data.filteredCeramics.length, 2)
   page.selectCeramic({ detail: { id: 'ceramic-009' } })
   assert.equal(page.data.selectedCeramicId, 'ceramic-009')
+  assert.deepEqual(navigations, ['/pages/ceramic-detail/index?id=ceramic-009'])
+  global.wx = originalWx
 })
 
 test('museum brand stays above the search area under a custom navigation bar', () => {

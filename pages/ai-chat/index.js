@@ -1,1 +1,24 @@
-Page({data:{messages:[{role:'assistant',text:'你好，我是瓷韵助手。你可以问我陶瓷文化相关问题。'}],input:''},input(e){this.setData({input:e.detail.value})},send(){if(!this.data.input.trim())return;this.setData({messages:[...this.data.messages,{role:'user',text:this.data.input},{role:'assistant',text:'这是第一阶段的模拟回复，后续可接入真实 AI 接口。'}],input:''})}})
+Page({
+  data: {
+    ceramicId: '',
+    messages: [{ role: 'assistant', text: '你好，我是瓷韵助手。你可以问我陶瓷文化相关问题。' }],
+    input: ''
+  },
+  onLoad(options = {}) {
+    this.setData({ ceramicId: options.ceramicId || '' })
+  },
+  input(event) {
+    this.setData({ input: event.detail.value })
+  },
+  send() {
+    if (!this.data.input.trim()) return
+    this.setData({
+      messages: [
+        ...this.data.messages,
+        { role: 'user', text: this.data.input },
+        { role: 'assistant', text: '这是第一阶段的模拟回复，后续可接入真实 AI 接口。' }
+      ],
+      input: ''
+    })
+  }
+})

@@ -1,1 +1,4 @@
-{ "navigationBarTitleText": "瓷器详情" }
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "瓷器详情"
+}
