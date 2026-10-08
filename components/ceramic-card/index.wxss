@@ -1,1 +1,103 @@
-.card{overflow:hidden;background:var(--color-surface);border:1rpx solid var(--color-border);border-radius:var(--radius-md)}.image-placeholder{display:grid;place-items:center;height:220rpx;color:var(--color-text-secondary);background:var(--color-primary-soft)}.name{padding:20rpx 20rpx 0;font-weight:600}.meta{padding:8rpx 20rpx 20rpx;color:var(--color-text-secondary);font-size:var(--font-size-caption)}
+.card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: rgba(255, 252, 247, 0.96);
+  border: 1rpx solid rgba(217, 205, 187, 0.72);
+  border-radius: 20rpx;
+  box-shadow: 0 6rpx 18rpx rgba(42, 48, 47, 0.09);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.card:active {
+  transform: scale(0.985);
+  box-shadow: 0 3rpx 10rpx rgba(42, 48, 47, 0.08);
+}
+
+.card-image {
+  display: block;
+  width: 100%;
+  height: 190rpx;
+  background: var(--color-primary-soft);
+}
+
+.card-body {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 90rpx;
+  padding: 12rpx 62rpx 13rpx 16rpx;
+  overflow: hidden;
+}
+
+.card-body::after {
+  position: absolute;
+  right: -20rpx;
+  bottom: -30rpx;
+  width: 112rpx;
+  height: 78rpx;
+  opacity: 0.11;
+  background:
+    radial-gradient(ellipse at 25% 76%, transparent 0 29%, var(--color-primary) 31% 33%, transparent 35%),
+    radial-gradient(ellipse at 58% 57%, transparent 0 32%, var(--color-primary) 34% 36%, transparent 38%);
+  content: "";
+}
+
+.card-name {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  color: var(--color-ink-blue);
+  font-family: var(--font-family-title);
+  font-size: 27rpx;
+  font-weight: 700;
+  line-height: 1.28;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-dynasty {
+  position: relative;
+  z-index: 1;
+  margin-top: 7rpx;
+  color: var(--color-text-secondary);
+  font-size: 22rpx;
+  line-height: 1.2;
+}
+
+.card-arrow {
+  position: absolute;
+  right: 14rpx;
+  bottom: 17rpx;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 46rpx;
+  height: 46rpx;
+  color: var(--color-primary);
+  background: rgba(255, 252, 247, 0.93);
+  border: 1rpx solid rgba(183, 137, 85, 0.35);
+  border-radius: 50%;
+  font-family: Arial, sans-serif;
+  font-size: 27rpx;
+  line-height: 1;
+  box-shadow: 0 4rpx 11rpx rgba(68, 53, 39, 0.08);
+}
+
+@media (max-width: 350px) {
+  .card-body {
+    padding-right: 56rpx;
+    padding-left: 14rpx;
+  }
+
+  .card-name {
+    font-size: 25rpx;
+  }
+
+  .card-arrow {
+    right: 11rpx;
+    width: 43rpx;
+    height: 43rpx;
+  }
+}

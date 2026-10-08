@@ -1,1 +1,58 @@
-<view class="page-shell stack"><section-title title="数字瓷馆" description="浏览代表性陶瓷藏品"/><scroll-view scroll-x class="filters"><view class="row"><view wx:for="{{filters}}" wx:key="*this" class="filter {{selected===item?'active':''}}" data-value="{{item}}" bindtap="selectFilter">{{item}}</view></view></scroll-view><view class="grid"><ceramic-card wx:for="{{ceramics}}" wx:key="id" item="{{item}}" bind:select="openDetail"/></view></view>
+<view class="museum-page">
+  <view class="museum-hero" style="height: {{heroHeight}}px">
+    <image class="hero-background" src="/assets/banners/home-hero.jpg" mode="aspectFill"/>
+    <view class="hero-wash"></view>
+
+    <view class="museum-nav" style="top: {{navTop}}px">
+      <view class="nav-title">瓷馆</view>
+    </view>
+
+    <view class="museum-brand" style="top: {{brandTop}}px">
+      <view class="brand-row">
+        <view class="brand-title">瓷馆</view>
+        <view class="brand-seal">瓷韵</view>
+      </view>
+      <view class="brand-subtitle">千 年 瓷 韵 · 一 馆 尽 览</view>
+    </view>
+  </view>
+
+  <view class="museum-content">
+    <view class="search-box">
+      <view class="search-icon"></view>
+      <input
+        class="search-input"
+        value="{{keyword}}"
+        placeholder="搜索瓷器、朝代或关键词…"
+        placeholder-class="search-placeholder"
+        confirm-type="search"
+        bindinput="onSearchInput"
+        aria-label="搜索瓷器、朝代或关键词"
+      />
+      <view class="search-decoration"></view>
+    </view>
+
+    <view class="dynasty-filters">
+      <view
+        wx:for="{{dynasties}}"
+        wx:key="*this"
+        class="dynasty-filter {{selectedDynasty === item ? 'is-active' : ''}}"
+        data-dynasty="{{item}}"
+        bindtap="selectDynasty"
+      >{{item}}</view>
+    </view>
+
+    <view wx:if="{{filteredCeramics.length}}" class="collection-grid">
+      <ceramic-card
+        wx:for="{{filteredCeramics}}"
+        wx:key="id"
+        item="{{item}}"
+        bind:select="selectCeramic"
+      />
+    </view>
+    <view wx:else class="empty-result">
+      <view class="empty-mark">瓷</view>
+      <view class="empty-title">未找到相关瓷器</view>
+      <view class="empty-description">换个关键词或朝代试试</view>
+    </view>
+  </view>
+</view>

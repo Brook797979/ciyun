@@ -1,1 +1,8 @@
-<view class="card" bindtap="onTap"><view class="image-placeholder">陶瓷图片</view><view class="name">{{item.name}}</view><view class="meta">{{item.dynasty}} · {{item.shape}}</view></view>
+<view class="card" bindtap="onTap" aria-role="button" aria-label="查看{{item.name}}">
+  <image class="card-image" src="{{item.image}}" mode="aspectFill"/>
+  <view class="card-body">
+    <view class="card-name">{{item.name}}</view>
+    <view class="card-dynasty">{{item.dynasty}}</view>
+    <view class="card-arrow" aria-hidden="true">→</view>
+  </view>
+</view>

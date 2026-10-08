@@ -1,1 +1,7 @@
-{ "navigationBarTitleText": "瓷馆", "usingComponents": { "section-title": "/components/section-title/index", "ceramic-card": "/components/ceramic-card/index" } }
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "瓷馆",
+  "usingComponents": {
+    "ceramic-card": "/components/ceramic-card/index"
+  }
+}
