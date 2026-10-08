@@ -36,9 +36,19 @@ test('every ceramic exposes complete generic detail-page data', () => {
     assert.ok(item.video && item.video.title && item.video.description)
     assert.match(item.video.duration, /^\d{2}:\d{2}$/)
     assert.ok(fs.existsSync(path.join(root, item.video.cover.replace(/^\//, ''))), `${item.video.cover} is missing`)
-    assert.equal(item.video.src, '')
+    assert.equal(typeof item.video.src, 'string')
+    if (item.video.src) {
+      assert.match(item.video.src, /^(?:cloud:\/\/|https:\/\/|\/assets\/videos\/)/)
+    }
     assert.match(item.video.resourcePath, /^\/assets\/videos\/.+\.mp4$/)
+    assert.equal(item.video.cloudPath, `videos/ceramic-detail/${item.id}.mp4`)
+    assert.match(item.video.coverResourcePath, /^\/assets\/videos\/ceramic-detail-\d{3}\.jpg$/)
   })
+
+  assert.equal(new Set(ceramics.map((item) => item.video)).size, ceramics.length)
+  for (const field of ['id', 'cloudPath', 'coverResourcePath', 'resourcePath']) {
+    assert.equal(new Set(ceramics.map((item) => item.video[field])).size, ceramics.length, `${field} must be independent for each ceramic`)
+  }
 })
 
 test('ceramic detail resolves one shared page by id and falls back safely', () => {

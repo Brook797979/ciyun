@@ -1,12 +1,16 @@
 const detailVideoCover = '/assets/videos/glazing.jpg'
 
-function createDetailVideo(id, title, description, duration) {
+function createDetailVideo(id, title, description, duration, media = {}) {
   return {
+    id: `ceramic-video-${id}`,
     title,
     description,
     duration,
-    cover: detailVideoCover,
-    src: '',
+    cover: media.cover || detailVideoCover,
+    src: media.src || '',
+    // Each ceramic has its own upload destination and replaceable local cover.
+    cloudPath: `videos/ceramic-detail/ceramic-${id}.mp4`,
+    coverResourcePath: `/assets/videos/ceramic-detail-${id}.jpg`,
     resourcePath: `/assets/videos/ceramic-detail-${id}.mp4`
   }
 }
@@ -26,7 +30,7 @@ module.exports = [
     craft: '青花釉下彩',
     intro: '白地青花层次清晰，缠枝莲纹随器身舒展，呈现端庄饱满的装饰节奏。',
     description: '此梅瓶造型秀美，线条流畅，通体以青花绘缠枝莲纹。枝叶舒展，花姿典雅，青白相映，意境清雅，是明代青花瓷中兼具艺术价值与时代风格的典型器物。',
-    video: createDetailVideo('001', '青花绘制工艺', '从原料、绘制到烧成，走近青花瓷的匠心工艺与千年传承。', '08:15')
+    video: createDetailVideo('001', '青花绘制工艺', '从原料、绘制到烧成，走近青花瓷的匠心工艺与千年传承。', '08:15', { cover: '', src: '' })
   },
   {
     id: 'ceramic-002',
@@ -42,7 +46,7 @@ module.exports = [
     craft: '天青釉',
     intro: '器形取莲瓣舒展之意，釉色温润含蓄，细密开片增添自然雅趣。',
     description: '此碗以莲瓣为形，口沿舒展，腹壁柔和。通体施天青釉，釉色含蓄温润，细密开片若冰裂自然生长，集中体现宋代汝窑崇尚素雅、宁静与内敛的审美追求。',
-    video: createDetailVideo('002', '汝窑天青釉烧制', '从釉料配制到窑火控制，读懂雨过天青般的温润釉色。', '07:42')
+    video: createDetailVideo('002', '汝窑天青釉烧制', '从釉料配制到窑火控制，读懂雨过天青般的温润釉色。', '07:42', { cover: '', src: '' })
   },
   {
     id: 'ceramic-003',
@@ -58,7 +62,7 @@ module.exports = [
     craft: '粉彩',
     intro: '粉彩设色柔和明丽，花卉与禽鸟错落相映，展现清代瓷绘的细腻气韵。',
     description: '此瓶器形端庄，粉彩设色柔和明丽，牡丹与禽鸟错落相映。画面层次细腻，色彩清润而不失华美，呈现清代彩瓷在勾线、填色与题材经营上的成熟技艺。',
-    video: createDetailVideo('003', '粉彩花鸟设色', '细看勾线、填彩与低温烘烧，感受粉彩瓷绘的清丽层次。', '09:18')
+    video: createDetailVideo('003', '粉彩花鸟设色', '细看勾线、填彩与低温烘烧，感受粉彩瓷绘的清丽层次。', '09:18', { cover: '', src: '' })
   },
   {
     id: 'ceramic-004',
@@ -74,7 +78,7 @@ module.exports = [
     craft: '开片釉',
     intro: '双耳三足造型古雅，釉面开片纵横交织，在温润釉光中形成自然纹理。',
     description: '此炉双耳三足，比例稳健而古雅。温润釉面布满纵横交织的开片纹，纹路疏密相间、自然天成，在含蓄的色泽中展现宋代哥窑以缺为美、化裂为纹的独特意趣。',
-    video: createDetailVideo('004', '哥窑开片之美', '认识釉层与胎体收缩差异，观察天然开片纹理的形成过程。', '06:48')
+    video: createDetailVideo('004', '哥窑开片之美', '认识釉层与胎体收缩差异，观察天然开片纹理的形成过程。', '06:48', { cover: '', src: '' })
   },
   {
     id: 'ceramic-005',
@@ -90,7 +94,7 @@ module.exports = [
     craft: '青花釉下彩',
     intro: '盘心莲花与多层边饰由内向外展开，构图繁而有序，青花发色浓郁。',
     description: '此盘形制开阔，盘心以莲花团纹为视觉中心，多层边饰由内向外舒展。纹样繁密却井然有序，青花发色浓郁明快，体现元代大型青花器雄浑而富节奏的装饰特点。',
-    video: createDetailVideo('005', '青花团花纹绘制', '从分区构图到一笔一画，理解大型青花盘的纹样秩序。', '08:52')
+    video: createDetailVideo('005', '青花团花纹绘制', '从分区构图到一笔一画，理解大型青花盘的纹样秩序。', '08:52', { cover: '', src: '' })
   },
   {
     id: 'ceramic-006',
@@ -106,7 +110,7 @@ module.exports = [
     craft: '白釉',
     intro: '长颈与圆腹衔接流畅，以纯净白釉突出器物轮廓，气质简洁舒展。',
     description: '此瓶长颈挺拔、圆腹饱满，轮廓转折简洁流畅。通体施纯净白釉，以素面突出器物自身的比例与线条，呈现唐代白瓷明净、大方而舒展的时代气质。',
-    video: createDetailVideo('006', '唐代白瓷成型', '从拉坯修坯到施白釉，观察素瓷器形与釉色的共同塑造。', '07:36')
+    video: createDetailVideo('006', '唐代白瓷成型', '从拉坯修坯到施白釉，观察素瓷器形与釉色的共同塑造。', '07:36', { cover: '', src: '' })
   },
   {
     id: 'ceramic-007',
@@ -122,7 +126,7 @@ module.exports = [
     craft: '低温铅釉',
     intro: '凤首流与曲柄相互呼应，黄、绿、白三色釉交融，造型充满盛唐气象。',
     description: '此壶以凤首为流，曲柄与修长器身彼此呼应，造型兼具异域气息与东方想象。黄、绿、白三色釉自然交融，生动呈现盛唐开放包容、华美昂扬的审美风貌。',
-    video: createDetailVideo('007', '唐三彩施釉工艺', '了解低温铅釉的施釉与流动，感受三彩器物斑斓交融的色泽。', '10:20')
+    video: createDetailVideo('007', '唐三彩施釉工艺', '了解低温铅釉的施釉与流动，感受三彩器物斑斓交融的色泽。', '10:20', { cover: '', src: '' })
   },
   {
     id: 'ceramic-008',
@@ -138,7 +142,7 @@ module.exports = [
     craft: '龙泉青釉',
     intro: '青釉色泽如玉，双耳与三足比例稳健，以简净器形表现宋瓷的含蓄之美。',
     description: '此炉双耳对称、三足稳健，器形简净而富古意。龙泉青釉层次丰厚，色泽温润如玉，在克制的装饰与端正比例中，体现宋瓷追求自然、含蓄与平和的审美精神。',
-    video: createDetailVideo('008', '龙泉青瓷烧造', '探寻胎釉配方与还原焰烧成，感受龙泉青瓷温润如玉的质感。', '09:42')
+    video: createDetailVideo('008', '龙泉青瓷烧造', '探寻胎釉配方与还原焰烧成，感受龙泉青瓷温润如玉的质感。', '09:42', { cover: '', src: '' })
   },
   {
     id: 'ceramic-009',
@@ -154,7 +158,7 @@ module.exports = [
     craft: '青花釉下彩',
     intro: '苍龙穿行于云气之间，饱满器身与强烈青白对比营造出雄健的视觉气势。',
     description: '此罐器身饱满，苍龙穿行于翻卷云气之间，构图充满动势。浓郁青花与洁白胎釉形成鲜明对比，展现元代青花大器雄健豪迈、层次丰富的艺术风格。',
-    video: createDetailVideo('009', '云龙纹青花绘制', '从龙身勾勒到云气铺陈，体会元代青花纹样的力量与节奏。', '08:38')
+    video: createDetailVideo('009', '云龙纹青花绘制', '从龙身勾勒到云气铺陈，体会元代青花纹样的力量与节奏。', '08:38', { cover: '', src: '' })
   },
   {
     id: 'ceramic-010',
@@ -170,6 +174,6 @@ module.exports = [
     craft: '斗彩',
     intro: '庭院花石与鸡群相映成趣，釉下青花和釉上彩共同构成清雅细腻的画面。',
     description: '此杯小巧精致，庭院花石与鸡群相映成趣，生活气息盎然。釉下青花先勾轮廓，釉上彩再填色设色，两次彩绘相互衔接，形成清雅细腻而富层次的画面。',
-    video: createDetailVideo('010', '斗彩合绘技法', '认识釉下青花与釉上彩的两次绘制，读懂斗彩器物的细腻层次。', '11:05')
+    video: createDetailVideo('010', '斗彩合绘技法', '认识釉下青花与釉上彩的两次绘制，读懂斗彩器物的细腻层次。', '11:05', { cover: '', src: '' })
   }
 ]
