@@ -4,3 +4,7 @@ miniprogram_npm/
 .DS_Store
 Thumbs.db
 
+# Rebuildable local authoring output
+__pycache__/
+*.py[cod]
+design-assets/craft/glazes-v1/*/masters/

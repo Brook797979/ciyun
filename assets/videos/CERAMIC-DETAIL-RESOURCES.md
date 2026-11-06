@@ -1,37 +1,41 @@
 # 瓷器详情页视频资源对应表
 
-每件瓷器只展示一条相关影像，10 件瓷器分别使用独立的视频和封面。当前尚未上传实际视频，页面显示临时封面；所有 `src` 保持为空。
+2026-10-20 更新：瓷馆列表与详情主图统一白色背景；相关影像使用桌面“资源/瓷馆”各视频的原始 .Cover 封面和实际片名，不再使用藏品主图充当视频封面。
 
-视频继续使用现有微信云存储环境：`cloud1-d7gew23w04c3def7d`。
-
-| 瓷器 ID | 瓷器名称 | 云存储上传路径 | 本地封面文件 |
+| 瓷器 ID | 瓷器名称 | 视频标题 | 实际时长 |
 | --- | --- | --- | --- |
-| ceramic-001 | 青花缠枝莲纹梅瓶 | videos/ceramic-detail/ceramic-001.mp4 | assets/videos/ceramic-detail-001.jpg |
-| ceramic-002 | 汝窑天青釉莲瓣碗 | videos/ceramic-detail/ceramic-002.mp4 | assets/videos/ceramic-detail-002.jpg |
-| ceramic-003 | 粉彩花鸟纹瓶 | videos/ceramic-detail/ceramic-003.mp4 | assets/videos/ceramic-detail-003.jpg |
-| ceramic-004 | 哥窑开片纹炉 | videos/ceramic-detail/ceramic-004.mp4 | assets/videos/ceramic-detail-004.jpg |
-| ceramic-005 | 青花莲纹大盘 | videos/ceramic-detail/ceramic-005.mp4 | assets/videos/ceramic-detail-005.jpg |
-| ceramic-006 | 白釉长颈瓶 | videos/ceramic-detail/ceramic-006.mp4 | assets/videos/ceramic-detail-006.jpg |
-| ceramic-007 | 三彩凤首壶 | videos/ceramic-detail/ceramic-007.mp4 | assets/videos/ceramic-detail-007.jpg |
-| ceramic-008 | 龙泉窑青釉双耳炉 | videos/ceramic-detail/ceramic-008.mp4 | assets/videos/ceramic-detail-008.jpg |
-| ceramic-009 | 青花云龙纹罐 | videos/ceramic-detail/ceramic-009.mp4 | assets/videos/ceramic-detail-009.jpg |
-| ceramic-010 | 斗彩鸡缸杯 | videos/ceramic-detail/ceramic-010.mp4 | assets/videos/ceramic-detail-010.jpg |
+| ceramic-001 | 青花缠枝莲纹梅瓶 | 广庆祥拍卖丨清道光 青花缠枝莲纹赏瓶 | 01:14 |
+| ceramic-002 | 汝窑天青釉莲瓣碗 | 北宋 汝窯 蓮花式溫碗 | 24:34 |
+| ceramic-003 | 粉彩花鸟纹瓶 | 雍正粉彩花鸟纹抱月瓶｜大英博物馆收藏 | 01:09 |
+| ceramic-004 | 哥窑开片纹炉 | 【央视纪录】哥窑谜案（2011.04.27） | 25:48 |
+| ceramic-005 | 青花莲纹大盘 | 元青花 莲池鱼藻纹大盘 湖南博物院 | 00:33 |
+| ceramic-006 | 白釉长颈瓶 | 白釉长颈瓶 | 02:22 |
+| ceramic-007 | 三彩凤首壶 | 【中原藏珍】异国情调｜唐三彩｜壶口像凤首 | 03:41 |
+| ceramic-008 | 龙泉窑青釉双耳炉 | 龙泉青瓷弟窑粉青釉双耳炉 | 00:25 |
+| ceramic-009 | 青花云龙纹罐 | 稀世之宝！元青花云龙纹罐，国家博物馆典藏珍宝 | 01:05 |
+| ceramic-010 | 斗彩鸡缸杯 | 一个杯价值2亿元，这个连乾隆都爱的瓷器，到底什么来头？ | 02:36 |
 
-## 如何替换
+## 图片路径
 
-1. 在微信开发者工具的云开发控制台中，将各自的 MP4 上传到表中对应路径。
-2. 把封面文件放入表中指定的项目目录；这些 JPG 文件尚未创建，`coverResourcePath` 仅预留名称。
-3. 在 `data/ceramics.js` 对应瓷器的 `createDetailVideo(...)` 最后一个参数中，填写本件瓷器的 `cover` 和云存储返回的真实文件 ID `src`。
+- 白底主图：`assets/ceramics/museum-white-20261020/ceramic-001.jpg` 至 `ceramic-010.jpg`。
+- 视频封面：`assets/videos/museum-covers-20261020/ceramic-001.jpg` 至 `ceramic-010.jpg`。
+- 图片通过现有静态 CDN 与 `utils/static-media-manifest.{json,js}` 加载；版本目录避免旧图缓存。
+- 主图与原视频封面均完整显示，长片名自动换行。竖版视频封面保留完整构图，视频区域以深色填充留白。
 
-例如，第一件瓷器的参数为：
+002 / 004 / 005 / 006 / 007 / 010 六张使用内置 imagegen 改白底，001 / 003 / 008 / 009 四张沿用上一轮白底图。新图保留完整器形，但生成编辑有少量色调、釉面纹理变化；007原图仅285×429，放大细节不应作为文物考据依据。所有原始照片、视频与原封面未覆盖，提示词和哈希在聊天工作区 `outputs/museum-white/clean/*.provenance.json` 与 `work/museum-white/*manifest.json`。
 
-```js
-{
-  cover: '/assets/videos/ceramic-detail-001.jpg',
-  src: '上传后返回的真实 cloud:// 文件 ID'
-}
-```
+视频封面仅使用 Sharp 等比例缩放与 JPEG 压缩，无生成编辑、裁剪或改写图内文字。梅瓶对应赏瓶视频、粉彩花鸟瓶对应抱月瓶视频、莲纹盘对应鱼藻盘视频，均为相关参考影像；保留主图器物名称，不宣称为同一件藏品。
 
-同时按实际素材更新这一件的标题、简介与时长。每件瓷器独立配置，替换一件不会改变其他件。
+## 视频存储与播放
 
-详情页当前完成的是封面展示、播放按钮外观与资源数据预留。真实视频的加载、播放交互及云文件地址解析将在提供素材后接入。
+原视频路径保持 `videos/ceramic-detail/ceramic-001.mp4` 至 `ceramic-010.mp4`，使用原有云环境 `cloud1-d7gew23w04c3def7d`。文件ID、签名白名单和时长保持，未重传或转码视频，本轮未部署云函数。
+
+点击相关影像后，`video-playback` 按 `ceramic-video-001` 等固定ID签名，临时URL只在内存缓存；播放器 contain 保留完整横竖画面，支持加载、失败重试、暂停及离页清理。默认十条课堂视频继续可用。
+
+## 后续替换
+
+1. 原视频上传至各自固定云路径；在 `data/ceramics.js` 设置真实文件ID与片名、简介、时长。
+2. 各封面独立替换，使用新的版本目录并同步静态CDN与两份清单；更新 `realMuseumVideo` / `coverResourcePath`。
+3. 主图与视频封面分别核对，不复用主图填充不同器物的相关视频。
+
+本轮检查记录在聊天工作区 `work/museum-white/`。离线真实模板检查不等同于微信真机触摸 / 播放验收。

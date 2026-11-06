@@ -2,6 +2,36 @@
   "envId": "cloud1-d7gew23w04c3def7d",
   "functionRoot": "cloudfunctions",
   "functions": [
-    { "name": "video-playback", "runtime": "Nodejs20.19", "handler": "index.main", "timeout": 15, "memorySize": 128, "installDependency": true }
+    {
+      "name": "video-playback",
+      "runtime": "Nodejs20.19",
+      "handler": "index.main",
+      "timeout": 15,
+      "memorySize": 128,
+      "installDependency": true
+    },
+    {
+      "name": "ciyun-ai",
+      "runtime": "Nodejs20.19",
+      "handler": "index.main",
+      "timeout": 80,
+      "memorySize": 256,
+      "installDependency": true
+    },
+    {
+      "name": "ciyun-image-worker",
+      "runtime": "Nodejs20.19",
+      "handler": "index.main",
+      "timeout": 360,
+      "memorySize": 256,
+      "installDependency": true,
+      "triggers": [
+        {
+          "name": "ciyun-image-queue",
+          "type": "timer",
+          "config": "*/10 * * * * * *"
+        }
+      ]
+    }
   ]
 }

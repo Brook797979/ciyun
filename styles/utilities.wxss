@@ -1,4 +1,8 @@
 .page-shell { box-sizing: border-box; min-height: 100vh; padding: var(--space-lg) var(--page-gutter) var(--space-xl); }
+.paper-texture-page { position: relative; z-index: 0; }
+.paper-texture { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.paper-texture-image { display: block; width: 100%; height: 100%; }
+.paper-texture::after { position: absolute; inset: 0; content: ''; background: var(--paper-wash, transparent); }
 .surface { background: var(--color-surface); border: 1rpx solid var(--color-border); border-radius: var(--radius-md); }
 .stack { display: flex; flex-direction: column; gap: var(--space-md); }
 .row { display: flex; align-items: center; gap: var(--space-sm); }

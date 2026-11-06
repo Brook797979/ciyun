@@ -42,7 +42,7 @@ test('every ceramic exposes complete generic detail-page data', () => {
     }
     assert.match(item.video.resourcePath, /^\/assets\/videos\/.+\.mp4$/)
     assert.equal(item.video.cloudPath, `videos/ceramic-detail/${item.id}.mp4`)
-    assert.match(item.video.coverResourcePath, /^\/assets\/videos\/ceramic-detail-\d{3}\.jpg$/)
+    assert.equal(item.video.coverResourcePath, item.video.cover)
   })
 
   assert.equal(new Set(ceramics.map((item) => item.video)).size, ceramics.length)
@@ -86,10 +86,13 @@ test('ceramic detail returns to the museum and opens contextual AI chat', () => 
   page.ask()
   page.goBack()
 
-  assert.deepEqual(calls, [
-    ['navigate', '/pages/ai-chat/index?ceramicId=ceramic-006'],
-    ['back', 1]
-  ])
+  assert.equal(calls.length, 2)
+  assert.equal(calls[0][0], 'navigate')
+  const destination = new URL(calls[0][1], 'https://ciyun.invalid')
+  assert.equal(destination.pathname, '/pages/ai-chat/index')
+  assert.equal(destination.searchParams.get('ceramicId'), 'ceramic-006')
+  assert.equal(destination.searchParams.has('question'), false)
+  assert.deepEqual(calls[1], ['back', 1])
   global.wx = originalWx
 })
 
@@ -102,7 +105,7 @@ test('ceramic detail template matches the high-fidelity single-item structure', 
   assert.match(template, /class="detail-header"/)
   assert.match(template, /class="back-button"[^>]+bindtap="goBack"/)
   assert.match(template, /瓷器详情/)
-  assert.match(template, /<image[^>]+class="ceramic-hero-image"[^>]+src="\{\{item\.image\}\}"[^>]+mode="aspectFill"/)
+  assert.match(template, /<image[^>]+class="ceramic-hero-image"[^>]+src="\{\{item\.image\}\}"[^>]+mode="aspectFit"[^>]+bindtap="previewCeramic"/)
   assert.match(template, /wx:for="\{\{item\.tags\}\}"/)
   assert.match(template, /\{\{item\.type\}\}/)
   assert.match(template, /\{\{item\.category\}\}/)
@@ -112,9 +115,10 @@ test('ceramic detail template matches the high-fidelity single-item structure', 
   assert.match(template, /item\.video\.cover/)
   assert.match(template, /item\.video\.duration/)
   assert.doesNotMatch(template, /查看更多/)
-  assert.equal((template.match(/class="related-video"/g) || []).length, 1)
+  assert.equal((template.match(/class="related-video(?:\s[^"]*)?"/g) || []).length, 1)
   assert.match(template, /class="ai-entry"[^>]+bindtap="ask"/)
-  assert.match(template, /继续了解这件瓷器/)
+  assert.match(template, /AI深度解读/)
+  assert.match(template, /探索这件藏品背后的历史与纹样/)
   assert.match(styles, /\.ceramic-hero-image\s*\{[^}]*height:\s*540rpx/)
   assert.match(styles, /@media\s*\(max-width:\s*350px\)/)
 })

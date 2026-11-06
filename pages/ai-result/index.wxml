@@ -1,0 +1,61 @@
+<view class="creation-page result-page" style="padding-bottom: calc(156rpx + {{safeBottom}}px)">
+  <image class="creation-paper" src="{{visuals.paper}}" mode="aspectFill" aria-hidden="true"/>
+  <image class="creation-scene" src="{{visuals.scene}}" mode="aspectFill" aria-hidden="true"/>
+  <view class="creation-hero" style="height: {{heroHeight}}px">
+    <view class="creation-nav" style="top: {{navTop}}px; height: {{navHeight}}px">
+      <view class="creation-back" bindtap="goBack" aria-role="button" aria-label="返回创瓷界面" hover-class="creation-button-pressed"><view class="creation-back-icon"></view></view>
+      <text class="creation-nav-title">AI创瓷</text>
+    </view>
+    <view class="creation-tagline" style="top: {{brandTop}}px">以文字为笔，创造独属于你的东方瓷器</view>
+  </view>
+  <view class="creation-content result-content">
+    <view class="creation-panel result-panel {{image ? 'result-panel-complete' : ''}}">
+      <image class="creation-flower" src="{{visuals.flower}}" mode="aspectFit" aria-hidden="true"/>
+      <image class="creation-cloud" src="{{visuals.cloud}}" mode="aspectFit" aria-hidden="true"/>
+      <view wx:if="{{isShowcase}}" class="result-case-label"><text>预生成展示案例</text><text class="result-case-date">案例日期 · {{caseDate}}</text></view>
+      <block wx:if="{{!initialLoading && image && status === 'succeeded'}}">
+        <view class="result-art-frame"><image class="result-art" src="{{image}}" mode="aspectFit" bindtap="previewArtwork" binderror="artworkImageError" aria-role="button" aria-label="预览瓷器作品大图"/></view>
+        <view class="result-title-row">
+          <view class="result-title-line"></view><image class="result-title-floret" src="{{visuals.floret}}" mode="aspectFit" aria-hidden="true"/>
+          <input wx:if="{{editingName}}" class="result-name-input" value="{{workName}}" maxlength="24" focus="{{editingName}}" bindinput="nameInput" bindblur="finishNameEditing" bindconfirm="finishNameEditing" confirm-type="done" aria-label="作品名称，最多24字"/>
+          <text wx:else class="result-artwork-title" bindtap="editName" aria-role="button" aria-label="点击修改作品名称">{{workName}}</text>
+          <image class="result-title-floret" src="{{visuals.floret}}" mode="aspectFit" aria-hidden="true"/><view class="result-title-line"></view>
+        </view>
+        <text class="result-artwork-intro">{{artworkIntro}}</text>
+      </block>
+      <view wx:else class="result-waiting" aria-live="polite">
+        <block wx:if="{{initialLoading}}">
+          <text class="result-waiting-title">正在读取作品进度</text>
+          <text class="result-waiting-message">正在确认这件作品的最新状态，请稍候</text>
+          <image class="result-loading-art" src="{{visuals.loading}}" mode="aspectFit" aria-hidden="true"/>
+          <view class="result-loading-dots" aria-hidden="true"><view></view><view></view><view></view></view>
+        </block>
+        <block wx:elif="{{status === 'queued' || status === 'running' || status === 'storing'}}">
+          <text class="result-waiting-title">正在为你生成瓷器作品…</text>
+          <text class="result-waiting-message">请稍候，AI正在描绘你的灵感</text>
+          <image class="result-loading-art" src="{{visuals.loading}}" mode="aspectFit" aria-hidden="true"/>
+          <view class="result-loading-dots" aria-hidden="true"><view></view><view></view><view></view></view>
+          <view class="result-loading-caption"><view></view><text>{{status === 'queued' ? '灵感已入窑，正在排队' : status === 'storing' ? '作品已生成，正在保存' : '生成中，请稍候'}}</text><view></view></view>
+          <text wx:if="{{status === 'queued'}}" class="result-background-note">可先返回，稍后继续查看</text>
+        </block>
+        <block wx:else>
+          <view class="result-recovery-emblem" aria-hidden="true"><view></view></view>
+          <text class="result-waiting-title">{{imageError ? '作品图片暂时无法显示' : statusTitle}}</text>
+          <text class="result-waiting-message result-recovery-message">{{imageError || statusMessage}}</text>
+          <view wx:if="{{taskId && (status === 'unknown' || imageError)}}" class="creation-button creation-button-secondary result-recovery-button {{refreshing ? 'creation-button-disabled' : ''}}" bindtap="refreshResult" aria-role="button" aria-disabled="{{refreshing}}" hover-class="creation-button-pressed">{{refreshing ? '正在查询原任务…' : '重新查询进度'}}</view>
+          <view class="creation-link result-return-link {{confirmingNewCreation ? 'creation-button-disabled' : ''}}" bindtap="createAgain" aria-role="button" aria-disabled="{{confirmingNewCreation}}">{{confirmingNewCreation ? '等待确认' : status === 'unknown' ? '返回调整创意' : '返回创瓷'}}</view>
+        </block>
+      </view>
+    </view>
+    <view wx:if="{{!initialLoading && canSave && image && status === 'succeeded'}}" class="result-bottom-actions">
+      <view class="creation-button creation-button-secondary result-action {{saving || confirmingNewCreation ? 'creation-button-disabled' : ''}}" bindtap="createAgain" aria-role="button" aria-disabled="{{saving || confirmingNewCreation}}" hover-class="creation-button-pressed">
+        <image class="creation-button-flower" src="{{visuals.floret}}" mode="aspectFit" aria-hidden="true"/><view class="result-regenerate-icon" aria-hidden="true"></view><text>重新生成</text>
+      </view>
+      <view class="creation-button creation-button-primary result-action {{saving ? 'creation-button-disabled' : ''}}" bindtap="saveArtwork" aria-role="button" aria-disabled="{{saving}}" hover-class="creation-button-pressed">
+        <view class="result-save-icon" aria-hidden="true"><view></view></view><text>{{saving ? '正在保存' : saved ? '已保存作品' : '保存作品'}}</text><image class="creation-button-flower" src="{{visuals.floret}}" mode="aspectFit" aria-hidden="true"/>
+      </view>
+    </view>
+    <view class="result-saved-note"><text wx:if="{{saved}}">已保存到我的作品</text><view class="creation-link" bindtap="viewWorks" aria-role="button" aria-disabled="{{saving || confirmingNewCreation}}">查看作品 ›</view></view>
+    <text wx:if="{{isShowcase}}" class="result-case-note">预生成展示案例用于展示风格效果，保存后保留案例标记。</text>
+  </view>
+</view>

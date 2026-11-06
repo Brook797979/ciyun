@@ -1,4 +1,5 @@
-<view class="ceramic-detail-page">
+<view class="ceramic-detail-page paper-texture-page">
+  <view class="paper-texture" aria-hidden="true"><image class="paper-texture-image" src="/assets/backgrounds/home-paper.png" mode="aspectFill"/></view>
   <view class="detail-header" style="height: {{heroHeight}}px">
     <image class="detail-header-image" src="/assets/banners/home-hero.jpg" mode="aspectFill"/>
     <view class="detail-header-wash"></view>
@@ -12,7 +13,7 @@
 
   <view class="detail-content">
     <view class="ceramic-hero">
-      <image class="ceramic-hero-image" src="{{item.image}}" mode="aspectFill"/>
+      <image class="ceramic-hero-image" src="{{item.image}}" mode="aspectFit" bindtap="previewCeramic" aria-role="button" aria-label="查看{{item.name}}完整大图"/>
       <view class="hero-cloud-decoration" aria-hidden="true"></view>
     </view>
 
@@ -45,12 +46,20 @@
         <view class="section-line"></view>
       </view>
 
-      <view class="related-video">
+      <view class="related-video {{videoUrl ? 'related-video-active' : ''}}">
         <view class="related-video-cover">
-          <image class="related-video-image" src="{{item.video.cover}}" mode="aspectFill"/>
-          <view class="related-video-shade"></view>
-          <view class="video-play" aria-hidden="true"><view class="video-play-triangle"></view></view>
-          <view class="video-duration">{{item.video.duration}}</view>
+          <video wx:if="{{videoUrl}}" id="ceramic-detail-video" class="related-video-player" src="{{videoUrl}}" poster="{{item.video.cover}}" object-fit="contain" autoplay="{{false}}" controls="{{true}}" show-center-play-btn="{{true}}" binderror="onVideoError" bindplay="onVideoPlay"/>
+          <view wx:else class="related-video-trigger" bindtap="playRelatedVideo" aria-role="button" aria-label="{{!item.video.src ? '影像待补充' : videoState === 'error' ? '影像播放失败，点击重试' : '播放相关影像'}}" aria-disabled="{{!item.video.src || videoState === 'loading'}}">
+            <image class="related-video-image" src="{{item.video.cover}}" mode="aspectFit"/>
+            <view class="related-video-shade"></view>
+            <view wx:if="{{!item.video.src}}" class="video-status">影像待补充</view>
+            <view wx:elif="{{videoState === 'loading'}}" class="video-status">影像加载中…</view>
+            <view wx:elif="{{videoState === 'error'}}" class="video-status video-status-error">{{videoError}}<text class="video-retry">点击重试</text></view>
+            <block wx:else>
+              <view class="video-play" aria-hidden="true"><view class="video-play-triangle"></view></view>
+              <view class="video-duration">{{item.video.duration}}</view>
+            </block>
+          </view>
         </view>
         <view class="related-video-copy">
           <view class="related-video-title">{{item.video.title}}</view>
@@ -60,14 +69,15 @@
       </view>
     </view>
 
-    <view class="ai-entry" bindtap="ask" aria-role="button" aria-label="问问AI，继续了解这件瓷器">
-      <view class="ai-icon"><view class="ai-bubble"><view class="ai-dots">•••</view></view></view>
+    <view class="ai-entry" bindtap="ask" hover-class="ai-entry-pressed" aria-role="button" aria-label="AI深度解读，探索这件藏品背后的历史与纹样">
+      <image class="ai-cloud" src="/assets/icons/identify-cloud.svg" mode="aspectFit" aria-hidden="true"/>
+      <view class="ai-icon" aria-hidden="true"><image class="ai-lotus" src="/assets/icons/ai-reading-lotus.svg" mode="aspectFit"/></view>
       <view class="ai-divider"></view>
       <view class="ai-copy">
-        <view class="ai-title">问问AI</view>
-        <view class="ai-description">继续了解这件瓷器</view>
+        <view class="ai-title">AI深度解读</view>
+        <view class="ai-description">探索这件藏品背后的历史与纹样</view>
       </view>
-      <view class="ai-arrow" aria-hidden="true">›</view>
+      <view class="ai-arrow" aria-hidden="true"></view>
     </view>
   </view>
 </view>

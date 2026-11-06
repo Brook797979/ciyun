@@ -1,4 +1,5 @@
-const news = require('../../data/news')
+const { resolveMedia } = require('../../utils/static-media')
+const news = resolveMedia(require('../../data/news'))
 const { go } = require('../../utils/navigation')
 
 const featuredNews = news.find((item) => item.id === 'news-002') || news[0]

@@ -1,1 +1,80 @@
-<view class="page-shell stack"><section-title title="瓷韵之旅" description="完成关卡并解锁工坊纹样"/><view wx:for="{{levels}}" wx:key="id" class="level surface {{item.status}}" data-item="{{item}}" bindtap="openLevel"><view class="number">{{item.order}}</view><view class="level-body"><view>{{item.name}}</view><view class="muted">{{item.status==='locked'?'尚未解锁':'最高 '+item.bestStars+' 星'}}</view></view></view></view>
+<view class="challenge-page">
+  <view class="journey-hero" style="height: {{heroHeight}}px;">
+    <image class="hero-landscape" src="/assets/banners/home-hero.jpg" mode="aspectFill"/>
+    <view class="hero-mist"></view>
+    <view class="journey-brand" style="top: {{brandTop}}px;">
+      <view class="journey-brand-row"><text class="journey-title">挑战</text><text class="journey-seal">瓷韵</text></view>
+      <view class="journey-subtitle">闯关识瓷 · 解锁工坊素材</view>
+      <view class="journey-brand-rule" aria-hidden="true"></view>
+    </view>
+  </view>
+  <view class="journey-summary">
+    <view class="journey-progress">
+      <view class="progress-copy"><text class="progress-label">已完成</text><text class="progress-value">{{completedCount}}</text><text class="progress-total">/ {{totalCount}} 关</text></view>
+      <view class="progress-track"><view class="progress-fill" style="width: {{progressPercent}}%;"></view></view>
+    </view>
+    <button class="achievement-entry" size="mini" bindtap="openAchievement" aria-label="查看三枚章节徽章"><text class="achievement-entry-title">成就</text><text class="achievement-entry-count">{{unlockedBadgeCount}} / {{badges.length}}</text></button>
+  </view>
+  <swiper class="chapter-swiper" vertical current="{{chapters.length - 1 - chapterIndex}}" duration="420" bindchange="onChapterChange" disable-touch="{{showAchievement}}">
+    <swiper-item wx:for="{{displayChapters}}" wx:for-item="chapter" wx:key="id">
+      <view id="{{chapter.id}}" class="chapter chapter-{{chapter.number}}">
+        <image class="chapter-background" src="{{chapter.background}}" mode="aspectFill"/>
+        <view class="chapter-wash"></view>
+        <view class="chapter-heading">
+          <view class="chapter-plaque"><text class="chapter-ordinal">第{{chapter.number === 1 ? '一' : chapter.number === 2 ? '二' : '三'}}章</text><view class="chapter-heading-rule"></view><text class="chapter-name">{{chapter.name}}</text></view>
+          <view class="chapter-subtitle">{{chapter.subtitle}}</view>
+        </view>
+        <view class="chapter-map">
+          <image class="map-route" src="/assets/challenge/route.png" mode="scaleToFill"/>
+          <view wx:for="{{chapter.levels}}" wx:for-item="level" wx:for-index="levelIndex" wx:key="id" data-id="{{level.id}}" class="level-row level-row-{{levelIndex}} {{levelIndex % 2 === 0 ? 'level-left' : 'level-right'}} state-{{level.status}}">
+            <button class="level-node" data-id="{{level.id}}" bindtap="openLevel" aria-label="第{{level.order}}关，难度{{level.difficulty}}星，{{level.statusLabel}}，通关奖励{{level.reward.name}}">
+              <view class="porcelain-plate">
+                <image class="plate-rim" src="/assets/challenge/plate-rim.png" mode="aspectFit"/>
+                <text class="level-number">{{level.order}}</text>
+                <view wx:if="{{level.status === 'completed'}}" class="level-status completed-mark"><view class="check-mark"></view></view>
+                <view wx:elif="{{level.status === 'locked'}}" class="level-status locked-mark"><view class="lock-icon"><view class="lock-key"></view></view></view>
+              </view>
+              <view class="difficulty"><text class="difficulty-star star-on">★</text><text class="difficulty-star {{level.difficulty >= 2 ? 'star-on' : 'star-off'}}">{{level.difficulty >= 2 ? '★' : '☆'}}</text><text class="difficulty-star {{level.difficulty >= 3 ? 'star-on' : 'star-off'}}">{{level.difficulty >= 3 ? '★' : '☆'}}</text></view>
+            </button>
+            <view class="reward-note" data-id="{{level.id}}" aria-hidden="true">
+              <image class="reward-note-image" src="{{level.reward.image}}" mode="aspectFit"/>
+              <view class="reward-note-copy"><text class="reward-note-name">{{level.reward.name}}</text><text class="reward-note-caption">通关奖励 · {{level.reward.kindLabel}}</text></view>
+            </view>
+          </view>
+        </view>
+        <view class="chapter-footer">
+          <view class="chapter-swipe-hint" wx:if="{{chapter.nextChapterId}}"><text class="swipe-arrow">↓</text><text>下滑进入{{chapter.nextChapterName}}</text><text class="chapter-page-number">{{chapter.number}} / 3</text></view>
+          <view class="chapter-swipe-hint" wx:else><text>十二关，一段瓷韵之旅</text><text class="chapter-page-number">3 / 3</text></view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+  <view wx:if="{{showAchievement}}" class="sheet-mask" style="padding-top:{{navHeight + 8}}px" bindtap="closeAchievement" catchtouchmove="noop">
+    <view class="detail-sheet achievement-sheet" catchtap="noop" role="dialog" aria-modal="true" aria-label="章节徽章">
+      <button class="sheet-close" size="mini" bindtap="closeAchievement" aria-label="关闭章节徽章">×</button>
+      <view class="achievement-header">
+        <view class="sheet-eyebrow"><view class="achievement-rule"/><text>瓷韵成就</text><view class="achievement-rule"/></view>
+        <view class="sheet-title">章节徽章</view>
+        <view class="achievement-condition">每完成一章，解锁一枚纪念徽章</view>
+        <view class="achievement-tally">已解锁 <text>{{unlockedBadgeCount}}</text> / {{badges.length}} 枚</view>
+      </view>
+      <scroll-view class="badge-scroll" scroll-y="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}" bounces="{{false}}" catchtouchmove="noop">
+        <view class="badge-list">
+        <view wx:for="{{badges}}" wx:key="id" class="badge-card {{item.unlocked ? 'badge-unlocked' : ''}}">
+          <view class="badge-card-main">
+            <view class="badge-medallion {{item.unlocked ? 'medallion-unlocked' : 'medallion-locked'}}">
+              <view class="badge-artwork"><image class="badge-image" src="{{item.unlocked ? item.badgeImageUnlocked : item.badgeImageLocked}}" mode="aspectFill" aria-label="{{item.chapterName}}章节徽章，{{item.unlocked ? '已解锁' : '未解锁'}}"/></view>
+              <view wx:if="{{!item.unlocked}}" class="badge-lock" aria-hidden="true"><view class="lock-icon"><view class="lock-key"/></view></view>
+              <view wx:else class="badge-earned" aria-hidden="true"><view class="check-mark"/></view>
+            </view>
+            <view class="badge-copy"><view class="badge-name">{{item.title}}</view><view class="badge-condition">完成【{{item.chapterName}}】全部关卡后解锁</view><view class="badge-progress">已完成 <text class="badge-finished">{{item.finishedLevels}}</text> / {{item.totalLevels}} 关</view></view>
+            <text class="badge-state">{{item.unlocked ? '已解锁' : '未解锁'}}</text>
+          </view>
+          <view class="badge-progress-track" role="progressbar" aria-label="{{item.chapterName}}完成进度" aria-valuenow="{{item.finishedLevels}}" aria-valuemin="0" aria-valuemax="{{item.totalLevels}}"><view class="badge-progress-fill" style="width:{{item.progressPercent}}%"/></view>
+        </view>
+        </view>
+      </scroll-view>
+      <view class="achievement-footer"><button class="sheet-primary" bindtap="closeAchievement">继续瓷韵之旅<text class="continue-arrow" aria-hidden="true">›</text></button></view>
+    </view>
+  </view>
+</view>

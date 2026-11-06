@@ -1,1 +1,47 @@
-<view class="page-shell stack"><textarea class="surface prompt" value="{{prompt}}" bindinput="input" placeholder="例如：青花仙鹤祥云梅瓶"/><button class="link-button" bindtap="generate">生成设计（模拟）</button><view class="placeholder result">{{generated?'AI 陶瓷设计结果占位':'生成结果将在此展示'}}</view></view>
+<view class="creation-page input-page" style="padding-bottom: calc(40rpx + {{safeBottom}}px)">
+  <image class="creation-paper" src="{{visuals.paper}}" mode="aspectFill" aria-hidden="true"/>
+  <image class="creation-scene" src="{{visuals.scene}}" mode="aspectFill" aria-hidden="true"/>
+  <view class="creation-hero input-hero" style="height: {{heroHeight}}px">
+    <view class="creation-nav" style="top: {{navTop}}px; height: {{navHeight}}px">
+      <view class="creation-back" bindtap="goBack" hover-class="input-pressed" aria-role="button" aria-label="返回工坊"><view class="creation-back-icon"></view></view>
+      <text class="creation-nav-title">AI创瓷</text>
+    </view>
+    <view class="creation-tagline input-tagline" style="top: {{taglineTop}}px">以文字为笔，创造独属于你的东方瓷器</view>
+  </view>
+
+  <view class="creation-content input-content">
+    <view class="creation-panel input-panel">
+      <image class="creation-flower" src="{{visuals.flower}}" mode="aspectFit" aria-hidden="true"/>
+      <image class="creation-cloud" src="{{visuals.cloud}}" mode="aspectFit" aria-hidden="true"/>
+      <view class="input-panel-inner">
+        <view class="input-heading">
+          <view wx:if="{{!submitting}}" class="input-random" bindtap="randomInspiration" hover-class="input-pressed" aria-role="button" aria-label="填入随机创作灵感"><view class="input-dice" aria-hidden="true"><view></view><view></view><view></view></view><text>随机灵感</text></view>
+        </view>
+        <view wx:if="{{submitting}}" class="input-loading" aria-live="polite">
+          <image class="input-loading-art" src="{{visuals.loading}}" mode="aspectFit" aria-hidden="true"/>
+          <text class="input-loading-title">正在提交你的创意</text>
+          <text class="input-loading-caption">任务确认后，将自动进入创作结果页</text>
+        </view>
+        <view wx:else class="input-prompt-frame">
+          <textarea class="input-prompt" value="{{prompt}}" maxlength="200" bindinput="input" placeholder="请输入你想生成的瓷器描述，例如：一只绘有月下荷塘的青花梅瓶" placeholder-class="input-placeholder" cursor-spacing="32" disable-default-padding="{{true}}" aria-label="创意描述，最多200字"/>
+          <text class="input-count" aria-label="已输入{{promptLength}}字，最多200字">{{promptLength}}/200</text>
+        </view>
+        <view class="input-recommendations">
+          <view class="input-recommendation-heading"><image class="input-recommendation-flower" src="{{visuals.floret}}" mode="aspectFit" aria-hidden="true"/><text>灵感推荐</text><view class="input-heading-rule"></view></view>
+          <view class="input-chips" aria-label="选择一个主题填入完整创意">
+            <view wx:for="{{recommendations}}" wx:key="id" class="input-chip {{selectedRecommendation === item.id ? 'input-chip-selected' : ''}}" data-id="{{item.id}}" bindtap="applyRecommendation" hover-class="input-chip-pressed" aria-role="button" aria-label="填入{{item.title}}主题创意" aria-disabled="{{submitting || confirmingNewCreation}}"><image class="input-chip-flower" src="{{visuals.floret}}" mode="aspectFit" aria-hidden="true"/><text>{{item.title}}</text></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{generationError || recoveryPending || activeTaskUnknown}}" class="input-service-message" aria-live="polite">
+      <text>{{generationError || (recoveryPending ? '上次提交尚未确认，可恢复原任务继续查看。' : '上次生成结果尚未确认，开始新创作前将再次提示。')}}</text>
+      <view wx:if="{{recoveryPending}}" class="input-recovery-link" bindtap="retryGeneration" aria-role="button" aria-disabled="{{submitting || confirmingNewCreation}}">恢复原任务</view>
+    </view>
+
+    <view class="creation-button creation-button-primary input-generate {{submitting || confirmingNewCreation ? 'creation-button-disabled' : ''}}" bindtap="generate" hover-class="input-pressed" aria-role="button" aria-label="{{confirmingNewCreation ? '等待确认' : submitting ? '正在提交创意' : recoveryPending ? '恢复原任务' : activeTaskPending ? '查看生成进度' : '开始生成'}}" aria-disabled="{{submitting || confirmingNewCreation}}"><image class="creation-button-flower" src="{{visuals.floret}}" mode="aspectFit" aria-hidden="true"/><text>{{confirmingNewCreation ? '等待确认' : submitting ? '正在提交' : recoveryPending ? '恢复原任务' : activeTaskPending ? '查看生成进度' : '开始生成'}}</text><image class="creation-button-flower" src="{{visuals.floret}}" mode="aspectFit" aria-hidden="true"/></view>
+    <view wx:if="{{recoveryPending}}" class="input-secondary-action" bindtap="newCreation" aria-role="button" aria-disabled="{{submitting || confirmingNewCreation}}">仍要开始新创作</view>
+    <view class="input-secondary-action" bindtap="viewWorks" aria-role="button" aria-label="查看AI作品" aria-disabled="{{submitting || confirmingNewCreation}}">查看作品</view>
+  </view>
+</view>

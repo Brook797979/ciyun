@@ -1,1 +1,133 @@
-<view class="page-shell stack"><view class="steps row"><view wx:for="{{steps}}" wx:key="*this" class="step {{index<=current?'active':''}}">{{index+1}}. {{item}}</view></view><view class="workspace placeholder">{{steps[current]}}操作区域</view><button class="link-button" bindtap="next">下一步</button></view>
+<view class="craft-page" style="padding-bottom: calc(106rpx + {{safeBottom}}px)">
+  <image class="craft-paper" src="/assets/backgrounds/home-paper.png" mode="aspectFill" aria-hidden="true"/>
+  <view class="craft-hero" style="height: {{heroHeight}}px">
+    <image class="craft-hero-image" src="/assets/banners/home-hero.jpg" mode="aspectFill" aria-hidden="true"/>
+    <view class="craft-hero-wash"></view>
+    <view class="craft-navigation" style="top: {{navTop}}px; height: {{navHeight}}px">
+      <view class="craft-back" bindtap="goBack" hover-class="craft-pressed" aria-role="button" aria-label="返回工坊"><view class="back-chevron"></view></view>
+    </view>
+    <view class="craft-brand" style="top: {{brandTop}}px">
+      <view class="craft-brand-row"><view class="craft-brand-title">数字制瓷</view><view class="craft-brand-seal">瓷韵</view></view>
+      <view class="craft-brand-subtitle">择器、绘纹、施釉，成就一器东方之美</view>
+    </view>
+  </view>
+
+  <view class="craft-progress" aria-label="制作进度，当前第{{currentStep + 1}}步，{{steps[currentStep].name}}">
+    <view wx:for="{{steps}}" wx:key="number" class="craft-step {{index === currentStep ? 'craft-step-active' : ''}} {{index < currentStep ? 'craft-step-done' : ''}}">
+      <view class="step-number">{{item.number}}</view><view class="step-label">{{item.name}}</view>
+    </view>
+  </view>
+
+  <view class="craft-content {{currentStep === 3 ? 'craft-content-finish' : ''}}">
+    <view class="shape-preview" style="height: {{previewHeight}}rpx">
+      <view class="shape-preview-stage" style="transform: translate({{selectedShapeItem.preview.offsetX}}%, {{selectedShapeItem.preview.offsetY}}%) scale({{selectedShapeItem.preview.scale}})">
+        <image wx:if="{{currentStep > 0 && previewImage}}" class="shape-preview-image" src="{{previewImage}}" mode="aspectFill" aria-label="{{selectedShapeItem.name}}，{{selectedPatternItem.name}}{{currentStep >= 2 ? '，' + selectedGlazeItem.name : '，白瓷纹样'}}预览"/>
+        <block wx:else>
+          <image class="shape-preview-image" src="{{selectedShapeItem.image}}" mode="aspectFill" aria-label="{{selectedShapeItem.name}}{{currentStep === 1 ? '，' + selectedPatternItem.name + '预览' : '，素白瓷器预览'}}"/>
+          <view wx:if="{{currentStep === 1}}" class="pattern-surface" style="top: {{selectedShapeItem.patternOverlay.top}}%; left: {{selectedShapeItem.patternOverlay.left}}%; width: {{selectedShapeItem.patternOverlay.width}}%; height: {{selectedShapeItem.patternOverlay.height}}%; border-radius: {{selectedShapeItem.patternOverlay.radius}}; clip-path: {{selectedShapeItem.patternOverlay.clipPath}}; -webkit-clip-path: {{selectedShapeItem.patternOverlay.clipPath}}" aria-hidden="true">
+            <image class="pattern-texture" src="{{selectedPatternItem.texture}}" mode="aspectFill"/>
+            <view class="pattern-shading"></view>
+          </view>
+        </block>
+      </view>
+      <view class="preview-wash"></view>
+      <view class="preview-poem" aria-hidden="true"><text>以手造物</text><text>让千年瓷韵重现于你手中</text></view>
+      <view class="preview-cloud" aria-hidden="true"><view></view><view></view><view></view></view>
+    </view>
+
+    <view wx:if="{{previewUnavailable}}" class="finish-note-row"><text class="finish-status">完整创作预览准备中，当前可欣赏素瓷器型。</text></view>
+
+    <view class="shape-section-heading">
+      <image class="shape-section-icon" src="/assets/icons/home-section-classroom.png" mode="aspectFit" aria-hidden="true"/>
+      <text class="shape-section-title">{{steps[currentStep].name}}</text><view class="shape-section-rule"></view>
+      <text class="shape-section-caption">{{currentStep === 3 ? '为作品命名，留住你的创意' : currentStep === 2 ? '一色一境，让釉光映照纹样' : currentStep === 1 ? '一纹一意，为' + selectedShapeItem.name + '绘上东方气韵' : '不同的器型，承载不同的东方美学'}}</text>
+    </view>
+
+    <scroll-view wx:if="{{currentStep < 3}}" class="shape-scroll" scroll-x="{{true}}" enable-flex="{{true}}" show-scrollbar="{{false}}" enhanced="{{true}}" aria-label="横向滑动{{steps[currentStep].name}}">
+      <view wx:if="{{currentStep === 1}}" class="shape-list">
+        <view wx:for="{{patterns}}" wx:key="id" class="shape-card pattern-card {{item.id === selectedPattern ? 'shape-card-selected' : ''}} {{!item.unlocked ? 'shape-card-locked' : ''}}" style="height: {{shapeCardHeight}}rpx" data-id="{{item.id}}" bindtap="selectPattern" hover-class="shape-card-pressed" aria-role="button" aria-label="{{item.name}}，{{item.unlocked ? (item.id === selectedPattern ? '当前选中' : '可选择') : '完成挑战解锁'}}">
+          <view class="shape-card-cover pattern-card-cover" style="height: {{shapeCoverHeight}}rpx">
+            <image class="shape-card-image" src="{{item.image}}" mode="aspectFill"/>
+            <view wx:if="{{item.id === selectedPattern}}" class="shape-status shape-status-selected" aria-hidden="true"><view class="shape-check"></view></view>
+            <view wx:elif="{{!item.unlocked}}" class="shape-status shape-status-locked" aria-hidden="true"><view class="shape-lock"></view></view>
+          </view>
+          <view class="shape-card-copy">
+            <view class="shape-card-name">{{item.name}}</view><view class="shape-card-description">{{item.description}}</view>
+            <view wx:if="{{!item.unlocked}}" class="shape-unlock-note"><view class="shape-unlock-icon" aria-hidden="true"></view><text>完成挑战解锁</text></view>
+          </view>
+        </view>
+      </view>
+      <view wx:elif="{{currentStep === 2}}" class="shape-list">
+        <view wx:for="{{glazes}}" wx:key="id" class="shape-card glaze-card {{item.id === selectedGlaze ? 'shape-card-selected' : ''}} {{!item.unlocked ? 'shape-card-locked' : ''}}" style="height: {{shapeCardHeight}}rpx" data-id="{{item.id}}" bindtap="selectGlaze" hover-class="shape-card-pressed" aria-role="button" aria-label="{{item.name}}，{{item.unlocked ? (item.id === selectedGlaze ? '当前选中' : '可选择') : '完成挑战解锁'}}">
+          <view class="shape-card-cover glaze-card-cover" style="height: {{shapeCoverHeight}}rpx; background-color: {{item.color}}">
+            <image class="shape-card-image" src="{{item.image}}" mode="aspectFill"/>
+            <view wx:if="{{item.id === selectedGlaze}}" class="shape-status shape-status-selected" aria-hidden="true"><view class="shape-check"></view></view>
+            <view wx:elif="{{!item.unlocked}}" class="shape-status shape-status-locked" aria-hidden="true"><view class="shape-lock"></view></view>
+          </view>
+          <view class="shape-card-copy">
+            <view class="shape-card-name">{{item.name}}</view><view class="shape-card-description">{{item.description}}</view>
+            <view wx:if="{{!item.unlocked}}" class="shape-unlock-note"><view class="shape-unlock-icon" aria-hidden="true"></view><text>完成挑战解锁</text></view>
+          </view>
+        </view>
+      </view>
+      <view wx:else class="shape-list">
+        <view wx:for="{{shapes}}" wx:key="id" class="shape-card {{item.id === selectedShape ? 'shape-card-selected' : ''}} {{!item.unlocked ? 'shape-card-locked' : ''}}" style="height: {{shapeCardHeight}}rpx" data-id="{{item.id}}" bindtap="selectShape" hover-class="shape-card-pressed" aria-role="button" aria-label="{{item.name}}，{{item.unlocked ? (item.id === selectedShape ? '当前选中' : '可选择') : '完成挑战解锁'}}">
+          <view class="shape-card-cover" style="height: {{shapeCoverHeight}}rpx">
+            <image class="shape-card-image" src="{{item.image}}" mode="aspectFill"/>
+            <view wx:if="{{item.id === selectedShape}}" class="shape-status shape-status-selected" aria-hidden="true"><view class="shape-check"></view></view>
+            <view wx:elif="{{!item.unlocked}}" class="shape-status shape-status-locked" aria-hidden="true"><view class="shape-lock"></view></view>
+          </view>
+          <view class="shape-card-copy">
+            <view class="shape-card-name">{{item.name}}</view><view class="shape-card-description">{{item.description}}</view>
+            <view wx:if="{{!item.unlocked}}" class="shape-unlock-note"><view class="shape-unlock-icon" aria-hidden="true"></view><text>完成挑战解锁</text></view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view wx:if="{{currentStep === 3}}" class="finish-panel">
+      <view class="finish-details">
+        <view class="finish-detail">
+          <view class="finish-detail-cover finish-shape-cover"><image class="finish-detail-image" src="{{selectedShapeItem.image}}" mode="aspectFit" aria-hidden="true"/></view>
+          <text class="finish-detail-label">器型</text><text class="finish-detail-value">{{selectedShapeItem.name}}</text>
+        </view>
+        <view class="finish-detail">
+          <view class="finish-detail-cover finish-pattern-cover"><image class="finish-detail-image" src="{{selectedPatternItem.image}}" mode="aspectFit" aria-hidden="true"/></view>
+          <text class="finish-detail-label">纹样</text><text class="finish-detail-value">{{selectedPatternItem.name}}</text>
+        </view>
+        <view class="finish-detail">
+          <view class="finish-detail-cover" style="background-color: {{selectedGlazeItem.color}}"><image class="finish-detail-image" src="{{selectedGlazeItem.image}}" mode="aspectFill" aria-hidden="true"/></view>
+          <text class="finish-detail-label">釉色</text><text class="finish-detail-value">{{selectedGlazeItem.name}}</text>
+        </view>
+      </view>
+      <view class="finish-name-row"><text class="finish-name-label">作品名称</text><text class="finish-name-hint">可修改 · 最多24字</text></view>
+      <view class="finish-name-field {{saving ? 'finish-name-field-disabled' : ''}}">
+        <input class="finish-name-input" value="{{workName}}" maxlength="24" bindinput="onNameInput" confirm-type="done" placeholder="给这件瓷器起个名字" placeholder-class="finish-name-placeholder" aria-label="作品名称" disabled="{{saving}}"/>
+        <view class="finish-name-icon" aria-hidden="true"></view>
+      </view>
+      <view class="finish-note-row">
+        <text class="finish-status {{saved ? 'finish-status-saved' : ''}}">{{saved ? '已收入我的作品' : '保存后可在我的作品中查看'}}</text>
+        <text wx:if="{{saved}}" class="finish-edit" bindtap="previous" aria-role="button">返回修改</text>
+      </view>
+    </view>
+
+    <view class="craft-actions">
+      <block wx:if="{{currentStep === 3 && saved}}">
+        <button class="craft-action craft-previous" bindtap="startAgain" hover-class="craft-previous-pressed">再做一件</button>
+        <button class="craft-action craft-next" bindtap="viewWorks" hover-class="craft-next-pressed">查看作品</button>
+      </block>
+      <block wx:else>
+        <button class="craft-action craft-previous" disabled="{{currentStep === 0 || saving}}" bindtap="previous" hover-class="craft-previous-pressed" aria-label="{{currentStep === 0 ? '上一步，第1步不可用' : '上一步，返回' + steps[currentStep - 1].name}}">上一步</button>
+        <button wx:if="{{currentStep === 3}}" class="craft-action craft-next" disabled="{{saving}}" loading="{{saving}}" bindtap="saveWork" hover-class="craft-next-pressed">{{saving ? '正在保存' : '保存作品'}}</button>
+        <button wx:else class="craft-action craft-next" bindtap="next" hover-class="craft-next-pressed"><text>下一步</text><view class="next-chevron" aria-hidden="true"></view></button>
+      </block>
+    </view>
+  </view>
+
+  <view class="craft-tabbar" style="padding-bottom: {{safeBottom}}px" aria-label="底部导航">
+    <view wx:for="{{tabs}}" wx:key="id" class="craft-tab {{item.id === 'workshop' ? 'craft-tab-active' : ''}}" data-id="{{item.id}}" bindtap="onTabTap" aria-role="button" aria-label="{{item.name}}">
+      <image class="craft-tab-icon" src="{{item.id === 'workshop' ? item.iconActive : item.icon}}" mode="aspectFit"/>
+      <text>{{item.name}}</text><view wx:if="{{item.id === 'workshop'}}" class="craft-tab-indicator"></view>
+    </view>
+  </view>
+</view>

@@ -1,1 +1,1 @@
-{ "navigationBarTitleText": "AI识瓷", "usingComponents": { "empty-state": "/components/empty-state/index" } }
+{ "navigationBarTitleText": "AI识瓷", "navigationStyle": "custom", "usingComponents": { "porcelain-tabbar": "/components/porcelain-tabbar/index" } }

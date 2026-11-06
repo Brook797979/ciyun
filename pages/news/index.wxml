@@ -1,4 +1,5 @@
-<view class="news-page">
+<view class="news-page paper-texture-page">
+  <view class="paper-texture" aria-hidden="true"><image class="paper-texture-image" src="/assets/backgrounds/home-paper.png" mode="aspectFill"/></view>
   <view class="news-hero">
     <image class="news-hero-image" src="/assets/banners/home-hero.jpg" mode="aspectFill"/>
     <view class="news-hero-wash"></view>

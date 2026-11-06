@@ -28,8 +28,8 @@ const secondaryPages = [
   'pages/challenge-result/index'
 ]
 
-const componentNames = ['section-title', 'feature-entry', 'ceramic-card', 'empty-state']
-const dataFiles = ['ceramics', 'patterns', 'challenges', 'works', 'videos', 'news', 'user']
+const componentNames = ['section-title', 'ceramic-card']
+const dataFiles = ['ceramics', 'patterns', 'challenges', 'videos', 'news']
 const assetFolders = ['ceramics', 'patterns', 'banners', 'videos', 'icons', 'backgrounds', 'achievements']
 
 function exists(relativePath) {

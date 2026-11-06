@@ -1,1 +1,122 @@
-<view class="page-shell stack"><section-title title="数字工坊" description="用传统纹样创作你的陶瓷作品"/><view wx:for="{{entries}}" wx:key="title" data-url="{{item.url}}" bindtap="open"><feature-entry title="{{item.title}}" description="{{item.description}}"/></view></view>
+<view class="workshop-page">
+  <view class="workshop-viewport-probe" aria-hidden="true"></view>
+  <image class="workshop-paper" src="{{paperImage}}" mode="aspectFill" aria-hidden="true"/>
+
+  <view class="workshop-hero" style="height: {{heroHeight}}px">
+    <image class="workshop-hero-image" src="{{headerImage}}" mode="aspectFill"/>
+    <view class="workshop-hero-wash"></view>
+    <view class="workshop-brand" style="top: {{brandTop}}px">
+      <view class="workshop-brand-row">
+        <view class="workshop-brand-title">{{title}}</view>
+        <view class="workshop-brand-seal">瓷韵</view>
+      </view>
+      <view class="workshop-brand-subtitle">{{subtitle}}</view>
+      <view class="workshop-brand-rule" aria-hidden="true"></view>
+    </view>
+  </view>
+
+  <view class="workshop-content" style="height: {{contentHeight}}px">
+    <view
+      class="entry-card entry-primary"
+      data-id="{{primaryEntry.id}}"
+      bindtap="selectEntry"
+      hover-class="entry-card-pressed"
+      hover-start-time="10"
+      hover-stay-time="80"
+      aria-role="button"
+      aria-label="{{primaryEntry.title}}，{{primaryEntry.action}}"
+    >
+      <image class="entry-image" src="{{primaryEntry.image}}" mode="aspectFill"/>
+      <view class="entry-wash"></view>
+      <view class="entry-copy">
+        <view class="entry-title">{{primaryEntry.title}}</view>
+        <view class="entry-title-rule" aria-hidden="true"></view>
+        <view class="entry-description">
+          <view wx:for="{{primaryEntry.descriptionLines}}" wx:for-item="line" wx:key="*this">{{line}}</view>
+        </view>
+        <view class="entry-arrow-button" aria-hidden="true">
+          <text class="entry-action-label">{{primaryEntry.action}}</text>
+          <text class="entry-action-arrow">→</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="entry-pair">
+      <view
+        wx:for="{{secondaryEntries}}"
+        wx:key="id"
+        class="entry-card entry-compact entry-{{item.emphasis}}"
+        data-id="{{item.id}}"
+        bindtap="selectEntry"
+        hover-class="entry-card-pressed"
+        hover-start-time="10"
+        hover-stay-time="80"
+        aria-role="button"
+        aria-label="{{item.title}}，{{item.action}}"
+      >
+        <image class="entry-image" src="{{item.image}}" mode="{{item.emphasis === 'collection' ? 'heightFix' : 'aspectFill'}}"/>
+        <view class="entry-wash"></view>
+        <view class="entry-copy">
+          <view class="entry-title">{{item.title}}</view>
+          <view class="entry-title-rule" aria-hidden="true"></view>
+          <view class="entry-description">
+            <view wx:for="{{item.descriptionLines}}" wx:for-item="line" wx:key="*this">{{line}}</view>
+          </view>
+          <view class="entry-arrow-button" aria-hidden="true">
+            <text class="entry-action-label">{{item.action}}</text>
+            <text class="entry-action-arrow">→</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="recent-section">
+      <view class="recent-heading">
+        <view class="recent-heading-icon" aria-hidden="true">
+          <view class="recent-heading-icon-crop">
+            <image class="recent-heading-icon-source" src="{{recentHeadingIcon}}" mode="widthFix"/>
+          </view>
+        </view>
+        <view class="recent-heading-title">最近创作</view>
+        <text class="recent-work-count">{{workCount}}</text>
+        <view class="recent-heading-line"></view>
+      </view>
+
+      <view wx:if="{{workError}}" class="recent-work-error" bindtap="retryWorks" aria-role="button">{{workError}} · 重试</view>
+
+      <scroll-view
+        wx:if="{{recentWorks.length}}"
+        class="recent-scroll"
+        scroll-x="{{true}}"
+        enhanced="{{true}}"
+        show-scrollbar="{{false}}"
+        enable-flex="{{true}}"
+      >
+        <view class="recent-track">
+          <view wx:for="{{recentWorks}}" wx:key="id" class="recent-work-card" bindtap="openWorks" aria-role="button" aria-label="查看{{item.name}}与我的作品">
+            <view class="recent-work-delete" data-id="{{item.id}}" catchtap="deleteWork" aria-role="button" aria-label="删除{{item.name}}" aria-disabled="{{!!deletingWorkId}}"><text>{{deletingWorkId === item.id ? '删除中' : '删除'}}</text></view>
+            <image wx:if="{{item.image}}" class="recent-work-image" src="{{item.image}}" mode="aspectFit" aria-label="{{item.name}}"/>
+            <view wx:else class="recent-work-image recent-work-unavailable">{{item.imageLoading ? '正在展卷' : '图片待加载'}}</view>
+            <view class="recent-work-copy">
+              <view class="recent-work-name">{{item.name}}</view>
+              <view class="recent-work-date">{{item.creationLabel}} · {{item.displayDate}}</view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+
+      <view wx:elif="{{workError}}"></view>
+      <view wx:else class="recent-empty">
+        <image class="recent-empty-landscape" src="{{headerImage}}" mode="aspectFill" aria-hidden="true"/>
+        <view class="recent-empty-mark" aria-hidden="true">
+          <image class="recent-empty-vase" src="{{emptyVaseImage}}" mode="aspectFill"/>
+        </view>
+        <view class="recent-empty-copy">
+          <view class="recent-empty-title">暂无最近创作</view>
+          <view class="recent-empty-text">保存数字制瓷或AI作品后，会在这里展示</view>
+          <view class="recent-empty-text recent-empty-invitation">快去创作属于你的第一件陶瓷作品吧！</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,1 +1,57 @@
-<view class="page-shell chat"><view class="messages"><view wx:for="{{messages}}" wx:key="index" class="bubble {{item.role}}">{{item.text}}</view></view><view class="composer row"><input value="{{input}}" bindinput="input" placeholder="输入陶瓷文化问题"/><button class="link-button" bindtap="send">发送</button></view></view>
+<view class="chat-page {{historyOpen ? 'history-is-open' : ''}}">
+  <image class="page-paper" src="{{paperImage}}" mode="aspectFill" aria-hidden="true"/>
+  <view class="native-header" style="height:{{headerHeight}}px">
+    <image class="header-landscape" src="{{headerImage}}" mode="aspectFill" aria-hidden="true"/>
+    <view class="header-wash"/>
+    <view class="native-nav" style="top:{{navTop}}px;height:{{navHeight}}px"><button class="back-button" size="mini" bindtap="goBack" aria-label="返回"><image src="/assets/ai-chat/back.svg" mode="aspectFit"/></button></view>
+    <view class="hero-copy" style="top:{{navTop + navHeight + 10}}px"><view class="hero-title">AI陶瓷助手</view><view class="hero-subtitle"><text class="subtitle-rule"/><text>千年瓷韵，一问即知</text><text class="subtitle-rule"/></view></view>
+    <button class="history-button" size="mini" style="top:{{navTop + navHeight + 8}}px" bindtap="openHistory" aria-label="查看对话记录"><image src="/assets/ai-chat/history.svg" mode="aspectFit"/><text>对话记录</text></button>
+  </view>
+  <scroll-view class="chat-scroll" scroll-y="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}" scroll-into-view="{{scrollTarget}}" scroll-top="{{scrollTop}}" scroll-with-animation="{{false}}" style="margin-bottom:{{mode === 'live' ? composerHeight + keyboardHeight : 0}}px">
+    <view class="chat-content">
+      <view wx:if="{{ceramic}}" class="context-card"><image wx:if="{{ceramic.image}}" src="{{ceramic.image}}" mode="aspectFill"/><view class="context-copy"><view class="context-label">正在了解<text wx:if="{{ceramic.dynasty}}"> · {{ceramic.dynasty}}</text></view><view class="context-name">{{ceramic.name}}</view></view><text class="context-seal">问瓷</text></view>
+      <block wx:if="{{mode === 'live'}}">
+        <view wx:if="{{!hasConversation}}" class="welcome-section">
+          <view class="welcome-row"><image class="welcome-robot" src="{{robotImage}}" mode="aspectFit" aria-label="瓷韵陶瓷机器人"/><view class="welcome-bubble"><view class="welcome-title">你好，我是瓷韵AI助手，</view><view class="welcome-copy">关于陶瓷文化，有什么想了解的？</view><view class="welcome-cloud" aria-hidden="true">☁</view></view></view>
+          <view class="questions-heading"><text class="heading-flower" aria-hidden="true">❋</text><text>你可以试着问我</text><view class="heading-rule"/></view>
+          <view class="quick-questions"><button wx:for="{{quickQuestions}}" wx:key="index" class="quick-question" bindtap="quickQuestion" data-id="{{index}}" disabled="{{busy || status === 'running' || status === 'unknown'}}"><image class="question-icon" src="{{index === 0 ? '/assets/ai-chat/vase.svg' : index === 1 ? '/assets/ai-chat/lotus.svg' : index === 2 ? '/assets/ai-chat/pavilion.svg' : '/assets/ai-chat/kiln.svg'}}" mode="aspectFit"/><text class="question-label">{{item}}</text><text class="question-chevron" aria-hidden="true">›</text></button></view>
+          <view class="welcome-footer"><text>器型 · 纹样 · 釉色 · 工艺</text></view>
+        </view>
+        <view class="messages">
+          <view wx:for="{{viewMessages}}" wx:for-item="message" wx:key="id" class="message-item">
+            <view wx:if="{{message.time}}" class="message-time">{{message.time}}</view>
+            <view class="message-row {{message.role}}">
+              <image wx:if="{{message.role === 'assistant'}}" class="message-avatar robot-avatar" src="{{robotImage}}" mode="aspectFit" aria-label="瓷韵助手"/>
+              <view wx:else class="message-avatar user-avatar" aria-label="我"><view class="avatar-head"/><view class="avatar-shoulders"/></view>
+              <view class="bubble {{message.role}}"><view class="message-text" bindlongpress="copyMessage" data-id="{{message.id}}">{{message.text}}</view>
+                <view wx:if="{{message.role === 'assistant' && message.sources.length}}" class="message-sources"><view wx:for="{{message.sources}}" wx:for-item="source" wx:key="id" class="source-card"><image wx:if="{{source.image}}" class="source-image" src="{{source.image}}" mode="aspectFill" bindtap="previewSource" data-image="{{source.image}}" aria-label="预览{{source.name}}"/><button class="source-link" bindtap="openSource" data-id="{{source.id}}"><text class="source-kind">馆藏参考</text><text class="source-name">{{source.name}}</text><text class="source-chevron" aria-hidden="true">›</text></button></view></view>
+              </view>
+            </view>
+          </view>
+          <view wx:if="{{pendingQuestion}}" class="message-item pending-item"><view class="message-row user"><view class="message-avatar user-avatar" aria-label="我"><view class="avatar-head"/><view class="avatar-shoulders"/></view><view class="bubble user"><view class="message-text">{{pendingQuestion}}</view></view></view></view>
+          <view wx:if="{{status === 'running'}}" class="message-row assistant waiting-row" aria-live="polite"><image class="message-avatar robot-avatar" src="{{robotImage}}" mode="aspectFit"/><view class="bubble assistant waiting-bubble"><view class="waiting-copy">正在寻瓷问答<view class="waiting-dots" aria-hidden="true"><text/><text/><text/></view></view><view class="waiting-hint">正在整理陶瓷文化知识</view></view></view>
+        </view>
+        <view wx:if="{{error}}" class="error-card" aria-live="polite"><view class="error-title">{{status === 'unknown' ? '回答状态待确认' : '暂时未能回答'}}</view><view class="error-copy">{{error}}</view><view class="error-actions"><button wx:if="{{canRetry && status === 'unknown'}}" class="small-button" disabled="{{busy}}" bindtap="retry">查询原请求</button><button wx:if="{{status === 'failed' || status === 'unknown'}}" class="small-button small-button-outline" disabled="{{busy}}" bindtap="restart">重新提问</button></view></view>
+      </block>
+      <view wx:else class="showcase-section">
+        <view class="showcase-heading"><view><view class="section-caption">瓷韵精选</view><view class="section-title">陶瓷文化问答</view></view><button class="text-button" bindtap="returnToLive">返回问答 ›</button></view>
+        <view class="case-note"><text class="case-note-label">整理示例</text><text>以下内容依据参考资料人工整理，供你了解陶瓷知识。</text></view>
+        <button wx:for="{{cases}}" wx:key="id" class="case-item {{selectedCase.id === item.id ? 'case-item-selected' : ''}}" bindtap="selectCase" data-id="{{item.id}}"><view class="case-question">{{item.question}}</view><view class="case-meta"><text>整理示例<text wx:if="{{item.createdAt}}"> · {{item.createdAt}}</text></text><text aria-hidden="true">›</text></view></button>
+        <view wx:if="{{selectedCase}}" class="sample-conversation"><view class="sample-label">{{caseLabel}}</view><view class="message-row user"><view class="message-avatar user-avatar"><view class="avatar-head"/><view class="avatar-shoulders"/></view><view class="bubble user"><view class="message-text">{{selectedCase.question}}</view></view></view><view class="message-row assistant"><image class="message-avatar robot-avatar" src="{{robotImage}}" mode="aspectFit"/><view class="bubble assistant"><view class="message-text">{{selectedCase.answer}}</view></view></view><view class="sample-footnote">整理示例 · 不计入你的对话记录</view></view>
+      </view>
+      <view wx:if="{{storageWarning}}" class="storage-warning">{{storageWarning}}</view>
+      <view id="chat-end-a" class="scroll-anchor"/><view id="chat-end-b" class="scroll-anchor"/>
+    </view>
+  </scroll-view>
+  <view wx:if="{{mode === 'live' && !historyOpen}}" class="composer" style="bottom:{{keyboardHeight}}px;padding-bottom:{{keyboardVisible ? 8 : safeBottom + 8}}px"><view class="input-shell"><textarea class="question-input" value="{{input}}" maxlength="500" bindinput="input" placeholder="问问我关于陶瓷的知识…" placeholder-class="input-placeholder" auto-height="{{true}}" adjust-position="{{false}}" hold-keyboard="{{true}}" confirm-type="send" bindconfirm="send" show-confirm-bar="{{false}}" bindkeyboardheightchange="keyboardChange" bindlinechange="composerResize" bindfocus="inputFocus" bindblur="inputBlur" aria-label="输入陶瓷问题"/></view><button class="send-button" size="mini" bindtap="send" disabled="{{busy || status === 'running' || status === 'unknown' || !inputLength}}" loading="{{busy}}" aria-label="发送问题"><image wx:if="{{!busy}}" src="/assets/ai-chat/send.svg" mode="aspectFit"/></button></view>
+  <view wx:if="{{historyOpen}}" class="history-overlay"><view class="history-scrim" bindtap="closeHistory" catchtouchmove="noop"/><view class="history-sheet" style="padding-top:{{navTop + navHeight + 14}}px;padding-bottom:{{safeBottom + 16}}px" role="dialog" aria-label="对话记录">
+    <view class="history-heading"><view><view class="section-caption">与瓷韵的每次相遇</view><view class="section-title">对话记录</view></view><button class="history-close" size="mini" bindtap="closeHistory" aria-label="关闭对话记录">×</button></view>
+    <button class="new-conversation" bindtap="newConversation" disabled="{{busy || status === 'running' || status === 'unknown'}}"><text class="new-conversation-mark" aria-hidden="true">＋</text><text>新建对话</text></button>
+    <view wx:if="{{busy || status === 'running' || status === 'unknown'}}" class="history-status">本轮回答尚未结束，确认结果后可切换对话。</view>
+    <scroll-view class="history-list" scroll-y="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+      <view wx:if="{{!conversations.length}}" class="history-empty"><text class="history-empty-mark">瓷</text><view>还没有对话记录</view><text>从一个感兴趣的陶瓷问题开始。</text></view>
+      <button wx:for="{{conversations}}" wx:key="id" class="history-item {{conversationId === item.id ? 'history-item-current' : ''}}" bindtap="selectConversation" data-id="{{item.id}}" disabled="{{busy || status === 'running' || status === 'unknown'}}"><view class="history-item-top"><text class="history-item-title">{{item.title}}</text><text wx:if="{{conversationId === item.id}}" class="history-current-label">当前</text></view><view wx:if="{{item.preview}}" class="history-preview">{{item.preview}}</view><view class="history-meta"><text>{{item.time}}</text><text wx:if="{{item.activeLabel}}" class="history-active-label">{{item.activeLabel}}</text></view><view wx:if="{{item.ceramicName}}" class="history-ceramic">{{item.ceramicName}}</view></button><view class="history-list-end"/>
+    </scroll-view>
+    <view class="history-local-note">仅保存在本机 · 最近12段对话，每段40轮</view>
+  </view></view>
+</view>

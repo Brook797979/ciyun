@@ -108,6 +108,7 @@ test('museum template renders a custom hero, search, six filters and dense image
   const template = fs.readFileSync(path.join(root, 'pages/museum/index.wxml'), 'utf8')
   const styles = fs.readFileSync(path.join(root, 'pages/museum/index.wxss'), 'utf8')
   const cardTemplate = fs.readFileSync(path.join(root, 'components/ceramic-card/index.wxml'), 'utf8')
+  const cardStyles = fs.readFileSync(path.join(root, 'components/ceramic-card/index.wxss'), 'utf8')
   const config = JSON.parse(fs.readFileSync(path.join(root, 'pages/museum/index.json'), 'utf8'))
 
   assert.equal(config.navigationStyle, 'custom')
@@ -116,7 +117,8 @@ test('museum template renders a custom hero, search, six filters and dense image
   assert.match(template, /wx:for="\{\{dynasties\}\}"/)
   assert.match(template, /<ceramic-card[^>]+wx:for="\{\{filteredCeramics\}\}"/)
   assert.equal((template.match(/wx:for="\{\{filteredCeramics\}\}"/g) || []).length, 1)
-  assert.match(cardTemplate, /<image[^>]+src="\{\{item\.image\}\}"[^>]+mode="aspectFill"/)
+  assert.match(cardTemplate, /<image[^>]+src="\{\{item\.image\}\}"[^>]+mode="aspectFit"/)
+  assert.match(cardStyles, /\.card-image\s*\{[^}]*height:\s*240rpx/)
   assert.match(cardTemplate, /class="card-arrow"/)
   assert.match(styles, /grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/)
 })

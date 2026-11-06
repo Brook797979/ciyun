@@ -1,5 +1,5 @@
 <view class="card" bindtap="onTap" aria-role="button" aria-label="查看{{item.name}}">
-  <image class="card-image" src="{{item.image}}" mode="aspectFill"/>
+  <image class="card-image" src="{{item.image}}" mode="aspectFit"/>
   <view class="card-body">
     <view class="card-name">{{item.name}}</view>
     <view class="card-dynasty">{{item.dynasty}}</view>

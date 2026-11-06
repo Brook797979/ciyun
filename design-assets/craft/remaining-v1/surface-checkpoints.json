@@ -1,0 +1,216 @@
+{
+  "schema": {
+    "coordinates": "Source JPEG pixels (x,y), 1200x675",
+    "extraRegions": "List of polygons unioned into glaze mask only",
+    "holes": "List of polygons subtracted from glaze mask",
+    "patternClip": "Single polygon multiplying pigment coverage only; polygon boundary is not texture content",
+    "refineEdges": "false preserves manually traced boundaries, including low-contrast feet"
+  },
+  "shapes": {
+    "bowl": {
+      "glazeIncludes": [
+        [
+          600,
+          270
+        ],
+        [
+          600,
+          315
+        ],
+        [
+          600,
+          400
+        ],
+        [
+          600,
+          515
+        ],
+        [
+          341,
+          315
+        ]
+      ],
+      "glazeExcludes": [
+        [
+          600,
+          240
+        ],
+        [
+          320,
+          300
+        ],
+        [
+          875,
+          300
+        ],
+        [
+          600,
+          535
+        ],
+        [
+          480,
+          517
+        ]
+      ],
+      "patternSurfaceIncludes": [
+        [
+          600,
+          400
+        ],
+        [
+          380,
+          380
+        ],
+        [
+          820,
+          380
+        ],
+        [
+          600,
+          480
+        ]
+      ],
+      "patternSurfaceExcludes": [
+        [
+          600,
+          270
+        ],
+        [
+          600,
+          315
+        ],
+        [
+          600,
+          515
+        ],
+        [
+          340,
+          289
+        ],
+        [
+          850,
+          286
+        ]
+      ]
+    },
+    "double-ear": {
+      "glazeIncludes": [
+        [
+          600,
+          68
+        ],
+        [
+          600,
+          160
+        ],
+        [
+          400,
+          175
+        ],
+        [
+          795,
+          175
+        ],
+        [
+          414,
+          245
+        ],
+        [
+          781,
+          244
+        ],
+        [
+          600,
+          400
+        ],
+        [
+          600,
+          606
+        ]
+      ],
+      "glazeExcludes": [
+        [
+          440,
+          185
+        ],
+        [
+          754,
+          185
+        ],
+        [
+          440,
+          225
+        ],
+        [
+          751,
+          225
+        ],
+        [
+          380,
+          200
+        ],
+        [
+          820,
+          170
+        ],
+        [
+          600,
+          50
+        ],
+        [
+          600,
+          630
+        ]
+      ],
+      "patternSurfaceIncludes": [
+        [
+          600,
+          350
+        ],
+        [
+          420,
+          350
+        ],
+        [
+          790,
+          350
+        ],
+        [
+          600,
+          570
+        ]
+      ],
+      "patternSurfaceExcludes": [
+        [
+          600,
+          68
+        ],
+        [
+          600,
+          160
+        ],
+        [
+          400,
+          175
+        ],
+        [
+          795,
+          175
+        ],
+        [
+          600,
+          606
+        ],
+        [
+          440,
+          185
+        ],
+        [
+          754,
+          185
+        ]
+      ]
+    }
+  },
+  "verification": "All points checked against interpolated outline + 4x supersampled polygons; includes >0.98, excludes <0.02."
+}

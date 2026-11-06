@@ -1,4 +1,5 @@
-<view class="museum-page">
+<view class="museum-page paper-texture-page">
+  <view class="paper-texture" aria-hidden="true"><image class="paper-texture-image" src="/assets/backgrounds/home-paper.png" mode="aspectFill"/></view>
   <view class="museum-hero" style="height: {{heroHeight}}px">
     <image class="hero-background" src="/assets/banners/home-hero.jpg" mode="aspectFill"/>
     <view class="hero-wash"></view>

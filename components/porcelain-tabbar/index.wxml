@@ -1,0 +1,6 @@
+<view class="porcelain-tabs" style="padding-bottom:{{safeBottom}}px" aria-label="底部导航">
+  <view wx:for="{{tabs}}" wx:key="id" class="porcelain-tab {{selected === item.id ? 'selected' : ''}}" bindtap="openTab" data-id="{{item.id}}" aria-role="button" aria-label="{{item.name}}">
+    <image src="/assets/icons/tab-{{item.id}}{{selected === item.id ? '-active' : ''}}.png" mode="aspectFit"/>
+    <text>{{item.name}}</text>
+  </view>
+</view>

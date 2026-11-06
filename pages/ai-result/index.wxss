@@ -1,0 +1,47 @@
+@import '../../styles/ai-creation.wxss';
+
+.result-page { min-height: 100vh; }
+.result-panel { min-height: 828rpx; padding: 46rpx 22rpx 48rpx; }
+.result-panel-complete { padding: 32rpx 18rpx 54rpx; }
+.result-content { padding-top: 4rpx; }
+.result-art-frame { position: relative; width: 100%; height: 610rpx; overflow: hidden; border-radius: 24rpx; }
+.result-art { display: block; width: 100%; height: 100%; }
+.result-title-row { position: relative; display: flex; align-items: center; justify-content: center; gap: 18rpx; margin: 24rpx 22rpx 0; min-height: 62rpx; }
+.result-title-line { flex: 1; max-width: 104rpx; height: 1rpx; background: linear-gradient(90deg, transparent, #c39e65); }
+.result-title-line:last-child { transform: rotate(180deg); }
+.result-title-floret { flex: none; width: 30rpx; height: 30rpx; }
+.result-artwork-title { max-width: 360rpx; padding: 4rpx 2rpx; color: #123d60; font-size: 35rpx; line-height: 1.45; font-weight: 700; letter-spacing: 2rpx; text-align: center; word-break: break-all; }
+.result-name-input { flex: 1; min-width: 0; max-width: 360rpx; height: 64rpx; padding: 0 8rpx; border-bottom: 1rpx solid #b59462; color: #123d60; font-size: 31rpx; line-height: 64rpx; text-align: center; }
+.result-artwork-intro { position: relative; display: block; margin: 20rpx 48rpx 0; color: #7f8c9b; font-family: var(--font-family-body); font-size: 24rpx; line-height: 1.8; text-align: center; word-break: break-all; }
+.result-waiting { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 732rpx; padding: 46rpx 4rpx 0; box-sizing: border-box; }
+.result-waiting-title { position: relative; z-index: 1; display: block; color: #103657; font-size: 33rpx; line-height: 1.6; font-weight: 700; letter-spacing: 1rpx; text-align: center; }
+.result-waiting-message { position: relative; z-index: 1; display: block; margin-top: 12rpx; color: #52738d; font-size: 25rpx; line-height: 1.75; text-align: center; }
+.result-loading-art { display: block; flex: none; width: 100%; height: 516rpx; margin: 6rpx 0 -8rpx; }
+.result-loading-dots { display: flex; align-items: center; justify-content: center; gap: 12rpx; margin: 10rpx 0 24rpx; }
+.result-loading-dots view { width: 14rpx; height: 14rpx; border-radius: 50%; background: #3d6b92; opacity: .3; animation: porcelain-breathe 1.5s ease-in-out infinite; }
+.result-loading-dots view:nth-child(2) { animation-delay: .25s; }
+.result-loading-dots view:nth-child(3) { animation-delay: .5s; }
+.result-loading-caption { display: flex; align-items: center; justify-content: center; gap: 18rpx; width: 100%; color: #52738d; font-size: 24rpx; line-height: 1.6; text-align: center; }
+.result-loading-caption view { position: relative; width: 60rpx; height: 1rpx; background: linear-gradient(90deg, transparent, #8395a0); }
+.result-loading-caption view::after { content: ''; position: absolute; top: -3rpx; right: -8rpx; width: 6rpx; height: 6rpx; background: #6d8292; transform: rotate(45deg); }
+.result-loading-caption view:last-child { transform: rotate(180deg); }
+.result-background-note { display: block; margin-top: 12rpx; color: #8b969e; font-family: var(--font-family-body); font-size: 21rpx; line-height: 1.5; }
+.result-recovery-emblem { display: flex; align-items: center; justify-content: center; flex: none; width: 112rpx; height: 112rpx; margin: 100rpx 0 34rpx; border: 1rpx solid #b4c2c9; border-radius: 50%; background: rgba(240,245,246,.8); }
+.result-recovery-emblem > view { width: 46rpx; height: 46rpx; border: 3rpx solid #567c96; border-top-color: transparent; border-radius: 50%; }
+.result-recovery-message { max-width: 530rpx; margin-top: 24rpx; color: #7f8c97; font-family: var(--font-family-body); font-size: 25rpx; line-height: 1.8; }
+.result-recovery-button { width: 430rpx; max-width: 92%; margin-top: 46rpx; min-height: 82rpx; font-size: 28rpx; }
+.result-return-link { margin-top: 20rpx; }
+.result-bottom-actions { display: flex; align-items: stretch; gap: 26rpx; margin: 48rpx 0 0; }
+.result-action { flex: 1; min-width: 0; width: auto; min-height: 94rpx; padding: 16rpx 17rpx; gap: 15rpx; font-size: 28rpx; }
+.result-action .creation-button-flower { width: 24rpx; height: 24rpx; }
+.result-regenerate-icon { box-sizing: border-box; position: relative; flex: none; width: 27rpx; height: 27rpx; border: 3rpx solid currentColor; border-right-color: transparent; border-radius: 50%; transform: rotate(24deg); }
+.result-regenerate-icon::after { content: ''; position: absolute; top: -3rpx; right: -2rpx; width: 9rpx; height: 9rpx; border-right: 3rpx solid currentColor; border-bottom: 3rpx solid currentColor; transform: rotate(-14deg); }
+.result-save-icon { position: relative; flex: none; box-sizing: border-box; width: 28rpx; height: 24rpx; margin-top: 8rpx; border: 2rpx solid currentColor; border-top: 0; border-radius: 2rpx; }
+.result-save-icon > view { position: absolute; left: 11rpx; top: -9rpx; width: 2rpx; height: 21rpx; background: currentColor; }
+.result-save-icon > view::after { content: ''; position: absolute; left: -5rpx; bottom: 0; width: 10rpx; height: 10rpx; border-right: 2rpx solid currentColor; border-bottom: 2rpx solid currentColor; transform: rotate(45deg); }
+.result-saved-note { position: relative; display: flex; align-items: center; justify-content: center; margin-top: 18rpx; color: #788a95; font-family: var(--font-family-body); font-size: 23rpx; line-height: 1.6; }
+.result-case-label { position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10rpx 20rpx; margin: 0 42rpx 10rpx; color: #9b7950; font-size: 21rpx; line-height: 1.5; }
+.result-case-date { color: #9b8b75; font-family: var(--font-family-body); font-size: 20rpx; }
+.result-case-note { position: relative; display: block; margin: 22rpx 14rpx 0; color: #9b8b75; font-family: var(--font-family-body); font-size: 21rpx; line-height: 1.6; text-align: center; }
+@keyframes porcelain-breathe { 0%, 70%, 100% { opacity: .3; transform: translateY(0); } 35% { opacity: 1; transform: translateY(-3rpx); } }
+@media (max-width: 350px) { .result-panel-complete { padding-left: 12rpx; padding-right: 12rpx; } .result-art-frame { height: 580rpx; } .result-title-row { gap: 12rpx; margin-left: 12rpx; margin-right: 12rpx; } .result-artwork-title { font-size: 33rpx; } .result-artwork-intro { margin-left: 26rpx; margin-right: 26rpx; font-size: 24rpx; } .result-bottom-actions { gap: 20rpx; } .result-action { gap: 12rpx; padding-left: 13rpx; padding-right: 13rpx; font-size: 27rpx; } .result-action .creation-button-flower { display: none; } .result-waiting-title { font-size: 31rpx; } }

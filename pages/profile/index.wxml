@@ -1,1 +1,41 @@
-<view class="page-shell stack"><view class="profile surface"><view class="avatar">瓷</view><view><view class="name">{{user.displayName}}</view><view class="muted">本地体验数据 · 无需登录</view></view></view><section-title title="我的瓷韵" description="非核心项目暂只保留数据摘要"/><view class="menu surface"><view wx:for="{{items}}" wx:key="title" class="menu-item" data-item="{{item}}" bindtap="open"><text>{{item.title}}</text><text class="muted">{{item.value}}{{item.enabled?' ›':' · 暂未展开'}}</text></view></view></view>
+<view class="profile-page paper-texture-page">
+  <view class="paper-texture" aria-hidden="true"><image class="paper-texture-image" src="/assets/backgrounds/home-paper.png" mode="aspectFill"/></view>
+  <view class="profile-hero" style="height:{{heroHeight}}px"><image class="hero-landscape" src="{{heroImage}}" mode="aspectFill" aria-hidden="true"/><view class="hero-mist"/><view class="profile-nav" style="top:{{navTop}}px;height:{{navHeight}}px">我的</view></view>
+  <view class="profile-body">
+    <view class="porcelain-panel identity-card">
+      <view class="identity-copy">
+        <view class="identity-heading"><text class="section-mark" aria-hidden="true">❖</text><text>瓷韵身份卡</text><text class="identity-seal" aria-hidden="true">雅集</text></view>
+        <view class="identity-title">{{identity.title}}</view><view class="identity-motto">以瓷为伴 · 探寻千年风雅</view>
+        <view class="identity-growth"><view class="identity-level">Lv.<text>{{identity.level}}</text></view><view class="identity-xp">成长值 <text>{{identity.totalXp}}</text><text wx:if="{{identity.nextLevelXp !== null}}"> / {{identity.nextLevelXp}}</text><text wx:else class="highest-level"> · 已臻瓷境</text></view></view>
+        <view class="identity-track" role="progressbar" aria-label="等级成长进度" aria-valuenow="{{identity.progressPercent}}" aria-valuemin="0" aria-valuemax="100"><view class="identity-fill" style="width:{{identity.progressPercent}}%"/></view>
+      </view>
+      <image class="identity-landscape" src="{{identity.image}}" mode="aspectFit" aria-hidden="true"/>
+      <view class="identity-days"><text class="days-flower" aria-hidden="true">❋</text><text>已在瓷韵中探索 <text class="days-value">{{identity.exploredDays}}</text> 天</text></view>
+    </view>
+    <view class="porcelain-panel footprints-panel">
+      <view class="panel-heading"><text class="section-mark" aria-hidden="true">❖</text><text class="panel-title">瓷韵足迹</text><view class="heading-rule"/><text class="panel-caption">步履所至 · 皆是瓷韵</text></view>
+      <view class="footprints-grid">
+        <button class="footprint-item" bindtap="openFootprint" data-kind="levels" aria-label="已完成{{footprints.completedLevels}}关，前往挑战"><image src="/assets/profile/scholar.png" mode="aspectFit"/><view><view class="footprint-count">{{footprints.completedLevels}}</view><view class="footprint-label">已完成关卡</view></view></button>
+        <button class="footprint-item" bindtap="openFootprint" data-kind="works" aria-label="已保存{{footprints.ownWorks}}件本人作品，查看我的作品"><image src="/assets/profile/craft.png" mode="aspectFit"/><view><view class="footprint-count">{{footprints.ownWorks}}</view><view class="footprint-label">创作作品</view></view></button>
+        <button class="footprint-item" bindtap="openFootprint" data-kind="badges" aria-label="已获得{{footprints.unlockedBadges}}枚成长徽章，查看徽章"><image src="/assets/profile/master.png" mode="aspectFit"/><view><view class="footprint-count">{{footprints.unlockedBadges}}</view><view class="footprint-label">获得徽章</view></view></button>
+      </view>
+    </view>
+    <view id="growth-badges" class="porcelain-panel growth-panel">
+      <view class="panel-heading"><text class="section-mark" aria-hidden="true">❖</text><text class="panel-title">成长徽章</text><view class="heading-rule"/><text class="panel-caption">以瓷为章 · 见证成长</text></view>
+      <view class="growth-grid"><button wx:for="{{badges}}" wx:key="id" class="growth-badge {{item.unlocked ? 'growth-earned' : 'growth-locked'}}" bindtap="openBadge" data-id="{{item.id}}" aria-label="{{item.name}}，{{item.unlocked ? '已获得' : '未解锁'}}，查看条件与进度"><view class="growth-art"><image src="{{item.image}}" mode="aspectFit"/><view wx:if="{{!item.unlocked}}" class="growth-lock" aria-hidden="true"><view class="lock-icon"/></view></view><view class="growth-name">{{item.name}}</view></button></view>
+    </view>
+    <view class="porcelain-panel journal-panel">
+      <image class="journal-landscape" src="{{heroImage}}" mode="aspectFill" aria-hidden="true"/>
+      <view class="panel-heading"><text class="section-mark" aria-hidden="true">❖</text><text class="panel-title">瓷韵手札</text><view class="heading-rule"/><text class="panel-caption">点滴瓷缘 · 汇成成长卷</text></view>
+      <view wx:if="{{journal.length}}" class="journal-list"><view wx:for="{{journal}}" wx:key="id" class="journal-row"><view class="journal-dot"/><view class="journal-date" aria-label="{{item.dateLabel}}"><text>{{item.dateShort}}</text><text class="journal-year">{{item.year}}</text></view><text class="journal-title">{{item.title}}</text><image class="journal-icon" src="{{item.image}}" mode="aspectFit" aria-hidden="true"/></view></view>
+      <view wx:else class="journal-empty">每一次赏瓷、问瓷与创作，<text>都会在这里留下足迹。</text></view>
+    </view>
+    <button wx:if="{{profileWarning}}" class="profile-warning" bindtap="refreshProfile">{{profileWarning}}<text> ↻</text></button>
+    <view class="local-note">成长与足迹保存在本机</view>
+  </view>
+  <view wx:if="{{selectedBadge}}" class="badge-mask" style="padding-top:{{modalTop}}px" bindtap="closeBadge" catchtouchmove="noop"><view class="badge-dialog" catchtap="noop" role="dialog" aria-modal="true" aria-label="{{selectedBadge.name}}成长徽章">
+    <button class="dialog-close" size="mini" bindtap="closeBadge" aria-label="关闭徽章详情">×</button>
+    <scroll-view class="badge-dialog-body" scroll-y="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}" catchtouchmove="noop"><view class="dialog-art {{selectedBadge.unlocked ? '' : 'dialog-locked'}}"><image src="{{selectedBadge.image}}" mode="aspectFit"/></view><view class="dialog-name">{{selectedBadge.name}}</view><view class="dialog-state">{{selectedBadge.unlocked ? '已获得 · 瓷缘成章' : '未解锁 · 静待相逢'}}</view><view class="dialog-condition">{{selectedBadge.condition}}</view><view class="dialog-progress">{{selectedBadge.id === 'master' ? '已达成条件' : '当前进度'}} <text>{{selectedBadge.current}} / {{selectedBadge.target}}</text></view><view class="dialog-track"><view style="width:{{selectedBadge.progressPercent}}%"/></view></scroll-view>
+    <view class="dialog-footer"><button class="dialog-primary" bindtap="closeBadge">继续瓷韵之旅<text aria-hidden="true"> ›</text></button></view>
+  </view></view>
+</view>

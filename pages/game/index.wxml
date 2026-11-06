@@ -1,1 +1,4 @@
-<view class="page-shell stack"><view class="surface heading"><view>第 {{level.order}} 关</view><view class="title">{{level.name}}</view><view class="muted">游戏类型：{{level.gameType}}</view></view><view class="placeholder stage">代表性小游戏将在后续阶段实现</view><button class="link-button" bindtap="complete">模拟完成关卡</button></view>
+<view class="page-shell stack">
+  <view class="title">瓷韵之旅</view>
+  <button class="link-button" bindtap="back">返回地图</button>
+</view>

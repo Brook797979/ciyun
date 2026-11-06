@@ -1,0 +1,58 @@
+<view class="history-page" style="padding-bottom: calc(132rpx + {{safeBottom}}px)">
+  <image class="history-paper" src="{{media.paper}}" mode="aspectFill" aria-hidden="true"/>
+  <view class="history-hero" style="height: {{heroHeight}}px">
+    <image class="history-ink" src="{{media.header}}" mode="aspectFill" aria-hidden="true"/>
+    <view class="history-wash"></view>
+    <view class="history-nav" style="top: {{navTop}}px; height: {{navHeight}}px">
+      <view class="history-back" bindtap="goBack" hover-class="history-pressed" aria-role="button" aria-label="返回AI识瓷"><view class="history-back-chevron"></view></view>
+    </view>
+    <view class="history-brand" style="top: {{brandTop}}px">
+      <view class="history-brand-row"><text class="history-title">识瓷足迹</text><text class="history-seal">瓷韵</text></view>
+      <text class="history-subtitle">一器一会，留存瓷间所见</text>
+    </view>
+  </view>
+
+  <view class="history-content">
+    <view wx:if="{{error}}" class="history-state" aria-role="alert">
+      <text class="history-state-title">暂时读不到识瓷足迹</text>
+      <text class="history-state-copy">{{error}}</text>
+      <button class="history-action" bindtap="refresh" hover-class="history-pressed">重试读取</button>
+    </view>
+    <view wx:elif="{{loading}}" class="history-state">
+      <text class="history-state-title">正在展开识瓷足迹…</text>
+    </view>
+    <view wx:elif="{{!records.length}}" class="history-state history-empty">
+      <view class="history-empty-vessel" aria-hidden="true"><view class="history-vessel-line"></view></view>
+      <text class="history-state-title">还没有识瓷足迹</text>
+      <text class="history-state-copy">拍下身边的器物，识别完成后便会留存于此。</text>
+      <button class="history-action" bindtap="goIdentify" hover-class="history-pressed">开始识瓷</button>
+    </view>
+    <block wx:else>
+      <view class="history-list-heading"><text>共 {{records.length}} 次发现</text><text class="history-local-note">保存在本机 · 最近100条</text></view>
+      <view wx:if="{{deleteError}}" class="history-delete-error" aria-role="alert">{{deleteError}}</view>
+      <text wx:if="{{loadingImages}}" class="history-image-progress">正在加载器物照片…</text>
+      <view wx:for="{{records}}" wx:key="id" class="history-card" data-id="{{item.id}}" bindtap="openRecord" hover-class="history-card-pressed" aria-role="button" aria-label="查看{{item.title}}的识别结果">
+        <view class="history-image-frame">
+          <image wx:if="{{item.imagePath}}" class="history-image" src="{{item.imagePath}}" mode="aspectFill" data-id="{{item.id}}" data-url="{{item.imagePath}}" binderror="onImageError" aria-label="识别时的器物照片"/>
+          <view wx:else class="history-image-placeholder">
+            <text class="history-image-mark" aria-hidden="true">瓷</text>
+            <text class="history-image-message">{{item.imageLoading ? '照片加载中' : '照片暂不可用'}}</text>
+            <button wx:if="{{!item.imageLoading}}" class="history-image-retry" data-id="{{item.id}}" catchtap="retryImages" aria-label="重新加载照片">重试加载</button>
+          </view>
+        </view>
+        <view class="history-card-copy">
+          <text class="history-record-title">{{item.title}}</text>
+          <view wx:if="{{item.tags.length}}" class="history-tags"><text wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this" class="history-tag">{{tag}}</text></view>
+          <text class="history-summary">{{item.summary || item.statusLabel}}</text>
+          <view class="history-card-footer"><text>{{item.dateLabel}}</text><text class="history-status {{item.status !== 'recognized' ? 'history-status-muted' : ''}}">{{item.statusLabel}}</text></view>
+          <view class="history-card-actions">
+            <button class="history-delete" data-id="{{item.id}}" catchtap="deleteRecord" disabled="{{!!deletingId}}" hover-class="history-pressed" aria-label="删除{{item.title}}的本机识瓷记录">{{deletingId === item.id ? '待确认' : '删除记录'}}</button>
+            <text class="history-open">回看结果 <text aria-hidden="true">›</text></text>
+          </view>
+        </view>
+      </view>
+      <text class="history-endnote">每次回看，都是与器物的再次相遇</text>
+    </block>
+  </view>
+  <porcelain-tabbar selected="workshop" safe-bottom="{{safeBottom}}"/>
+</view>

@@ -1,0 +1,916 @@
+{
+  "version": 1,
+  "size": [
+    1200,
+    675
+  ],
+  "runtimeSize": [
+    800,
+    450
+  ],
+  "cardSize": [
+    384,
+    360
+  ],
+  "runtimeEncoding": "JPEG quality 84, 4:2:0, optimized progressive",
+  "colorSource": "data/glazes.js",
+  "glazes": [
+    {
+      "id": "glaze-white",
+      "name": "青花白釉",
+      "shortName": "白釉",
+      "description": "温润清透，青花澄净",
+      "image": "/assets/craft/glazes-v1/cards/white.jpg",
+      "color": "#ffffff",
+      "unlocked": true
+    },
+    {
+      "id": "glaze-sky",
+      "name": "天青釉",
+      "shortName": "天青",
+      "description": "浅青含蓝，莹润如水",
+      "image": "/assets/craft/glazes-v1/cards/sky.jpg",
+      "color": "#b3d9d9",
+      "unlocked": true
+    },
+    {
+      "id": "glaze-bean",
+      "name": "豆青釉",
+      "shortName": "豆青",
+      "description": "柔和青绿，釉面温润",
+      "image": "/assets/craft/glazes-v1/cards/bean.jpg",
+      "color": "#99c4a8",
+      "unlocked": false
+    },
+    {
+      "id": "glaze-rice",
+      "name": "暖米釉",
+      "shortName": "暖米",
+      "description": "暖米柔光，细腻古雅",
+      "image": "/assets/craft/glazes-v1/cards/rice.jpg",
+      "color": "#e8cfa3",
+      "unlocked": false
+    },
+    {
+      "id": "glaze-cobalt",
+      "name": "霁蓝釉",
+      "shortName": "霁蓝",
+      "description": "沉静深蓝，釉光含蓄",
+      "image": "/assets/craft/glazes-v1/cards/cobalt.jpg",
+      "color": "#3666ab",
+      "unlocked": false
+    },
+    {
+      "id": "glaze-rouge",
+      "name": "胭脂红釉",
+      "shortName": "胭脂红",
+      "description": "胭脂含紫，莹润柔亮",
+      "image": "/assets/craft/glazes-v1/cards/rouge.jpg",
+      "color": "#b8526b",
+      "unlocked": false
+    }
+  ],
+  "sourceDirectory": "design-assets/craft/two-vessel-v2",
+  "specularScale": 1.25,
+  "lightingMethod": "Same saved diffuse and specular layers; scaled specular intensity without moving support",
+  "combinationCount": 72,
+  "generatedPreviewCount": 60,
+  "materialCardCount": 6,
+  "sources": {
+    "design-assets/craft/two-vessel-v2/inputs/lotus-source.png": "deb46fd2e107db43147b8236385ff7125d1fbcc434e087faf34e608d6cb1a4b8",
+    "design-assets/craft/two-vessel-v2/inputs/cloud-source.png": "9eea640748be37f68f94e5b3256ab843b08c69ea690016cb2fcecf3675b3dba4",
+    "design-assets/craft/two-vessel-v2/inputs/flower-bird-source.png": "6b701f664cf76a976fc08f0b6360b9938ec8e6af31456f9126dcb651ef76b34d",
+    "design-assets/craft/two-vessel-v2/inputs/landscape-source.png": "a0d1ece1f03a86bb52052a57260df93dcc63c2161d6b02f6b7772fcae889fec2",
+    "design-assets/craft/two-vessel-v2/inputs/scroll-lotus-source.png": "62bc06c58bc64c19cdac700dc83b49d1fd9c031010c377872a342c6fc208ab15",
+    "design-assets/craft/two-vessel-v2/inputs/beast-source.png": "cdc3d6d70c510d006bbe7f9c9c079a73d7d0ff102c1f54a23f407824a957b09e",
+    "design-assets/craft/two-vessel-v2/inputs/meiping-white.jpg": "783d24e6e7dc65da94d64522dde3f1f8d176e4fab8d130b4939f00c2de941b2d",
+    "design-assets/craft/two-vessel-v2/meiping/layers/body-mask.png": "bf3017d00224d2c125c5e5f85b53f03e6800c20061b2d7045072f493e52385d6",
+    "design-assets/craft/two-vessel-v2/meiping/layers/glaze-base.png": "d99b5eedd1be68e7e690fdd7ead8a781f9c93843fe59517fb0f4edb8f02b4112",
+    "design-assets/craft/two-vessel-v2/meiping/layers/diffuse-shading.png": "037d3662c6479a005893382fe9ea1d5e360ffd09577b79b405427bbe8d9fa439",
+    "design-assets/craft/two-vessel-v2/meiping/layers/specular-highlights.png": "04abf8f898be508633987163f803d2d756e00531f362e9fee1507f75fa483c76",
+    "design-assets/craft/two-vessel-v2/meiping/layers/lotus-wrapped.png": "27e84b73bdbb5f75db6f04fc729b613c42d8893b96be8433a9ccd41867bc9d34",
+    "design-assets/craft/two-vessel-v2/meiping/masters/lotus-white.png": "12a8546abdce9b93f406face38da6d92025d506db4132c28a05313a438488e26",
+    "design-assets/craft/two-vessel-v2/meiping/layers/cloud-wrapped.png": "3f23be2d700025d4394673be47399d10207374835cdccd25aa68c316caab5798",
+    "design-assets/craft/two-vessel-v2/meiping/masters/cloud-white.png": "d153a9cd1d0f530432e34b278c7d822c8146d1f1bbb99d9ac47781f35c335c52",
+    "design-assets/craft/two-vessel-v2/meiping/layers/flower-bird-wrapped.png": "9a9ab5c02dbcded305488ec6675285b79ea8f0d792d76076b71e1e10c095413a",
+    "design-assets/craft/two-vessel-v2/meiping/masters/flower-bird-white.png": "11d8666426b996ade40d025fff3bb8085f4ce369ee9017c32e10fcccad7515ae",
+    "design-assets/craft/two-vessel-v2/meiping/layers/landscape-wrapped.png": "1cd2a8fbd2d9a28690fef30b9da632ce7cbd18961f885de0f1c49843994e6277",
+    "design-assets/craft/two-vessel-v2/meiping/masters/landscape-white.png": "b2b553b2b590d0890cf2e9e81d105e7b08e782324153c5516ffec3b292c9ae9a",
+    "design-assets/craft/two-vessel-v2/meiping/layers/scroll-lotus-wrapped.png": "9b55973e6959fe7130dd810995d84ec2c0dc0cfe8d93e8d40facda03d96e9fa2",
+    "design-assets/craft/two-vessel-v2/meiping/masters/scroll-lotus-white.png": "68a46ea6597fe46413125fb8cb194bd4634e9249c6824b518f8a03f896572abe",
+    "design-assets/craft/two-vessel-v2/meiping/layers/beast-wrapped.png": "7dd4b8f7175d69cb1e99183b9ec4096b569d7418e518eb82c09e0fba375bb79b",
+    "design-assets/craft/two-vessel-v2/meiping/masters/beast-white.png": "9f105df8bdbf95a6aac4b50050fb2e26d31253df3b0129ec8c766b315c40fbcd",
+    "design-assets/craft/two-vessel-v2/inputs/yuhuchun-white.jpg": "06ba09632c4faaceb69986f11df0eebf5a117b999ddb73ba7b60928cc0e67bf5",
+    "design-assets/craft/two-vessel-v2/yuhuchun/layers/body-mask.png": "8ccba9c9cac0bfdd9f0fa4b4e6655f65d6b6fc65ad60d55a049b0c166580b5d6",
+    "design-assets/craft/two-vessel-v2/yuhuchun/layers/glaze-base.png": "2c7d86d3b243186588295ccc093bb69b86c6d88346917eaf62686d8e69ed688a",
+    "design-assets/craft/two-vessel-v2/yuhuchun/layers/diffuse-shading.png": "b6afac051c4375f64fd14a133e17076de5dd6c5cab112b80fdfb3e6fde676446",
+    "design-assets/craft/two-vessel-v2/yuhuchun/layers/specular-highlights.png": "2f72ad0b17b592fc566f8c6a75d9d19d83b2bdb9929a0e7ae74f4f5f676302ca",
+    "design-assets/craft/two-vessel-v2/yuhuchun/layers/lotus-wrapped.png": "ed193f55b012a31bd62398cd8d0630059412385b3949463a1b303ddf8d7c864d",
+    "design-assets/craft/two-vessel-v2/yuhuchun/masters/lotus-white.png": "2d4518e9540ff960e06fe0d3f8365b0dc9794d68698f4c8345f4115f12440c20",
+    "design-assets/craft/two-vessel-v2/yuhuchun/layers/cloud-wrapped.png": "570854a63f772cbbce318b245dcc705af280f01eb23a72a10dde6af6546840c6",
+    "design-assets/craft/two-vessel-v2/yuhuchun/masters/cloud-white.png": "796f25efc0e50440a90ab3ba0ee3d399ee01d9b023e5d766570b16574af757a9",
+    "design-assets/craft/two-vessel-v2/yuhuchun/layers/flower-bird-wrapped.png": "574b21e6ac328f9568341d0e6cc0a9193e3f4ba7724fb86aa07595def7dc68c0",
+    "design-assets/craft/two-vessel-v2/yuhuchun/masters/flower-bird-white.png": "627c12a1b6fe89cea2c19c33c011c715f3cd630578c003dd108ee0d0d1987d3f",
+    "design-assets/craft/two-vessel-v2/yuhuchun/layers/landscape-wrapped.png": "074d2e7e1e22301ec2d9ac8f2b2bceafb1a017c7b13dc74d67b3898700d89490",
+    "design-assets/craft/two-vessel-v2/yuhuchun/masters/landscape-white.png": "8751837ddea0dca60a761c6080df51cc28d98bf0f966ef5fb2a54eedd94f828b",
+    "design-assets/craft/two-vessel-v2/yuhuchun/layers/scroll-lotus-wrapped.png": "2776fde732593f110b2d6c48357e39453e5cef55e3f1529e89a121e33d11dc9a",
+    "design-assets/craft/two-vessel-v2/yuhuchun/masters/scroll-lotus-white.png": "77ee7847ce6208886ca52250533a44a78c448b1d9bb07f28ddf94d000fbae063",
+    "design-assets/craft/two-vessel-v2/yuhuchun/layers/beast-wrapped.png": "495d9407af5b116a72d83f5d8f566e371c967b6a10daacddabbab098f2e13faf",
+    "design-assets/craft/two-vessel-v2/yuhuchun/masters/beast-white.png": "b3ee6bc2f38f2c342a813596af725097e1aa7624d1c2fd32c604b0773b0f9c20"
+  },
+  "combinations": [
+    {
+      "shape": "meiping",
+      "patternId": "pattern-lotus",
+      "glazeId": "glaze-white",
+      "image": "/assets/craft/two-vessel-v2/meiping/lotus-preview.jpg",
+      "reused": true
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-lotus",
+      "glazeId": "glaze-sky",
+      "image": "/assets/craft/glazes-v1/meiping/lotus-sky.jpg",
+      "master": "meiping/masters/lotus-sky.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 66219,
+      "sha256": "e32ff8d79f2a00b66c6072c078bf1ff92f527c860793649959481d135dcb82c3"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-lotus",
+      "glazeId": "glaze-bean",
+      "image": "/assets/craft/glazes-v1/meiping/lotus-bean.jpg",
+      "master": "meiping/masters/lotus-bean.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 65236,
+      "sha256": "f56796267503d1d06a4b2c00abfd20438f396e9d180d26d4a5efff32f0f736d1"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-lotus",
+      "glazeId": "glaze-rice",
+      "image": "/assets/craft/glazes-v1/meiping/lotus-rice.jpg",
+      "master": "meiping/masters/lotus-rice.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 67415,
+      "sha256": "6f474dd87301c906c2e348165c990d84f1d9d2460f05adf5cc52972586e11089"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-lotus",
+      "glazeId": "glaze-cobalt",
+      "image": "/assets/craft/glazes-v1/meiping/lotus-cobalt.jpg",
+      "master": "meiping/masters/lotus-cobalt.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 60172,
+      "sha256": "1008dadf56b8587e33b05f5d4984de312529fda990e5edb325d74b2fa191772f"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-lotus",
+      "glazeId": "glaze-rouge",
+      "image": "/assets/craft/glazes-v1/meiping/lotus-rouge.jpg",
+      "master": "meiping/masters/lotus-rouge.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 62967,
+      "sha256": "a102af1a22b861bcaf3c8f716759a4dd1cb78e60e0b905d6715e281b53d62e00"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-cloud",
+      "glazeId": "glaze-white",
+      "image": "/assets/craft/two-vessel-v2/meiping/cloud-preview.jpg",
+      "reused": true
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-cloud",
+      "glazeId": "glaze-sky",
+      "image": "/assets/craft/glazes-v1/meiping/cloud-sky.jpg",
+      "master": "meiping/masters/cloud-sky.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 66149,
+      "sha256": "41bbb17254760cb569d0898565f27423f4ffc7833cb3ba06b672315c6d575181"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-cloud",
+      "glazeId": "glaze-bean",
+      "image": "/assets/craft/glazes-v1/meiping/cloud-bean.jpg",
+      "master": "meiping/masters/cloud-bean.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 65183,
+      "sha256": "88fc3b3da7b27b9e4a892ffaebdeabba4a4625967a9c79e908ba00a319a1d71b"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-cloud",
+      "glazeId": "glaze-rice",
+      "image": "/assets/craft/glazes-v1/meiping/cloud-rice.jpg",
+      "master": "meiping/masters/cloud-rice.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 67397,
+      "sha256": "050f3c4a2608bd070cdd1ad5b518b877158ace1e4647a297e8fee104271821c4"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-cloud",
+      "glazeId": "glaze-cobalt",
+      "image": "/assets/craft/glazes-v1/meiping/cloud-cobalt.jpg",
+      "master": "meiping/masters/cloud-cobalt.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 60119,
+      "sha256": "e6d30a123850c768620dfd5dd29e088dd4dd91d0fdf17c31613e474c5ec552fe"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-cloud",
+      "glazeId": "glaze-rouge",
+      "image": "/assets/craft/glazes-v1/meiping/cloud-rouge.jpg",
+      "master": "meiping/masters/cloud-rouge.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 62902,
+      "sha256": "21eb0ae068411083bfea6dd6a384d1585942d18cc35d5671b5a4e428988b860b"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-flower-bird",
+      "glazeId": "glaze-white",
+      "image": "/assets/craft/two-vessel-v2/meiping/flower-bird-preview.jpg",
+      "reused": true
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-flower-bird",
+      "glazeId": "glaze-sky",
+      "image": "/assets/craft/glazes-v1/meiping/flower-bird-sky.jpg",
+      "master": "meiping/masters/flower-bird-sky.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 65336,
+      "sha256": "20ca16baa8c48ea780a3679fc049c385d5288f74402a77cddc67d5901b8dbb18"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-flower-bird",
+      "glazeId": "glaze-bean",
+      "image": "/assets/craft/glazes-v1/meiping/flower-bird-bean.jpg",
+      "master": "meiping/masters/flower-bird-bean.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 64423,
+      "sha256": "dea9b00abe54a2f47bdd17b7fd017d0c4d1fde5e6d508f9231662ea25e927296"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-flower-bird",
+      "glazeId": "glaze-rice",
+      "image": "/assets/craft/glazes-v1/meiping/flower-bird-rice.jpg",
+      "master": "meiping/masters/flower-bird-rice.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 66415,
+      "sha256": "7f2fa9506941f27d0fbea6e46b806acc01f231226a7a1161ed2f58a8ffda6c27"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-flower-bird",
+      "glazeId": "glaze-cobalt",
+      "image": "/assets/craft/glazes-v1/meiping/flower-bird-cobalt.jpg",
+      "master": "meiping/masters/flower-bird-cobalt.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 59771,
+      "sha256": "f2bc5635f55896e97d16961c9bb07370597454ca65166ecc445e8e05af59b86c"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-flower-bird",
+      "glazeId": "glaze-rouge",
+      "image": "/assets/craft/glazes-v1/meiping/flower-bird-rouge.jpg",
+      "master": "meiping/masters/flower-bird-rouge.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 62295,
+      "sha256": "710760210258692280346471dd234e5121b77faf41146a68e4cdfb4e043baca6"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-landscape",
+      "glazeId": "glaze-white",
+      "image": "/assets/craft/two-vessel-v2/meiping/landscape-preview.jpg",
+      "reused": true
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-landscape",
+      "glazeId": "glaze-sky",
+      "image": "/assets/craft/glazes-v1/meiping/landscape-sky.jpg",
+      "master": "meiping/masters/landscape-sky.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 64185,
+      "sha256": "22dd234c3d00196a7479130a12cd09e08d4d56fbcbf1f5adbb7dde30ba0e5b7d"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-landscape",
+      "glazeId": "glaze-bean",
+      "image": "/assets/craft/glazes-v1/meiping/landscape-bean.jpg",
+      "master": "meiping/masters/landscape-bean.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 63344,
+      "sha256": "aa429fe0bff698ba06d3f39e3aa3afc5fff1702c46f6bb01e9460708f6f86c88"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-landscape",
+      "glazeId": "glaze-rice",
+      "image": "/assets/craft/glazes-v1/meiping/landscape-rice.jpg",
+      "master": "meiping/masters/landscape-rice.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 64993,
+      "sha256": "1e99cf734af814c7a1b62b1ef6d15f5e0985a840ffdb9fcb9057bea648e2afe7"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-landscape",
+      "glazeId": "glaze-cobalt",
+      "image": "/assets/craft/glazes-v1/meiping/landscape-cobalt.jpg",
+      "master": "meiping/masters/landscape-cobalt.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 59294,
+      "sha256": "31bcb17df8c7a2ecd0715d2e014be4078cafb61dbfaa2913803b8f33aa1f9bf5"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-landscape",
+      "glazeId": "glaze-rouge",
+      "image": "/assets/craft/glazes-v1/meiping/landscape-rouge.jpg",
+      "master": "meiping/masters/landscape-rouge.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 61341,
+      "sha256": "ea79ee3765c2c632047c29e4086b0852860ac81e9a4d6d46087866940560d94a"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-scroll-lotus",
+      "glazeId": "glaze-white",
+      "image": "/assets/craft/two-vessel-v2/meiping/scroll-lotus-preview.jpg",
+      "reused": true
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-scroll-lotus",
+      "glazeId": "glaze-sky",
+      "image": "/assets/craft/glazes-v1/meiping/scroll-lotus-sky.jpg",
+      "master": "meiping/masters/scroll-lotus-sky.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 68334,
+      "sha256": "7536a0b615c6d373599439cf73b83ba17ee180920957d9ab49b6b733962541b6"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-scroll-lotus",
+      "glazeId": "glaze-bean",
+      "image": "/assets/craft/glazes-v1/meiping/scroll-lotus-bean.jpg",
+      "master": "meiping/masters/scroll-lotus-bean.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 67206,
+      "sha256": "2b374b85c88643bfabda259ca29c17a7f54b893c60de045e436ac75c07a2ede8"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-scroll-lotus",
+      "glazeId": "glaze-rice",
+      "image": "/assets/craft/glazes-v1/meiping/scroll-lotus-rice.jpg",
+      "master": "meiping/masters/scroll-lotus-rice.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 69867,
+      "sha256": "1bfd65fb79615a9cd8154d9f774dc0e5116898f2626b49e5c477e1b25e8224fc"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-scroll-lotus",
+      "glazeId": "glaze-cobalt",
+      "image": "/assets/craft/glazes-v1/meiping/scroll-lotus-cobalt.jpg",
+      "master": "meiping/masters/scroll-lotus-cobalt.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 61082,
+      "sha256": "24781c6b2f55e5f2e1a18f6cd4e6d37db103cd3cd0fdc4d930773b7540415056"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-scroll-lotus",
+      "glazeId": "glaze-rouge",
+      "image": "/assets/craft/glazes-v1/meiping/scroll-lotus-rouge.jpg",
+      "master": "meiping/masters/scroll-lotus-rouge.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 64620,
+      "sha256": "96a746dd78c3a684eec5d201eecbdd92a43ec5eb91ca088ed6721b9f25eee7f1"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-beast",
+      "glazeId": "glaze-white",
+      "image": "/assets/craft/two-vessel-v2/meiping/beast-preview.jpg",
+      "reused": true
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-beast",
+      "glazeId": "glaze-sky",
+      "image": "/assets/craft/glazes-v1/meiping/beast-sky.jpg",
+      "master": "meiping/masters/beast-sky.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 66199,
+      "sha256": "7d1642df15e3519e8db50fe0f3f5f171c71e0b5829b58f06022203543ba76c36"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-beast",
+      "glazeId": "glaze-bean",
+      "image": "/assets/craft/glazes-v1/meiping/beast-bean.jpg",
+      "master": "meiping/masters/beast-bean.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 65257,
+      "sha256": "2c66df0ecbca7db2eb16ef43b7972d0012a9bc3c794371c413a9520f6933d102"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-beast",
+      "glazeId": "glaze-rice",
+      "image": "/assets/craft/glazes-v1/meiping/beast-rice.jpg",
+      "master": "meiping/masters/beast-rice.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 67383,
+      "sha256": "72cce72dd0e60f01dd5c539b0011b6c6fb4e144a80be30a93e9edbb6b3dc8253"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-beast",
+      "glazeId": "glaze-cobalt",
+      "image": "/assets/craft/glazes-v1/meiping/beast-cobalt.jpg",
+      "master": "meiping/masters/beast-cobalt.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 60269,
+      "sha256": "9e9bfefb2e0fa9cb497579971ee50e29704e8147daf246145690d091f5d3a677"
+    },
+    {
+      "shape": "meiping",
+      "patternId": "pattern-beast",
+      "glazeId": "glaze-rouge",
+      "image": "/assets/craft/glazes-v1/meiping/beast-rouge.jpg",
+      "master": "meiping/masters/beast-rouge.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 62979,
+      "sha256": "bbeee3d83a14c4974167c60008ae367f14f839c184494ca6b8a7f7e06de53a4a"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-lotus",
+      "glazeId": "glaze-white",
+      "image": "/assets/craft/two-vessel-v2/yuhuchun/lotus-preview.jpg",
+      "reused": true
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-lotus",
+      "glazeId": "glaze-sky",
+      "image": "/assets/craft/glazes-v1/yuhuchun/lotus-sky.jpg",
+      "master": "yuhuchun/masters/lotus-sky.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 54492,
+      "sha256": "9a8aceca4637c5a872e77ca864d31c54643be94f96c1ce9baa0d36c307dc8a0f"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-lotus",
+      "glazeId": "glaze-bean",
+      "image": "/assets/craft/glazes-v1/yuhuchun/lotus-bean.jpg",
+      "master": "yuhuchun/masters/lotus-bean.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 53778,
+      "sha256": "72e98cac2c3f3201709c66ed849a1526daa4c33540588aac7275c87a734b3aeb"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-lotus",
+      "glazeId": "glaze-rice",
+      "image": "/assets/craft/glazes-v1/yuhuchun/lotus-rice.jpg",
+      "master": "yuhuchun/masters/lotus-rice.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 55333,
+      "sha256": "f382cc267d5d9bfcd4fb0bb2a0592b4cac7ba8f823bfe2dba8a361912543448c"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-lotus",
+      "glazeId": "glaze-cobalt",
+      "image": "/assets/craft/glazes-v1/yuhuchun/lotus-cobalt.jpg",
+      "master": "yuhuchun/masters/lotus-cobalt.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 50051,
+      "sha256": "4f9627ecdccef69a47a45a1296c8bfbac2c6623d26cffe7cda2742dbabcebedd"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-lotus",
+      "glazeId": "glaze-rouge",
+      "image": "/assets/craft/glazes-v1/yuhuchun/lotus-rouge.jpg",
+      "master": "yuhuchun/masters/lotus-rouge.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 52084,
+      "sha256": "3f851b3ebdb6bb7fa28f080546b539b740969e83d2f6308bd0b644fd505648f8"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-cloud",
+      "glazeId": "glaze-white",
+      "image": "/assets/craft/two-vessel-v2/yuhuchun/cloud-preview.jpg",
+      "reused": true
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-cloud",
+      "glazeId": "glaze-sky",
+      "image": "/assets/craft/glazes-v1/yuhuchun/cloud-sky.jpg",
+      "master": "yuhuchun/masters/cloud-sky.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 54299,
+      "sha256": "f113e6697aac0f2be822f5f8effcbd21427994980d9563f2b4fbc2e1ae5fd294"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-cloud",
+      "glazeId": "glaze-bean",
+      "image": "/assets/craft/glazes-v1/yuhuchun/cloud-bean.jpg",
+      "master": "yuhuchun/masters/cloud-bean.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 53639,
+      "sha256": "566ed75d4e95d48b04ff3bc9ea05704af72c72b6071e388a1f24818061a0937d"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-cloud",
+      "glazeId": "glaze-rice",
+      "image": "/assets/craft/glazes-v1/yuhuchun/cloud-rice.jpg",
+      "master": "yuhuchun/masters/cloud-rice.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 55178,
+      "sha256": "c45139c747b54bdffba8fd481cbb31f7bbf4c87fe5d1071574dff90deeb7ea3d"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-cloud",
+      "glazeId": "glaze-cobalt",
+      "image": "/assets/craft/glazes-v1/yuhuchun/cloud-cobalt.jpg",
+      "master": "yuhuchun/masters/cloud-cobalt.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 49997,
+      "sha256": "2bde3eda0312d5dbd74753b592cc756db0d66d6d51c7b760e99f582f818cbda1"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-cloud",
+      "glazeId": "glaze-rouge",
+      "image": "/assets/craft/glazes-v1/yuhuchun/cloud-rouge.jpg",
+      "master": "yuhuchun/masters/cloud-rouge.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 51886,
+      "sha256": "ab8eadb9ecd83cb6334e0efe881ef33e94c4df2d8872a4a6f25e5558934d0dae"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-flower-bird",
+      "glazeId": "glaze-white",
+      "image": "/assets/craft/two-vessel-v2/yuhuchun/flower-bird-preview.jpg",
+      "reused": true
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-flower-bird",
+      "glazeId": "glaze-sky",
+      "image": "/assets/craft/glazes-v1/yuhuchun/flower-bird-sky.jpg",
+      "master": "yuhuchun/masters/flower-bird-sky.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 53914,
+      "sha256": "9292a738d982a62ab5069c2ac04b4754d0d3c579a66e27ff4482963edaf35772"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-flower-bird",
+      "glazeId": "glaze-bean",
+      "image": "/assets/craft/glazes-v1/yuhuchun/flower-bird-bean.jpg",
+      "master": "yuhuchun/masters/flower-bird-bean.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 53205,
+      "sha256": "edd52fab28afef1f640be9ce1b4078080e3680824dd8a12f96416a420257ac7a"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-flower-bird",
+      "glazeId": "glaze-rice",
+      "image": "/assets/craft/glazes-v1/yuhuchun/flower-bird-rice.jpg",
+      "master": "yuhuchun/masters/flower-bird-rice.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 54695,
+      "sha256": "a84c0a975813b2f9f47e37abb18fc50a949a7ce9ad8309e1c28f7baa4c5a447d"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-flower-bird",
+      "glazeId": "glaze-cobalt",
+      "image": "/assets/craft/glazes-v1/yuhuchun/flower-bird-cobalt.jpg",
+      "master": "yuhuchun/masters/flower-bird-cobalt.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 49759,
+      "sha256": "30d9ab6e1cf7abc6359969e45eabd4a22b3087eb6be2e341cf9ec63af9e33602"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-flower-bird",
+      "glazeId": "glaze-rouge",
+      "image": "/assets/craft/glazes-v1/yuhuchun/flower-bird-rouge.jpg",
+      "master": "yuhuchun/masters/flower-bird-rouge.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 51589,
+      "sha256": "5a05e39341dc4fb5b21df2e4f08470013d9ab3f609a81078b853431bd63fb7eb"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-landscape",
+      "glazeId": "glaze-white",
+      "image": "/assets/craft/two-vessel-v2/yuhuchun/landscape-preview.jpg",
+      "reused": true
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-landscape",
+      "glazeId": "glaze-sky",
+      "image": "/assets/craft/glazes-v1/yuhuchun/landscape-sky.jpg",
+      "master": "yuhuchun/masters/landscape-sky.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 53387,
+      "sha256": "be8915b6ae5980e1536d3edb58e207c0783215e03a2370ecb3f5d0c247ae88b6"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-landscape",
+      "glazeId": "glaze-bean",
+      "image": "/assets/craft/glazes-v1/yuhuchun/landscape-bean.jpg",
+      "master": "yuhuchun/masters/landscape-bean.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 52713,
+      "sha256": "6f0caf516201397272810de4ffa63270041b8dd9d41c6b5b9ac109bd56886cc5"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-landscape",
+      "glazeId": "glaze-rice",
+      "image": "/assets/craft/glazes-v1/yuhuchun/landscape-rice.jpg",
+      "master": "yuhuchun/masters/landscape-rice.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 54019,
+      "sha256": "9c693bd8862c0b38ac47b72f5c1b6433ce866dca941a494025544a255d45943b"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-landscape",
+      "glazeId": "glaze-cobalt",
+      "image": "/assets/craft/glazes-v1/yuhuchun/landscape-cobalt.jpg",
+      "master": "yuhuchun/masters/landscape-cobalt.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 49567,
+      "sha256": "0a72cef0ca417b5c27394b33e28c894a890de5f3183ba3510fa7f38b91baf7e8"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-landscape",
+      "glazeId": "glaze-rouge",
+      "image": "/assets/craft/glazes-v1/yuhuchun/landscape-rouge.jpg",
+      "master": "yuhuchun/masters/landscape-rouge.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 51033,
+      "sha256": "173ec8eecb3c3be071af26806ad421ac4ff46afc8c17552de821c98046f66973"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-scroll-lotus",
+      "glazeId": "glaze-white",
+      "image": "/assets/craft/two-vessel-v2/yuhuchun/scroll-lotus-preview.jpg",
+      "reused": true
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-scroll-lotus",
+      "glazeId": "glaze-sky",
+      "image": "/assets/craft/glazes-v1/yuhuchun/scroll-lotus-sky.jpg",
+      "master": "yuhuchun/masters/scroll-lotus-sky.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 55572,
+      "sha256": "1408b21f43df961e35d61621ab497370b96c38d1be6885b7c280d8d02eb24223"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-scroll-lotus",
+      "glazeId": "glaze-bean",
+      "image": "/assets/craft/glazes-v1/yuhuchun/scroll-lotus-bean.jpg",
+      "master": "yuhuchun/masters/scroll-lotus-bean.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 54809,
+      "sha256": "2256b0cef7829ef36a203b234c55f27a9262ec262c25f8a40dad73b2c36dd7b5"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-scroll-lotus",
+      "glazeId": "glaze-rice",
+      "image": "/assets/craft/glazes-v1/yuhuchun/scroll-lotus-rice.jpg",
+      "master": "yuhuchun/masters/scroll-lotus-rice.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 56658,
+      "sha256": "e4b419d9cbbaa6db14989853c8c53ad1e1a263302c1bc6397729780ac1d08ae1"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-scroll-lotus",
+      "glazeId": "glaze-cobalt",
+      "image": "/assets/craft/glazes-v1/yuhuchun/scroll-lotus-cobalt.jpg",
+      "master": "yuhuchun/masters/scroll-lotus-cobalt.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 50544,
+      "sha256": "58730f2310c797c588f98d34e89d52323c4d5493bf33c6a8e39210817d1649f5"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-scroll-lotus",
+      "glazeId": "glaze-rouge",
+      "image": "/assets/craft/glazes-v1/yuhuchun/scroll-lotus-rouge.jpg",
+      "master": "yuhuchun/masters/scroll-lotus-rouge.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 52952,
+      "sha256": "01ab19cda623a3a4431ef5973e0dd6fbdf4b6950181acde5cee957d12cf6930c"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-beast",
+      "glazeId": "glaze-white",
+      "image": "/assets/craft/two-vessel-v2/yuhuchun/beast-preview.jpg",
+      "reused": true
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-beast",
+      "glazeId": "glaze-sky",
+      "image": "/assets/craft/glazes-v1/yuhuchun/beast-sky.jpg",
+      "master": "yuhuchun/masters/beast-sky.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 54390,
+      "sha256": "82c828cf0f925d768f2ae1e25cc3e8ea355e7b1736294c17ab73bdebd164f53d"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-beast",
+      "glazeId": "glaze-bean",
+      "image": "/assets/craft/glazes-v1/yuhuchun/beast-bean.jpg",
+      "master": "yuhuchun/masters/beast-bean.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 53672,
+      "sha256": "c6f174c1c741cf72f7f89147306ea0f7ee4f5a63e1f6042ce337d4daa0db796a"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-beast",
+      "glazeId": "glaze-rice",
+      "image": "/assets/craft/glazes-v1/yuhuchun/beast-rice.jpg",
+      "master": "yuhuchun/masters/beast-rice.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 55182,
+      "sha256": "2c58255b8261feb6a766fca0aeaebcda1d9b00f076e4569ac71bea2d6b046b36"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-beast",
+      "glazeId": "glaze-cobalt",
+      "image": "/assets/craft/glazes-v1/yuhuchun/beast-cobalt.jpg",
+      "master": "yuhuchun/masters/beast-cobalt.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 49983,
+      "sha256": "dcffa071db16ee9e336dab3dfd866c8d535c83d39d534d4f03f544566c292e50"
+    },
+    {
+      "shape": "yuhuchun",
+      "patternId": "pattern-beast",
+      "glazeId": "glaze-rouge",
+      "image": "/assets/craft/glazes-v1/yuhuchun/beast-rouge.jpg",
+      "master": "yuhuchun/masters/beast-rouge.png",
+      "backgroundMaxChange255": 0,
+      "runtimeBackgroundMaxChangeBeyond32px255": 0,
+      "bytes": 51912,
+      "sha256": "f2231c026f3b50cc1df0c0a29abf0496091b86e97468e893804cfa7752cdc0ea"
+    }
+  ],
+  "materialCards": [
+    {
+      "glazeId": "glaze-white",
+      "image": "/assets/craft/glazes-v1/cards/white.jpg",
+      "bytes": 4974,
+      "sha256": "179d32fa31f0e54fb4c0b8d068243a847e6e560e6dd7566b2184edc70c8d0ac6"
+    },
+    {
+      "glazeId": "glaze-sky",
+      "image": "/assets/craft/glazes-v1/cards/sky.jpg",
+      "bytes": 4945,
+      "sha256": "cf7781e03d2344df0db88ce4bd1cdef2dd7ff2cde95c36ca1363f6d9135ca197"
+    },
+    {
+      "glazeId": "glaze-bean",
+      "image": "/assets/craft/glazes-v1/cards/bean.jpg",
+      "bytes": 4821,
+      "sha256": "2dcc2df391aa55aadfabb4845af11be1ca3e635f782bf4a0376a61ed45243b92"
+    },
+    {
+      "glazeId": "glaze-rice",
+      "image": "/assets/craft/glazes-v1/cards/rice.jpg",
+      "bytes": 4940,
+      "sha256": "75cfad3dde68e89caab1fa38bde32e99d60d6e266030bc1f2e479f5c8bff5999"
+    },
+    {
+      "glazeId": "glaze-cobalt",
+      "image": "/assets/craft/glazes-v1/cards/cobalt.jpg",
+      "bytes": 4542,
+      "sha256": "2f5f704da0f4bc52a5aa541f82dc8e3f5a5c87e9c73626151e87817b8af022dd"
+    },
+    {
+      "glazeId": "glaze-rouge",
+      "image": "/assets/craft/glazes-v1/cards/rouge.jpg",
+      "bytes": 4481,
+      "sha256": "4fe8a59c08405987c3c8db2e9aad9b166d628f49730f1c2e6ca513d6bae227af"
+    }
+  ],
+  "validation": {
+    "backgroundMaxChange255": 0,
+    "pigmentCoverageMaxChange255": 0,
+    "highlightSupportChangedPixels": 0,
+    "whiteMasterReconstructionMaxError255": 0,
+    "glazeBaseAlphaMaxDifference255": 1,
+    "runtimeBackgroundMaxChangeBeyond32px255": 0,
+    "checkedColoredCombinations": 60,
+    "cardBackgroundPixels": 0
+  },
+  "runtimeBytes": 3547347
+}

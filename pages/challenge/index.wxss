@@ -1,1 +1,111 @@
-.level{display:flex;align-items:center;gap:24rpx;padding:24rpx}.number{display:grid;place-items:center;width:72rpx;height:72rpx;color:#fff;background:var(--color-primary);border-radius:50%}.locked{opacity:.55}.level-body{flex:1}
+page { height: 100%; overflow: hidden; }
+.challenge-page { position: relative; display: flex; flex-direction: column; height: 100vh; overflow: hidden; color: #0B4162; background: #F8F1E6; }
+.challenge-page button { box-sizing: border-box; margin: 0; padding: 0; border: 0; border-radius: 0; color: inherit; background: transparent; font-family: inherit; font-size: inherit; line-height: 1.4; }
+.journey-hero { position: relative; z-index: 1; flex: none; overflow: hidden; background: var(--color-silk); }
+.hero-landscape, .hero-mist { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero-mist { background: linear-gradient(90deg,rgba(248,241,230,.45),rgba(248,241,230,.10) 62%,transparent 82%),linear-gradient(180deg,transparent 60%,#F8F1E6); }
+.journey-brand { position: absolute; z-index: 2; left: 36rpx; right: 28rpx; }
+.journey-brand-row { display: flex; align-items: center; gap: 13rpx; }
+.journey-title { font-family: "STKaiti","KaiTi",var(--font-family-title); font-size: 82rpx; font-weight: 800; letter-spacing: 6rpx; line-height: 1; text-shadow: 0 2rpx 2rpx rgba(255,252,247,.72); }
+.journey-seal { box-sizing: border-box; width: 30rpx; padding: 7rpx 5rpx; border-radius: 6rpx; color: #FFF8EB; background: var(--color-cinnabar); font-family: var(--font-family-title); font-size: 15rpx; line-height: 1.05; letter-spacing: 1rpx; text-align: center; }
+.journey-subtitle { margin-top: 14rpx; color: rgba(7,57,88,.91); font-family: var(--font-family-title); font-size: 23rpx; font-weight: 500; line-height: 1.45; letter-spacing: 3rpx; }
+.journey-brand-rule { width: 178rpx; height: 1rpx; margin-top: 14rpx; background: linear-gradient(90deg,#B78955,transparent); }
+.journey-summary { position: relative; z-index: 2; flex: none; display: flex; align-items: center; gap: 26rpx; padding: 10rpx 34rpx 16rpx; }
+.journey-progress { flex: 1; min-width: 0; }
+.progress-copy { display: flex; flex: none; align-items: baseline; gap: 6rpx; white-space: nowrap; }
+.progress-label { margin-right: 4rpx; color: #65767A; font-size: 23rpx; }
+.progress-value { color: #9D6536; font-family: Georgia,var(--font-family-title); font-size: 34rpx; }
+.progress-total { font-size: 23rpx; }
+.progress-track { height: 8rpx; margin-top: 12rpx; overflow: hidden; border-radius: 8rpx; background: #E5DDCE; }
+.progress-fill { height: 100%; border-radius: inherit; background: #315E75; }
+.challenge-page .achievement-entry { display: flex; flex: none; flex-direction: column; align-items: center; justify-content: center; width: 160rpx; height: 88rpx; min-height: 44px; border: 1rpx solid #BA9B6F; border-radius: 14rpx; background: #FFFCF7; box-shadow: inset 0 0 0 4rpx #F5EDDF; font-family: var(--font-family-title); }
+.achievement-entry-title { font-size: 29rpx; font-weight: 600; letter-spacing: 4rpx; }
+.achievement-entry-count { margin-top: 2rpx; color: #8A724B; font-family: Georgia,serif; font-size: 21rpx; letter-spacing: 2rpx; }
+.chapter-swiper { flex: 1; width: 100%; height: 0; min-height: 0; }
+.chapter { position: relative; display: flex; flex-direction: column; box-sizing: border-box; width: 100%; height: 100%; overflow: hidden; }
+.chapter-background, .chapter-wash { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.chapter-background { opacity: .95; }
+.chapter-wash { background: linear-gradient(180deg,#F8F1E6,rgba(248,241,230,.24) 20%,rgba(248,241,230,.02) 45%,rgba(248,241,230,.18) 85%,#F8F1E6); }
+.chapter-heading { position: relative; z-index: 2; display: flex; flex: none; flex-direction: column; align-items: center; padding: 15rpx 0 7rpx; }
+.chapter-plaque { display: flex; align-items: center; justify-content: center; gap: 16rpx; padding: 8rpx 25rpx; border-top: 1rpx solid rgba(86,121,139,.4); border-bottom: 1rpx solid rgba(86,121,139,.4); background: rgba(255,252,247,.65); font-family: var(--font-family-title); }
+.chapter-ordinal { color: #768487; font-size: 23rpx; }
+.chapter-heading-rule { width: 1rpx; height: 23rpx; background: #B99B73; }
+.chapter-name { font-size: 30rpx; font-weight: 600; letter-spacing: 3rpx; }
+.chapter-subtitle { margin-top: 8rpx; color: #778787; font-family: var(--font-family-title); font-size: 19rpx; letter-spacing: 3rpx; }
+.chapter-map { position: relative; z-index: 2; flex: 1; min-height: 0; margin: 3rpx 0; }
+.map-route { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.level-row { position: absolute; z-index: 2; left: 0; width: 100%; height: 25%; }
+.level-row-0 { bottom: 0; }.level-row-1 { bottom: 25%; }.level-row-2 { bottom: 50%; }.level-row-3 { bottom: 75%; }
+.challenge-page .level-node { position: absolute; z-index: 3; top: 50%; width: 128rpx; height: 146rpx; overflow: visible; transform: translateY(-50%); }
+.level-left .level-node { left: calc(24.6667% - 64rpx); }.level-right .level-node { right: calc(24.6667% - 64rpx); }
+.reward-note { position: absolute; z-index: 2; top: calc(50% - 21rpx); display: flex; align-items: center; box-sizing: border-box; gap: 10rpx; width: 226rpx; min-height: 74rpx; padding: 8rpx 12rpx; border: 1rpx solid rgba(133,157,156,.28); border-radius: 10rpx; background: linear-gradient(90deg,rgba(255,252,247,.72),rgba(255,252,247,.35)); transform: translateY(-50%); pointer-events: none; }
+.level-left .reward-note { left: calc(24.6667% + 86rpx); }
+.level-right .reward-note { right: calc(24.6667% + 86rpx); flex-direction: row-reverse; background: linear-gradient(270deg,rgba(255,252,247,.72),rgba(255,252,247,.35)); text-align: right; }
+.reward-note-image { flex: none; width: 46rpx; height: 52rpx; border-radius: 5rpx; mix-blend-mode: multiply; }
+.reward-note-copy { display: flex; flex: 1; flex-direction: column; min-width: 0; }
+.reward-note-name { color: #294E5E; font-family: var(--font-family-title); font-size: 24rpx; line-height: 1.35; white-space: nowrap; }
+.reward-note-caption { margin-top: 3rpx; color: #627874; font-size: 17rpx; line-height: 1.4; white-space: nowrap; }
+.porcelain-plate { position: relative; display: flex; align-items: center; justify-content: center; box-sizing: border-box; width: 104rpx; height: 104rpx; margin: 0 auto; border: 1rpx solid #C6A87A; border-radius: 50%; background: radial-gradient(ellipse at 38% 26%,#FFFDF8,#F6F0E3 70%,#E8DED0); box-shadow: inset 0 0 0 4rpx #FFFDF6,0 3rpx 7rpx rgba(13,49,68,.12); }
+.plate-rim { position: absolute; inset: 0; width: 100%; height: 100%; }
+.level-number { position: relative; font-family: Georgia,var(--font-family-title); font-size: 43rpx; line-height: 1; }
+.level-status { position: absolute; top: -2rpx; right: -3rpx; display: flex; align-items: center; justify-content: center; box-sizing: border-box; width: 27rpx; height: 27rpx; border: 2rpx solid #FFF9EF; border-radius: 50%; }
+.completed-mark { background: #B38B52; }.locked-mark { background: #9DABB2; }
+.check-mark { width: 11rpx; height: 6rpx; margin-top: -3rpx; border-left: 2rpx solid white; border-bottom: 2rpx solid white; transform: rotate(-45deg); }
+.lock-icon { position: relative; width: 11rpx; height: 9rpx; margin-top: 4rpx; border-radius: 2rpx; background: #FFFDF7; }
+.lock-icon::before { position: absolute; top: -6rpx; left: 2rpx; box-sizing: border-box; width: 7rpx; height: 8rpx; border: 2rpx solid #FFFDF7; border-radius: 6rpx 6rpx 0 0; content: ''; }
+.lock-key { position: absolute; top: 3rpx; left: 5rpx; width: 2rpx; height: 4rpx; border-radius: 2rpx; background: #9DABB2; }
+.difficulty { position: relative; z-index: 5; display: flex; align-items: center; justify-content: center; box-sizing: border-box; gap: 6rpx; width: 110rpx; height: 34rpx; margin: 6rpx auto 0; border: 1rpx solid #D8C9AD; border-radius: 18rpx; background: #FFFCF7; box-shadow: 0 2rpx 4rpx rgba(27,51,61,.08); }
+.difficulty-star { position: relative; font-family: Arial,sans-serif; font-size: 24rpx; line-height: 1; }
+.star-on { color: #8F5D16; }.star-off { color: #60716C; }
+.state-available .porcelain-plate { border-color: #B78955; color: #FFFCF7; background: #0B4162; box-shadow: 0 0 0 5rpx rgba(226,189,111,.32),0 0 0 8rpx rgba(247,221,155,.22),inset 0 0 0 3rpx #275974,0 4rpx 12rpx rgba(13,49,68,.17); }
+.state-available .plate-rim { opacity: .35; }
+.state-locked .level-number { color: #74878D; }.state-locked .plate-rim { opacity: .5; }
+.chapter-footer { position: relative; z-index: 2; flex: none; padding: 8rpx 31rpx 15rpx; }
+.chapter-swipe-hint { display: flex; align-items: center; justify-content: center; gap: 9rpx; color: #758482; font-size: 19rpx; letter-spacing: 1rpx; }
+.swipe-arrow { color: #A08050; font-size: 24rpx; line-height: 1; }
+.chapter-page-number { position: absolute; right: 31rpx; color: #9A9E90; font-family: Georgia,serif; font-size: 18rpx; letter-spacing: 2rpx; }
+.sheet-mask { position: fixed; inset: 0; z-index: 40; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 24rpx; padding-bottom: calc(24rpx + env(safe-area-inset-bottom)); background: rgba(10,34,48,.48); }
+.detail-sheet { position: relative; display: flex; flex-direction: column; box-sizing: border-box; width: 690rpx; height: 1100rpx; max-width: 100%; max-height: 100%; min-height: 0; overflow: hidden; border: 1rpx solid #C6AA7C; border-radius: 28rpx; background: #FFFCF7; box-shadow: inset 0 0 0 6rpx #F4EBDD,0 20rpx 60rpx rgba(4,33,50,.23); text-align: center; }
+.challenge-page button.sheet-close { position: absolute; z-index: 2; top: 8rpx; right: 8rpx; display: flex; align-items: center; justify-content: center; width: 44px; min-width: 44px; max-width: 44px; height: 44px; margin: 0; padding: 0; color: #6C7D81; background: transparent; font-family: Arial,sans-serif; font-size: 28px; font-weight: 300; line-height: 44px; }
+.achievement-header { flex: none; padding: 36rpx 28rpx 24rpx; }
+.sheet-eyebrow { display: flex; align-items: center; justify-content: center; gap: 14rpx; color: #9C7D50; font-family: var(--font-family-title); font-size: 20rpx; line-height: 1.5; letter-spacing: 3rpx; }
+.achievement-rule { width: 38rpx; height: 1rpx; background: #D2BC97; }
+.sheet-title { margin-top: 10rpx; color: #0B4162; font-family: var(--font-family-title); font-size: 46rpx; font-weight: 700; line-height: 1.45; letter-spacing: 5rpx; }
+.achievement-condition { margin-top: 8rpx; color: #77827E; font-size: 22rpx; line-height: 1.7; }
+.achievement-tally { margin-top: 10rpx; color: #8B8B7D; font-size: 20rpx; line-height: 1.5; }
+.achievement-tally text { padding: 0 3rpx; color: #9D753D; font-family: Georgia,serif; font-size: 26rpx; }
+.badge-scroll { flex: 1; width: 100%; height: 0; min-height: 0; }
+.badge-list { display: flex; flex-direction: column; gap: 18rpx; padding: 0 26rpx 12rpx; }
+.badge-card { flex: none; position: relative; box-sizing: border-box; padding: 20rpx 18rpx 18rpx; border: 1rpx solid #E0D9CB; border-radius: 18rpx; background: #F7F4ED; text-align: left; }
+.badge-card-main { display: flex; align-items: center; gap: 16rpx; }
+.badge-medallion { position: relative; flex: none; box-sizing: border-box; width: 132rpx; height: 132rpx; padding: 0; border: 0; border-radius: 50%; background: #DDE6E8; box-shadow: 0 3rpx 7rpx rgba(34,62,74,.08); }
+.badge-artwork { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 50%; background: #E4EAE9; }
+.badge-image { display: block; width: 100%; height: 100%; transform: scale(1.12); }
+.medallion-locked .badge-image { filter: grayscale(.92) saturate(.28) contrast(.85); opacity: .65; }
+.medallion-locked .badge-artwork::after { position: absolute; inset: 0; content: ''; background: rgba(105,139,157,.18); }
+.medallion-unlocked { background: #F0E1BF; box-shadow: 0 4rpx 10rpx rgba(34,62,74,.12); }
+.medallion-unlocked .badge-artwork::after { position: absolute; inset: 0; content: ''; background: linear-gradient(135deg,rgba(255,255,255,.18),transparent 48%,rgba(255,250,230,.05)); }
+.badge-lock,.badge-earned { position: absolute; right: -3rpx; bottom: 1rpx; display: flex; align-items: center; justify-content: center; box-sizing: border-box; width: 33rpx; height: 33rpx; border: 3rpx solid #FFFCF7; border-radius: 50%; background: #8398A3; }
+.badge-earned { background: #AE8D55; }
+.badge-earned .check-mark { width: 12rpx; height: 7rpx; }
+.badge-copy { flex: 1; min-width: 0; }
+.badge-name { color: #244C63; font-family: var(--font-family-title); font-size: 28rpx; font-weight: 600; line-height: 1.5; }
+.badge-condition { margin-top: 7rpx; color: #7A8584; font-size: 21rpx; line-height: 1.7; word-break: break-all; }
+.badge-progress { margin-top: 9rpx; color: #798B91; font-size: 21rpx; line-height: 1.5; }
+.badge-finished { color: #315E75; font-family: Georgia,serif; font-size: 26rpx; }
+.badge-state { flex: none; align-self: flex-start; margin-top: 3rpx; padding: 5rpx 8rpx; border: 1rpx solid #DAE0DF; border-radius: 7rpx; color: #7F929A; background: #EDF0EC; font-size: 20rpx; line-height: 1.5; white-space: nowrap; }
+.badge-progress-track { height: 6rpx; margin-top: 18rpx; overflow: hidden; border-radius: 6rpx; background: #E1E6E2; }
+.badge-progress-fill { height: 100%; border-radius: inherit; background: #789AAA; }
+.badge-unlocked { border-color: #CDB68C; background: linear-gradient(115deg,#FFFCF5,#F8F3E8); }
+.badge-unlocked .badge-state { border-color: #E2D1AD; color: #94703D; background: #F5EEDC; }
+.badge-unlocked .badge-progress-fill { background: linear-gradient(90deg,#547E97,#0B4162); }
+.achievement-footer { flex: none; padding: 18rpx 26rpx 28rpx; }
+.challenge-page button.sheet-primary { display: flex; align-items: center; justify-content: center; gap: 16rpx; width: 100%; min-width: 0; max-width: 100%; min-height: 44px; margin: 0; padding: 18rpx 15rpx; border: 1rpx solid #A58A5F; border-radius: 13rpx; color: #FFF9EC; background: #0B4162; font-family: var(--font-family-title); font-size: 28rpx; font-weight: 500; line-height: 1.5; letter-spacing: 3rpx; }
+.continue-arrow { color: #D9C5A2; font-family: Arial,sans-serif; font-size: 32rpx; line-height: 1; }
+@media (max-height: 600px) {
+  .journey-title { font-size: 76rpx; }.journey-summary { padding-top: 2rpx; padding-bottom: 7rpx; }.chapter-heading { padding-top: 8rpx; }.chapter-subtitle { margin-top: 4rpx; }
+  .chapter-footer { padding-top: 4rpx; padding-bottom: 10rpx; }
+  .challenge-page .level-node { height: 125rpx; }.porcelain-plate { width: 88rpx; height: 88rpx; }.level-number { font-size: 37rpx; }
+  .difficulty { height: 30rpx; margin-top: 5rpx; }.difficulty-star { font-size: 22rpx; }
+  .reward-note { top: calc(50% - 18rpx); }
+}

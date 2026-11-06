@@ -1,1 +1,14 @@
-const levels=require('../../data/challenges'); const {go}=require('../../utils/navigation'); Page({data:{level:levels[0]},onLoad(options){this.setData({level:levels.find((item)=>item.id===options.id)||levels[0]})},complete(){go(`/pages/challenge-result/index?id=${this.data.level.id}`)}})
+const { go } = require('../../utils/navigation')
+
+Page({
+  onLoad(options = {}) {
+    const levels = require('../../data/challenges')
+    const id = options.id || options.levelId || 'level-001'
+    const level = levels.find(level => level.id === id)
+    if (level) wx.redirectTo({ url: `/games/play/index?id=${encodeURIComponent(level.id)}` })
+    else go('/pages/challenge/index')
+  },
+  back() {
+    go('/pages/challenge/index')
+  }
+})

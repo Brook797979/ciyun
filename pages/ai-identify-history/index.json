@@ -1,0 +1,5 @@
+{
+  "navigationBarTitleText": "识瓷足迹",
+  "navigationStyle": "custom",
+  "usingComponents": { "porcelain-tabbar": "/components/porcelain-tabbar/index" }
+}

@@ -2,10 +2,8 @@
   min-height: 100vh;
   padding-bottom: calc(64rpx + env(safe-area-inset-bottom));
   overflow-x: hidden;
-  background:
-    linear-gradient(rgba(248, 241, 230, 0.92), rgba(248, 241, 230, 0.98)),
-    url("/assets/backgrounds/home-paper.png") repeat;
-  background-size: auto, 512rpx 512rpx;
+  background-color: var(--color-page);
+  --paper-wash: linear-gradient(rgba(248, 241, 230, 0.92), rgba(248, 241, 230, 0.98));
 }
 
 .news-hero {

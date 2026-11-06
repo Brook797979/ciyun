@@ -1,1 +1,4 @@
-<view class="page-shell result"><view class="title">挑战完成</view><view class="stars">★★★</view><view class="muted">获得纹样奖励：祥云纹（模拟）</view><view class="row"><button class="link-button" bindtap="back">返回挑战</button><button class="link-button" bindtap="workshop">进入工坊</button></view></view>
+<view class="page-shell stack">
+  <view class="title">瓷韵之旅</view>
+  <button class="link-button" bindtap="back">返回地图</button>
+</view>

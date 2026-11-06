@@ -1,4 +1,5 @@
-const { allVideos } = require('../../data/videos')
+const { resolveMedia } = require('../../utils/static-media')
+const { allVideos } = resolveMedia(require('../../data/videos'))
 
 Page({
   data: { item: allVideos[0] },

@@ -1,4 +1,5 @@
-<view class="home-page">
+<view class="home-page paper-texture-page">
+  <view class="paper-texture" aria-hidden="true"><image class="paper-texture-image" src="/assets/backgrounds/home-paper.png" mode="aspectFill"/></view>
   <view class="hero">
     <image class="hero-image" src="/assets/banners/home-hero.jpg" mode="aspectFill"/>
     <view class="hero-wash"></view>

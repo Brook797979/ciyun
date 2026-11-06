@@ -1,4 +1,5 @@
-const home = require('../../data/home')
+const { resolveMedia } = require('../../utils/static-media')
+const home = resolveMedia(require('../../data/home'))
 const { go } = require('../../utils/navigation')
 
 Page({

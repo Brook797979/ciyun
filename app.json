@@ -7,6 +7,7 @@
     "pages/profile/index",
     "pages/ceramic-detail/index",
     "pages/ai-identify/index",
+    "pages/ai-identify-history/index",
     "pages/ai-chat/index",
     "pages/video-learning/index",
     "pages/video-detail/index",
@@ -14,10 +15,12 @@
     "pages/news-detail/index",
     "pages/craft/index",
     "pages/ai-create/index",
+    "pages/ai-result/index",
     "pages/works/index",
     "pages/game/index",
     "pages/challenge-result/index"
   ],
+  "subPackages": [{ "root": "games", "name": "challenge-games", "pages": ["play/index"] }],
   "window": {
     "navigationBarTitleText": "瓷韵",
     "navigationBarBackgroundColor": "#F4EFE5",

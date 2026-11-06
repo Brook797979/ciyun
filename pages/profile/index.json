@@ -1,1 +1,1 @@
-{ "navigationBarTitleText": "我的", "usingComponents": { "section-title": "/components/section-title/index" } }
+{ "navigationBarTitleText": "我的", "navigationStyle": "custom", "backgroundColor": "#F8F1E6", "usingComponents": {} }

@@ -16,9 +16,11 @@
 
 .card-image {
   display: block;
+  box-sizing: border-box;
   width: 100%;
-  height: 190rpx;
-  background: var(--color-primary-soft);
+  height: 240rpx;
+  padding: 12rpx;
+  background: #fff;
 }
 
 .card-body {

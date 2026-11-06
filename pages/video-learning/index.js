@@ -1,4 +1,5 @@
-const { carouselVideos, videos } = require('../../data/videos')
+const { resolveMedia } = require('../../utils/static-media')
+const { carouselVideos, videos } = resolveMedia(require('../../data/videos'))
 
 function withInitialPlayUrl(items) {
   return items.map((item) => ({ ...item, playUrl: '' }))

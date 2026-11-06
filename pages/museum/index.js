@@ -1,4 +1,5 @@
-const ceramics = require('../../data/ceramics')
+const { resolveMedia } = require('../../utils/static-media')
+const ceramics = resolveMedia(require('../../data/ceramics'))
 const filterCeramics = require('../../utils/filter-ceramics')
 const { go } = require('../../utils/navigation')
 

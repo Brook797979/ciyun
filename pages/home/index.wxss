@@ -2,9 +2,6 @@
   min-height: 100vh;
   overflow-x: hidden;
   background-color: var(--color-page);
-  background-image: url('/assets/backgrounds/home-paper.png');
-  background-repeat: repeat-y;
-  background-size: 100% auto;
 }
 
 .hero {

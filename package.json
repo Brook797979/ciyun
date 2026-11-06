@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "test": "node --test tests/*.test.js",
-    "validate": "node scripts/validate-project.js"
+    "validate": "node scripts/validate-project.js",
+    "build:ai": "node scripts/build-ai-functions.js",
+    "test:ai": "node --test tests/ai-*.test.js tests/showcase.test.js"
   }
 }

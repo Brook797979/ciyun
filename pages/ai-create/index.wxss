@@ -1,1 +1,42 @@
-.prompt{box-sizing:border-box;width:100%;min-height:220rpx;padding:24rpx}.result{display:grid;place-items:center;min-height:520rpx}
+@import '../../styles/ai-creation.wxss';
+
+.input-page { min-height: 100vh; }
+.input-hero { overflow: hidden; }
+.input-content { position: relative; z-index: 1; margin-top: -10rpx; }
+.input-panel { box-sizing: border-box; min-height: 640rpx; padding: 20rpx 36rpx 26rpx; }
+.input-panel-inner { position: relative; z-index: 2; }
+.input-heading { display: flex; align-items: center; justify-content: flex-end; min-height: 44px; margin-bottom: 12rpx; }
+.input-random { display: flex; flex: none; align-items: center; justify-content: flex-end; gap: 8rpx; min-height: 44px; color: #355F7E; font-family: var(--font-family-title); font-size: 25rpx; line-height: 1.5; }
+.input-dice { position: relative; box-sizing: border-box; width: 28rpx; height: 28rpx; margin-right: 2rpx; border: 2rpx solid #7C886F; border-radius: 5rpx; transform: rotate(-8deg); }
+.input-dice view { position: absolute; width: 4rpx; height: 4rpx; border-radius: 50%; background: #7C886F; }
+.input-dice view:nth-child(1) { top: 4rpx; left: 4rpx; }
+.input-dice view:nth-child(2) { top: 10rpx; left: 10rpx; }
+.input-dice view:nth-child(3) { right: 4rpx; bottom: 4rpx; }
+.input-prompt-frame { position: relative; box-sizing: border-box; padding: 24rpx 28rpx 40rpx; border: 1rpx solid #D1CDBE; border-radius: 22rpx; background: rgba(249, 247, 239, 0.88); }
+.input-prompt { display: block; box-sizing: border-box; width: 100%; height: 260rpx; min-height: 260rpx; color: #244E69; font-family: var(--font-family-title); font-size: 30rpx; line-height: 1.9; }
+.input-placeholder { color: #8C989B; font-family: var(--font-family-title); font-size: 28rpx; line-height: 1.9; }
+.input-count { position: absolute; bottom: 12rpx; right: 26rpx; color: #8B9494; font-size: 24rpx; line-height: 1.5; }
+.input-loading { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 344rpx; padding-bottom: 8rpx; text-align: center; }
+.input-loading-art { display: block; width: 254rpx; height: 228rpx; margin-top: -14rpx; }
+.input-loading-title { display: block; margin-top: 8rpx; color: #315B77; font-family: var(--font-family-title); font-size: 29rpx; line-height: 1.6; letter-spacing: 1rpx; }
+.input-loading-caption { display: block; margin-top: 10rpx; color: #89918D; font-size: 23rpx; line-height: 1.6; }
+.input-recommendations { margin-top: 24rpx; }
+.input-recommendation-heading { display: flex; align-items: center; gap: 10rpx; margin-bottom: 18rpx; color: #4B6780; font-family: var(--font-family-title); font-size: 26rpx; line-height: 1.5; letter-spacing: 2rpx; }
+.input-recommendation-flower { flex: none; width: 24rpx; height: 24rpx; opacity: 0.8; }
+.input-heading-rule { flex: 1; height: 1rpx; margin-left: 8rpx; background: linear-gradient(90deg, #C9BD9D, transparent); }
+.input-chips { display: flex; align-items: stretch; justify-content: center; gap: 10rpx; }
+.input-chip { display: flex; flex: 1; min-width: 0; align-items: center; justify-content: center; gap: 6rpx; box-sizing: border-box; min-height: 62rpx; padding: 10rpx 5rpx; border: 1rpx solid #C7C9C0; border-radius: 10rpx; color: #526C80; background: rgba(255, 252, 243, 0.75); font-family: var(--font-family-title); font-size: 24rpx; line-height: 1.4; white-space: nowrap; }
+.input-chip-flower { flex: none; width: 22rpx; height: 22rpx; opacity: 0.75; }
+.input-chip-selected { border-color: #9E9B71; color: #264F70; background: rgba(230, 235, 225, 0.85); box-shadow: inset 0 0 0 1rpx rgba(151, 143, 101, 0.2); }
+.input-chip-pressed { background: rgba(217, 226, 222, 0.9); }
+.input-service-message { margin-top: 28rpx; padding: 18rpx 22rpx; border-left: 3rpx solid #B79860; color: #7E6D52; background: rgba(245, 237, 219, 0.85); font-size: 24rpx; line-height: 1.7; }
+.input-recovery-link { display: flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 8rpx; color: #315E7C; text-decoration: underline; text-underline-offset: 5rpx; }
+.input-generate { display: flex; align-items: center; justify-content: center; gap: 18rpx; width: 80%; margin: 70rpx auto 0; font-family: var(--font-family-title); font-size: 36rpx; font-weight: 700; letter-spacing: 6rpx; }
+.input-secondary-action { display: flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 12rpx; color: #617E90; font-size: 24rpx; line-height: 1.6; }
+.input-pressed { opacity: 0.78; }
+@media (max-width: 350px) {
+  .input-panel { padding-left: 30rpx; padding-right: 30rpx; }
+  .input-random { font-size: 24rpx; }
+  .input-chips { gap: 10rpx; }
+  .input-chip { font-size: 24rpx; padding-left: 5rpx; padding-right: 5rpx; }
+}

@@ -1,1 +1,50 @@
-<view class="page-shell stack"><section-title title="我的作品" description="本地保存的数字陶瓷创作"/><view wx:for="{{works}}" wx:key="id" class="surface work"><view class="preview">作品图片</view><view><view>{{item.name}}</view><view class="muted">{{item.shape}} · {{item.pattern}} · {{item.glaze}}</view></view></view></view>
+<view class="page-shell stack works-page">
+  <section-title title="{{aiOnly ? 'AI创瓷作品' : '我的作品'}}" description="{{aiOnly ? '收藏每一次AI创瓷灵感' : '记录数字制瓷与AI生成的每一份灵感'}}" action-text="{{works.length ? '再创作' : ''}}" bind:action="startCraft"/>
+
+  <view wx:if="{{loadError || syncError}}" class="works-error surface">
+    <view class="works-error-text">{{loadError ? '作品暂时无法读取，请重试' : '部分作品暂时未能读取，请重试'}}</view>
+    <button class="retry-button" bindtap="onShow">重新读取</button>
+  </view>
+  <view wx:if="{{syncing}}" class="works-loading" aria-live="polite">正在读取作品记录…</view>
+
+  <view wx:if="{{works.length}}" class="work-list">
+    <view class="collection-count">共 {{works.length}} 件作品</view>
+    <view wx:for="{{works}}" wx:key="id" class="surface work">
+      <image wx:if="{{item.image}}" class="work-preview" src="{{item.image}}" mode="aspectFit" data-id="{{item.id}}" bindtap="previewWork" aria-label="{{item.name}}成品图"/>
+      <view wx:else class="work-preview work-preview-pending"><text>{{item.imageLoading ? '正在展卷' : '图片暂未加载'}}</text><button wx:if="{{item.imageUnavailable}}" class="work-image-retry" bindtap="onShow">重新加载</button></view>
+      <view class="work-copy">
+        <view class="work-heading">
+          <view class="work-name">{{item.name}}</view>
+          <view wx:if="{{item.displayDate}}" class="work-date">{{item.displayDate}}</view>
+        </view>
+        <text class="work-creation-label">{{item.creationLabel}}</text>
+        <view wx:if="{{item.creationType === 'ai'}}" class="work-ai-description"><text class="work-ai-style">{{item.styleName || 'AI创瓷'}}</text><text>{{item.userPrompt || item.prompt || '以灵感为笔，绘就东方瓷韵'}}</text></view>
+        <view wx:else class="work-details">
+          <view class="work-detail">
+            <view class="detail-label">器型</view>
+            <view class="detail-value">{{item.shape || '未记录'}}</view>
+          </view>
+          <view class="work-detail">
+            <view class="detail-label">纹样</view>
+            <view class="detail-value">{{item.pattern || '未记录'}}</view>
+          </view>
+          <view class="work-detail">
+            <view class="detail-label">釉色</view>
+            <view class="detail-value">{{item.glaze || '未记录'}}</view>
+          </view>
+        </view>
+        <view class="work-actions"><view class="work-delete {{deletingId === item.id ? 'work-delete-busy' : ''}}" data-id="{{item.id}}" catchtap="deleteWork" aria-role="button" aria-label="删除{{item.name}}" aria-disabled="{{!!deletingId}}">删除作品</view></view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:elif="{{!loadError && !syncError && !syncing}}" class="surface works-empty">
+    <view class="empty-mark" aria-hidden="true">瓷</view>
+    <view class="empty-title">{{aiOnly ? '暂无AI作品' : '暂无作品'}}</view>
+    <view class="empty-description">
+      <view>{{aiOnly ? '写下创意，描绘瓷器灵感' : '选器型、绘纹样、施釉色'}}</view>
+      <view>{{aiOnly ? '生成的作品会记录在这里' : '完成并保存你的第一件陶瓷作品'}}</view>
+    </view>
+    <button class="link-button start-button" bindtap="startCraft">开始创作</button>
+  </view>
+</view>

@@ -1,0 +1,484 @@
+{
+  "size": [
+    1200,
+    675
+  ],
+  "runtimeSize": [
+    960,
+    540
+  ],
+  "runtimeEncoding": "JPEG quality 88, 4:2:2; cards PNG 128-color palette",
+  "pigmentRGB": [
+    21,
+    57,
+    106
+  ],
+  "sourceDirectory": "用户桌面/资源/纹理图",
+  "sources": {
+    "lotus": {
+      "name": "青花莲纹",
+      "originalFilename": "69f799a9-bfe3-4b51-903b-582ab46d4e7b.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "deb46fd2e107db43147b8236385ff7125d1fbcc434e087faf34e608d6cb1a4b8"
+    },
+    "cloud": {
+      "name": "祥云纹",
+      "originalFilename": "f4e0425e-a92a-49dd-a09f-fa41a7e4da96.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "9eea640748be37f68f94e5b3256ab843b08c69ea690016cb2fcecf3675b3dba4"
+    },
+    "flower-bird": {
+      "name": "花鸟纹",
+      "originalFilename": "3e836b71-8d58-4c51-b6f1-28f02b259f4b.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "6b701f664cf76a976fc08f0b6360b9938ec8e6af31456f9126dcb651ef76b34d"
+    },
+    "landscape": {
+      "name": "山水纹",
+      "originalFilename": "42bdf596-490f-40c9-9c3c-a2b02303ed68.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "a0d1ece1f03a86bb52052a57260df93dcc63c2161d6b02f6b7772fcae889fec2"
+    },
+    "scroll-lotus": {
+      "name": "缠枝莲纹",
+      "originalFilename": "cdfbe6b8-e8c2-45d4-98e1-3f7332de0124.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "62bc06c58bc64c19cdac700dc83b49d1fd9c031010c377872a342c6fc208ab15"
+    },
+    "beast": {
+      "name": "瑞兽纹",
+      "originalFilename": "8ee4a5fc-8a29-44d3-a73c-55a351420af2.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "cdc3d6d70c510d006bbe7f9c9c079a73d7d0ff102c1f54a23f407824a957b09e"
+    }
+  },
+  "shapes": {
+    "meiping": {
+      "photoSHA256": "783d24e6e7dc65da94d64522dde3f1f8d176e4fab8d130b4939f00c2de941b2d",
+      "geometry": {
+        "name": "梅瓶",
+        "outline": [
+          [
+            66,
+            555,
+            633
+          ],
+          [
+            80,
+            559,
+            633
+          ],
+          [
+            96,
+            557,
+            634
+          ],
+          [
+            110,
+            535,
+            654
+          ],
+          [
+            125,
+            489,
+            693
+          ],
+          [
+            145,
+            461,
+            724
+          ],
+          [
+            175,
+            437,
+            748
+          ],
+          [
+            205,
+            425,
+            758
+          ],
+          [
+            240,
+            425,
+            757
+          ],
+          [
+            280,
+            434,
+            746
+          ],
+          [
+            320,
+            449,
+            731
+          ],
+          [
+            360,
+            465,
+            715
+          ],
+          [
+            400,
+            480,
+            701
+          ],
+          [
+            440,
+            491,
+            690
+          ],
+          [
+            480,
+            498,
+            683
+          ],
+          [
+            520,
+            500,
+            682
+          ],
+          [
+            550,
+            497,
+            684
+          ],
+          [
+            575,
+            491,
+            690
+          ],
+          [
+            584,
+            498,
+            680
+          ],
+          [
+            592,
+            544,
+            636
+          ]
+        ],
+        "bodyTop": 130,
+        "bodyBottom": 567,
+        "bend": 8,
+        "bands": [
+          [
+            115,
+            0.65,
+            0.45
+          ],
+          [
+            121,
+            0.65,
+            0.32
+          ],
+          [
+            574,
+            0.65,
+            0.5
+          ],
+          [
+            580,
+            0.65,
+            0.35
+          ]
+        ],
+        "crop": [
+          380,
+          35,
+          805,
+          625
+        ]
+      },
+      "savedWhiteReconstructionMaxError255": 0.64314,
+      "patterns": {
+        "lotus": {
+          "backgroundMaxChange255": 0,
+          "sidePigmentCoverageAbove015": 0.4957,
+          "preview": "/assets/craft/two-vessel-v2/meiping/lotus-preview.jpg",
+          "wrappedLayer": "meiping/layers/lotus-wrapped.png"
+        },
+        "cloud": {
+          "backgroundMaxChange255": 0,
+          "sidePigmentCoverageAbove015": 0.4921,
+          "preview": "/assets/craft/two-vessel-v2/meiping/cloud-preview.jpg",
+          "wrappedLayer": "meiping/layers/cloud-wrapped.png"
+        },
+        "flower-bird": {
+          "backgroundMaxChange255": 0,
+          "sidePigmentCoverageAbove015": 0.4267,
+          "preview": "/assets/craft/two-vessel-v2/meiping/flower-bird-preview.jpg",
+          "wrappedLayer": "meiping/layers/flower-bird-wrapped.png"
+        },
+        "landscape": {
+          "backgroundMaxChange255": 0,
+          "sidePigmentCoverageAbove015": 0.4219,
+          "preview": "/assets/craft/two-vessel-v2/meiping/landscape-preview.jpg",
+          "wrappedLayer": "meiping/layers/landscape-wrapped.png"
+        },
+        "scroll-lotus": {
+          "backgroundMaxChange255": 0,
+          "sidePigmentCoverageAbove015": 0.5806,
+          "preview": "/assets/craft/two-vessel-v2/meiping/scroll-lotus-preview.jpg",
+          "wrappedLayer": "meiping/layers/scroll-lotus-wrapped.png"
+        },
+        "beast": {
+          "backgroundMaxChange255": 0,
+          "sidePigmentCoverageAbove015": 0.4522,
+          "preview": "/assets/craft/two-vessel-v2/meiping/beast-preview.jpg",
+          "wrappedLayer": "meiping/layers/beast-wrapped.png"
+        }
+      }
+    },
+    "yuhuchun": {
+      "photoSHA256": "06ba09632c4faaceb69986f11df0eebf5a117b999ddb73ba7b60928cc0e67bf5",
+      "geometry": {
+        "name": "玉壶春瓶",
+        "outline": [
+          [
+            32,
+            578,
+            622
+          ],
+          [
+            34,
+            541,
+            653
+          ],
+          [
+            38,
+            527,
+            674
+          ],
+          [
+            43,
+            530,
+            672
+          ],
+          [
+            50,
+            541,
+            660
+          ],
+          [
+            65,
+            551,
+            649
+          ],
+          [
+            90,
+            560,
+            638
+          ],
+          [
+            120,
+            565,
+            631
+          ],
+          [
+            155,
+            566,
+            629
+          ],
+          [
+            190,
+            563,
+            631
+          ],
+          [
+            225,
+            557,
+            638
+          ],
+          [
+            260,
+            546,
+            649
+          ],
+          [
+            290,
+            532,
+            663
+          ],
+          [
+            320,
+            513,
+            681
+          ],
+          [
+            350,
+            490,
+            703
+          ],
+          [
+            380,
+            471,
+            721
+          ],
+          [
+            410,
+            457,
+            735
+          ],
+          [
+            440,
+            448,
+            744
+          ],
+          [
+            470,
+            444,
+            748
+          ],
+          [
+            495,
+            446,
+            746
+          ],
+          [
+            520,
+            454,
+            737
+          ],
+          [
+            540,
+            465,
+            726
+          ],
+          [
+            560,
+            482,
+            708
+          ],
+          [
+            577,
+            505,
+            686
+          ],
+          [
+            588,
+            518,
+            674
+          ],
+          [
+            601,
+            519,
+            674
+          ],
+          [
+            609,
+            521,
+            671
+          ],
+          [
+            614,
+            543,
+            651
+          ],
+          [
+            617,
+            568,
+            627
+          ]
+        ],
+        "bodyTop": 288,
+        "bodyBottom": 578,
+        "bend": 12,
+        "bands": [
+          [
+            273,
+            0.65,
+            0.43
+          ],
+          [
+            280,
+            0.65,
+            0.3
+          ],
+          [
+            591,
+            0.6,
+            0.45
+          ],
+          [
+            599,
+            0.6,
+            0.3
+          ]
+        ],
+        "crop": [
+          385,
+          12,
+          810,
+          632
+        ]
+      },
+      "savedWhiteReconstructionMaxError255": 0.72941,
+      "patterns": {
+        "lotus": {
+          "backgroundMaxChange255": 0,
+          "sidePigmentCoverageAbove015": 0.5248,
+          "preview": "/assets/craft/two-vessel-v2/yuhuchun/lotus-preview.jpg",
+          "wrappedLayer": "yuhuchun/layers/lotus-wrapped.png"
+        },
+        "cloud": {
+          "backgroundMaxChange255": 0,
+          "sidePigmentCoverageAbove015": 0.4827,
+          "preview": "/assets/craft/two-vessel-v2/yuhuchun/cloud-preview.jpg",
+          "wrappedLayer": "yuhuchun/layers/cloud-wrapped.png"
+        },
+        "flower-bird": {
+          "backgroundMaxChange255": 0,
+          "sidePigmentCoverageAbove015": 0.4215,
+          "preview": "/assets/craft/two-vessel-v2/yuhuchun/flower-bird-preview.jpg",
+          "wrappedLayer": "yuhuchun/layers/flower-bird-wrapped.png"
+        },
+        "landscape": {
+          "backgroundMaxChange255": 0,
+          "sidePigmentCoverageAbove015": 0.518,
+          "preview": "/assets/craft/two-vessel-v2/yuhuchun/landscape-preview.jpg",
+          "wrappedLayer": "yuhuchun/layers/landscape-wrapped.png"
+        },
+        "scroll-lotus": {
+          "backgroundMaxChange255": 0,
+          "sidePigmentCoverageAbove015": 0.5813,
+          "preview": "/assets/craft/two-vessel-v2/yuhuchun/scroll-lotus-preview.jpg",
+          "wrappedLayer": "yuhuchun/layers/scroll-lotus-wrapped.png"
+        },
+        "beast": {
+          "backgroundMaxChange255": 0,
+          "sidePigmentCoverageAbove015": 0.4822,
+          "preview": "/assets/craft/two-vessel-v2/yuhuchun/beast-preview.jpg",
+          "wrappedLayer": "yuhuchun/layers/beast-wrapped.png"
+        }
+      }
+    }
+  },
+  "lightingMethod": "Single-photo diffuse/specular approximation, not measured PBR",
+  "edgeFade": false,
+  "glazeProofRGB": [
+    0.75,
+    0.87,
+    0.82
+  ],
+  "runtimeBytes": 1712780
+}

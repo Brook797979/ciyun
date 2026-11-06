@@ -1,1 +1,0 @@
-<view class="entry {{disabled ? 'disabled' : ''}}" bindtap="onTap"><view class="marker">瓷</view><view class="content"><view class="title">{{title}}</view><view class="description">{{description}}</view></view><view class="arrow">{{disabled ? '待完善' : '›'}}</view></view>

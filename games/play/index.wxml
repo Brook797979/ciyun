@@ -1,0 +1,75 @@
+<view class="game-page">
+  <block wx:if="{{level}}">
+    <view class="chapter-caption"><view class="caption-rule"/><text>第{{level.difficulty === 1 ? '一' : level.difficulty === 2 ? '二' : '三'}}章 · {{chapterName}}</text><view class="caption-rule"/></view>
+    <view class="level-heading">
+      <view><view class="level-number">第 {{level.order}} 关</view><view class="level-title">{{config ? config.title : '瓷韵之旅'}}</view></view>
+      <view class="heading-side"><text class="difficulty" aria-hidden="true">{{level.difficulty === 1 ? '★☆☆' : level.difficulty === 2 ? '★★☆' : '★★★'}}</text></view>
+    </view>
+  </block>
+  <block wx:if="{{config}}">
+    <view class="goal-card">
+      <view class="goal-top">
+        <view class="goal-copy"><text class="goal-label">{{config.goal}}</text><text class="goal-number">{{current}}<text class="goal-total"> / {{total}} {{config.unit}}</text></text></view>
+        <view wx:if="{{mode === 'match'}}" class="move-counter"><text class="move-number">{{movesLeft}}</text><text>剩余步数</text></view>
+        <view wx:elif="{{mode === 'quiz' || mode === 'shape'}}" class="calm-tag">答对 4 题即可通关</view>
+        <view wx:else class="calm-tag"><view class="calm-dot"/><text>慢慢来，细细看</text></view>
+      </view>
+      <view class="goal-track"><view class="goal-fill" style="width:{{progressPercent}}%"/></view>
+      <view wx:if="{{targetRows.length}}" class="target-row"><view wx:for="{{targetRows}}" wx:key="id" class="target-item {{item.current >= item.target ? 'target-done' : ''}}"><image src="{{item.image}}" mode="aspectFit"/><text>{{item.current}}<text class="target-total"> / {{item.target}}</text></text></view></view>
+    </view>
+    <view class="play-heading"><text class="instruction">{{config.instruction}}</text><view class="play-heading-mark" aria-hidden="true">瓷</view></view>
+    <view wx:if="{{mode === 'link'}}" class="link-rules">
+      <text class="link-rules-title">连线规则</text>
+      <view wx:for="{{config.connectionRules}}" wx:key="*this" class="link-rule"><text class="link-rule-dot" aria-hidden="true">·</text><text class="link-rule-text">{{item}}</text></view>
+    </view>
+    <view wx:if="{{hintText && mode !== 'puzzle'}}" class="hint-panel" aria-live="polite"><text class="hint-label">瓷韵提示</text><text>{{hintText}}</text></view>
+
+    <view wx:if="{{mode !== 'quiz' && mode !== 'shape'}}" class="board-frame {{mode}}-frame">
+      <view class="board-corner corner-tl"/><view class="board-corner corner-br"/>
+      <view wx:if="{{mode === 'match'}}" class="match-board" style="grid-template-columns:repeat({{config.cols}},minmax(0,1fr))" catchtouchmove="noop" aria-label="纹样消消乐棋盘">
+        <button wx:for="{{tiles}}" wx:for-item="tile" wx:key="index" class="porcelain-tile match-tile {{selected === tile.index ? 'tile-selected' : ''}} {{tile.arrived ? 'tile-arrived' : ''}} {{tile.hinted ? 'tile-hinted' : ''}}" size="mini" data-index="{{tile.index}}" bindtap="tapTile" hover-class="tile-pressed" aria-label="第{{tile.index + 1}}格，{{tile.name}}"><image class="tile-symbol" src="{{tile.image}}" mode="aspectFit"/></button>
+      </view>
+      <view wx:elif="{{mode === 'link'}}" class="link-perimeter">
+        <view class="link-board" style="grid-template-columns:repeat({{config.cols}},minmax(0,1fr))" aria-label="瓷纹连连看棋盘">
+          <button wx:for="{{tiles}}" wx:for-item="tile" wx:key="index" class="porcelain-tile link-tile {{tile.empty ? 'tile-empty' : ''}} {{selected === tile.index ? 'tile-selected' : ''}} {{tile.hinted ? 'tile-hinted' : ''}}" style="height:{{config.cols >= 6 ? 90 : 112}}rpx" size="mini" disabled="{{tile.empty}}" data-index="{{tile.index}}" bindtap="tapTile" hover-class="tile-pressed" aria-label="第{{tile.index + 1}}格，{{tile.empty ? '已配对' : tile.name}}"><image wx:if="{{!tile.empty}}" class="tile-symbol" src="{{tile.image}}" mode="aspectFit"/></button>
+          <view class="link-path" aria-hidden="true"><view wx:for="{{linkSegments}}" wx:key="id" class="path-segment {{item.horizontal ? 'path-horizontal' : 'path-vertical'}}" style="{{item.style}}"/></view>
+        </view>
+      </view>
+      <view wx:elif="{{mode === 'puzzle'}}" class="puzzle-stage">
+        <view class="puzzle-board" style="grid-template-columns:repeat({{config.cols}},minmax(0,1fr));grid-template-rows:repeat({{config.rows}},minmax(0,1fr));height:{{puzzleHeight}}rpx" aria-label="{{config.rows}}行{{config.cols}}列古瓷拼图">
+          <button wx:for="{{tiles}}" wx:for-item="tile" wx:key="index" class="puzzle-tile {{selected === tile.index ? 'tile-selected' : ''}} {{tile.hinted ? 'tile-hinted' : ''}}" size="mini" data-index="{{tile.index}}" bindtap="tapTile" hover-class="tile-pressed" aria-label="第{{tile.index + 1}}格图块{{tile.hinted ? '，提示与另一块标记图块互换' : ''}}"><image class="puzzle-fragment" src="{{config.image}}" mode="scaleToFill" style="width:{{config.cols * 100}}%;height:{{config.rows * 100}}%;left:{{tile.left}}%;top:{{tile.top}}%"/><view wx:if="{{tile.hintOrder}}" class="puzzle-hint-marker" aria-hidden="true"><text class="puzzle-hint-order">{{tile.hintOrder === 1 ? '①' : '②'}}</text><text>互换</text></view></button>
+        </view>
+        <view wx:if="{{showReference}}" class="reference-cover" bindtap="toggleReference"><image src="{{config.image}}" mode="aspectFit"/><text>完整原图 · 点击收起</text></view>
+      </view>
+    </view>
+
+    <view wx:else class="quiz-stage {{mode === 'shape' ? 'shape-stage' : ''}}">
+      <view class="question-card">
+        <view class="question-eyebrow"><text>{{mode === 'shape' ? '观器 · 辨形' : '问瓷 · 识趣'}}</text><text>{{questionNumber}} / 5</text></view>
+        <view wx:if="{{mode === 'shape'}}" class="shape-image-group {{question.images.length > 1 ? 'shape-pair' : 'shape-single'}}">
+          <view wx:for="{{question.images}}" wx:key="src" class="shape-image-card"><image class="shape-image" src="{{item.src}}" mode="aspectFill" aria-label="{{item.alt}}"/><text wx:if="{{question.images.length > 1}}" class="shape-caption">{{item.alt}}</text></view>
+        </view>
+        <view class="question-prompt">{{question.prompt}}</view><view class="question-rule"/>
+      </view>
+      <view class="quiz-options" role="radiogroup" aria-label="选择一个答案">
+        <button wx:for="{{quizOptions}}" wx:key="index" class="quiz-option {{item.correct ? 'option-correct' : ''}} {{item.incorrect ? 'option-incorrect' : ''}} {{item.muted ? 'option-muted' : ''}}" size="mini" data-index="{{item.index}}" bindtap="tapAnswer" disabled="{{quizRevealed}}" aria-label="{{item.letter}}，{{item.text}}"><text class="option-letter">{{item.letter}}</text><text class="option-text">{{item.text}}</text><text wx:if="{{item.correct || item.incorrect}}" class="option-mark">{{item.correct ? '✓' : '×'}}</text></button>
+      </view>
+      <view wx:if="{{quizRevealed}}" class="quiz-explanation"><text class="explanation-label">瓷识小记</text><text>{{quizExplanation}}</text></view>
+      <button wx:if="{{quizRevealed}}" class="primary-button quiz-next" size="mini" bindtap="nextQuestion">{{questionNumber === 5 ? '查看结果' : '下一题'}}<text class="next-chevron">›</text></button>
+    </view>
+    <view class="board-notice" aria-live="polite">{{notice || config.story}}</view>
+    <view class="game-actions"><button class="utility-button" size="mini" bindtap="restart"><text class="utility-icon">↻</text>重新开始</button><button class="utility-button hint-button" size="mini" bindtap="hint" disabled="{{resultOpen || showReference || ((mode === 'quiz' || mode === 'shape') && quizRevealed)}}">提示一下</button><button wx:if="{{mode === 'puzzle'}}" class="utility-button" size="mini" bindtap="toggleReference">{{showReference ? '收起原图' : '查看原图'}}</button></view>
+  </block>
+  <view wx:else class="preview-card"><view class="preview-title">{{mode === 'locked' ? '循序而行，步步识瓷' : '暂时找不到这个关卡'}}</view><view class="preview-copy">{{notice || (mode === 'locked' ? '请先完成前面的关卡，再来继续瓷韵之旅' : '返回地图，重新选择一关开始吧')}}</view><button class="primary-button" size="mini" bindtap="back">返回地图</button></view>
+
+  <view wx:if="{{resultOpen}}" class="modal-mask" catchtouchmove="noop">
+    <view class="dialog result-dialog" role="dialog" aria-modal="true" aria-label="挑战结果">
+      <view class="dialog-eyebrow">{{resultWon ? '一关一遇 · 瓷韵相伴' : '再试一次 · 总会相逢'}}</view><view class="result-mark {{resultWon ? '' : 'retry-mark'}}">{{resultWon ? '✓' : '↻'}}</view><view class="dialog-title">{{resultWon ? '挑战完成' : '再试一次'}}</view>
+      <view wx:if="{{saveError}}" class="save-error">{{saveError}}</view>
+      <block wx:elif="{{resultWon}}"><view wx:if="{{resultDescription}}" class="result-caption">{{resultDescription}}</view><view class="result-caption">已解锁{{level.reward.kindLabel}}</view><view class="result-reward-name">{{level.reward.name}}</view><view wx:if="{{badgeUnlocked}}" class="chapter-earned">{{chapterName}}章节徽章已解锁</view></block>
+      <view wx:else class="result-caption">{{resultDescription}}</view>
+      <button wx:if="{{saveError}}" class="primary-button" size="mini" bindtap="retrySave">重试保存</button><button wx:elif="{{!resultWon}}" class="primary-button" size="mini" bindtap="restart">重新挑战</button><button wx:else class="primary-button" size="mini" bindtap="back">返回地图</button>
+      <view class="result-secondary"><button wx:if="{{resultWon && !saveError && level.order < 12}}" class="text-button" size="mini" bindtap="nextLevel">下一关 ›</button><button wx:if="{{!resultWon || saveError}}" class="text-button" size="mini" bindtap="back">返回地图</button><button wx:if="{{resultWon && !saveError}}" class="text-button" size="mini" bindtap="restart">再玩一次</button></view>
+    </view>
+  </view>
+</view>

@@ -34,8 +34,134 @@
   "simulatorPluginLibVersion": {},
   "packOptions": {
     "ignore": [
-      { "type": "folder", "value": "cloudfunctions" },
-      { "type": "file", "value": "cloudbaserc.json" }
+      {
+        "type": "folder",
+        "value": "server"
+      },
+      {
+        "type": "folder",
+        "value": "scripts"
+      },
+      {
+        "type": "folder",
+        "value": "tests"
+      },
+      {
+        "type": "folder",
+        "value": "docs"
+      },
+      {
+        "type": "folder",
+        "value": ".worktrees"
+      },
+      {
+        "type": "folder",
+        "value": ".git"
+      },
+      {
+        "type": "folder",
+        "value": "cloudfunctions"
+      },
+      {
+        "type": "file",
+        "value": "cloudbaserc.json"
+      },
+      {
+        "type": "folder",
+        "value": "design-assets"
+      },
+      {
+        "type": "folder",
+        "value": "assets/ai-create"
+      },
+      {
+        "type": "folder",
+        "value": "assets/ceramics"
+      },
+      {
+        "type": "folder",
+        "value": "assets/craft"
+      },
+      {
+        "type": "folder",
+        "value": "assets/shapes"
+      },
+      {
+        "type": "folder",
+        "value": "assets/videos"
+      },
+      {
+        "type": "folder",
+        "value": "assets/workshop"
+      },
+      {
+        "type": "file",
+        "value": "assets/backgrounds/video-classroom-header.jpg"
+      },
+      {
+        "type": "file",
+        "value": "assets/banners/home-ai-assistant-clean.jpg"
+      },
+      {
+        "type": "file",
+        "value": "assets/banners/news-craftsmanship.jpeg"
+      },
+      {
+        "type": "file",
+        "value": "assets/banners/news-exhibition.jpeg"
+      },
+      {
+        "type": "file",
+        "value": "assets/banners/news-famous-ceramics.png"
+      },
+      {
+        "type": "file",
+        "value": "assets/banners/news-kiln-fire.jpg"
+      },
+      {
+        "type": "file",
+        "value": "assets/banners/news-pottery-making.jpg"
+      },
+      {
+        "type": "file",
+        "value": "assets/banners/news-silk-road.jpeg"
+      },
+      {
+        "type": "file",
+        "value": "assets/challenge/chapter-1.jpg"
+      },
+      {
+        "type": "file",
+        "value": "assets/challenge/chapter-2.jpg"
+      },
+      {
+        "type": "file",
+        "value": "assets/challenge/chapter-3.jpg"
+      },
+      {
+        "type": "file",
+        "value": "assets/icons/workshop-recent-reference-ui.png"
+      },
+      {
+        "type": "file",
+        "value": "README.md"
+      },
+      {
+        "type": "file",
+        "value": ".gitignore"
+      },
+      {
+        "type": "file",
+        "value": "package.json"
+      },
+      {
+        "type": "file",
+        "value": "project.private.config.json"
+      },
+      {
+        "type": "folder",
+        "value": "assets/ai-showcase"
+      }
     ],
     "include": []
   },

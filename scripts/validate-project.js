@@ -24,6 +24,8 @@ readJson('sitemap.json')
 
 if (app) {
   app.pages.forEach((page) => pageExtensions.forEach((extension) => requirePath(`${page}.${extension}`)))
+  ;(app.subPackages || []).forEach((pack) => pack.pages.forEach((page) =>
+    pageExtensions.forEach((extension) => requirePath(`${pack.root}/${page}.${extension}`))))
   const tabs = app.tabBar && app.tabBar.list ? app.tabBar.list : []
   if (tabs.length !== 5) errors.push(`Tab 数量应为 5，当前为 ${tabs.length}`)
   tabs.forEach((tab) => {

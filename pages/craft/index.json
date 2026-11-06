@@ -1,1 +1,5 @@
-{ "navigationBarTitleText": "数字制瓷" }
+{
+  "navigationBarTitleText": "数字制瓷",
+  "navigationStyle": "custom",
+  "backgroundColor": "#F8F1E6"
+}
